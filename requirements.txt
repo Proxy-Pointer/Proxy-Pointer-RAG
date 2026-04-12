@@ -1,0 +1,11 @@
+# Core dependencies
+google-generativeai
+langchain-community
+langchain-google-genai
+langchain-core
+langchain-text-splitters
+faiss-cpu
+python-dotenv
+
+# PDF extraction (optional — only needed for src.extraction)
+llama-cloud
