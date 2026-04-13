@@ -1,0 +1,285 @@
+=== PROXY-POINTER RAG vs GROUND TRUTH BENCHMARK ===
+Company: AMD_2022
+
+================================================================================
+USER QUERY [1]: For AMD, what percentage of total revenue growth from FY2021 to FY2022 is attributable to the Embedded segment (including Xilinx)?
+--------------------------------------------------------------------------------
+--- BOT INTERNAL LOG ---
+====================================================================================================
+Final Context Selection (Top 5 Unique Nodes):
+  -> Node 0066   | AMD > Embedded
+  -> Node 0114   | AMD > NOTE 3 – Supplemental Financial Statement Information > NOTE 4 – Segment Reporting
+  -> Node 0062   | AMD > Results of Operations
+  -> Node 0060   | AMD > ITEM 7. MANAGEMENT’S DISCUSSION AND ANALYSIS OF FINANCIAL CONDITION AND RESULTS OF OPERATIONS > Overview
+  -> Node 0059   | AMD > ITEM 7. MANAGEMENT’S DISCUSSION AND ANALYSIS OF FINANCIAL CONDITION AND RESULTS OF OPERATIONS > Introduction
+====================================================================================================
+
+--- BOT SYNTHESIZED RESPONSE ---
+To determine the percentage of total revenue growth attributable to the Embedded segment, we first calculate the total revenue growth and the revenue growth specifically from the Embedded segment:
+
+*   **Total Revenue Growth:** $23,601 million (2022) - $16,434 million (2021) = **$7,167 million**
+*   **Embedded Segment Revenue Growth:** $4,552 million (2022) - $246 million (2021) = **$4,306 million**
+
+**Calculation:**
+($4,306 million / $7,167 million) * 100 ≈ **60.08%**
+
+Approximately **60.08%** of AMD’s total revenue growth from FY2021 to FY2022 is attributable to the Embedded segment.
+
+**Sources:**
+*   *AMD > NOTE 3 – Supplemental Financial Statement Information > NOTE 4 – Segment Reporting (ID: 0114)*
+*   *AMD > Results of Operations (ID: 0062)*
+
+--- GROUND TRUTH (From GPT.xlsx) ---
+~60.1% (4,306 / 7,167)
+
+================================================================================
+USER QUERY [2]: For AMD, compute the operating margin for FY2022 and compare it with FY2021. What is the change in percentage points?
+--------------------------------------------------------------------------------
+--- BOT INTERNAL LOG ---
+====================================================================================================
+Final Context Selection (Top 5 Unique Nodes):
+  -> Node 0085   | AMD > ITEM 8. FINANCIAL STATEMENTS AND SUPPLEMENTARY DATA > Advanced Micro Devices, Inc. > Consolidated Statements of Operations
+  -> Node 0062   | AMD > Results of Operations
+  -> Node 0068   | AMD > Comparison of Gross Margin, Expenses, Licensing Gain, Interest Expense, Other Income (Expense) and Income Taxes
+  -> Node 0060   | AMD > ITEM 7. MANAGEMENT’S DISCUSSION AND ANALYSIS OF FINANCIAL CONDITION AND RESULTS OF OPERATIONS > Overview
+  -> Node 0059   | AMD > ITEM 7. MANAGEMENT’S DISCUSSION AND ANALYSIS OF FINANCIAL CONDITION AND RESULTS OF OPERATIONS > Introduction
+====================================================================================================
+
+--- BOT SYNTHESIZED RESPONSE ---
+To compute the operating margin, we use the formula: **(Operating Income / Net Revenue) * 100**. Based on the **Consolidated Statements of Operations (ID: 0085)**:
+
+*   **FY2022:**
+    *   Operating Income: $1,264 million
+    *   Net Revenue: $23,601 million
+    *   Operating Margin: ($1,264 / $23,601) ≈ **5.36%**
+
+*   **FY2021:**
+    *   Operating Income: $3,648 million
+    *   Net Revenue: $16,434 million
+    *   Operating Margin: ($3,648 / $16,434) ≈ **22.20%**
+
+**Change in Percentage Points:**
+The operating margin decreased by approximately **16.84 percentage points** (22.20% - 5.36%). 
+
+*Source: Consolidated Statements of Operations (ID: 0085)*
+
+--- GROUND TRUTH (From GPT.xlsx) ---
+Operating margin declined from 22.2% (2021) to 5.36% (2022), a decrease of 16.84 percentage points
+
+================================================================================
+USER QUERY [3]: For AMD, quantify how much of the operating income decline in FY2022 is explained by acquisition-related amortization and costs.
+--------------------------------------------------------------------------------
+--- BOT INTERNAL LOG ---
+====================================================================================================
+Final Context Selection (Top 5 Unique Nodes):
+  -> Node 0073   | AMD > Expenses > Amortization of Acquisition-Related Intangibles
+  -> Node 0119   | AMD > NOTE 6 – Acquisition-related Intangible Assets and Goodwill > Acquisition-related Intangible Assets
+  -> Node 0117   | AMD > Supplemental Unaudited Pro Forma Information
+  -> Node 0068   | AMD > Comparison of Gross Margin, Expenses, Licensing Gain, Interest Expense, Other Income (Expense) and Income Taxes
+  -> Node 0062   | AMD > Results of Operations
+====================================================================================================
+
+--- BOT SYNTHESIZED RESPONSE ---
+In fiscal year 2022, AMD’s total operating income declined by **$2,384 million**, falling from $3,648 million in 2021 to $1,264 million in 2022 (Source: ID 0062).
+
+This decline is largely explained by the **$3,548 million** in total acquisition-related intangible asset amortization recorded in 2022 (Source: ID 0119). These costs were distributed as follows:
+
+*   **Cost of Sales:** $1,448 million (Source: ID 0068)
+*   **Operating Expenses:** $2,100 million (Source: ID 0068)
+
+Because these specific amortization expenses were not present in 2021 (Source: ID 0068), they represent a significant non-cash drag on operating results that exceeds the absolute dollar value of the year-over-year decline in operating income.
+
+--- GROUND TRUTH (From GPT.xlsx) ---
+Majority (~$3B+ impact), as operating income fell despite revenue growth, largely due to Xilinx amortization and acquisition-related expenses
+
+================================================================================
+USER QUERY [4]: For AMD, calculate the proportion of total assets contributed by goodwill and intangible assets in FY2022.
+--------------------------------------------------------------------------------
+--- BOT INTERNAL LOG ---
+====================================================================================================
+Final Context Selection (Top 5 Unique Nodes):
+  -> Node 0089   | AMD > Advanced Micro Devices, Inc. > Consolidated Balance Sheets
+  -> Node 0119   | AMD > NOTE 6 – Acquisition-related Intangible Assets and Goodwill > Acquisition-related Intangible Assets
+  -> Node 0120   | AMD > Goodwill
+  -> Node 0080   | AMD > FINANCIAL CONDITION > Liquidity and Capital Resources
+  -> Node 0081   | AMD > FINANCIAL CONDITION > Liquidity and Capital Resources > Operating Activities
+====================================================================================================
+
+--- BOT SYNTHESIZED RESPONSE ---
+As of December 31, 2022, the proportion of AMD's total assets contributed by goodwill and intangible assets is approximately **71.46%**.
+
+**Calculation:**
+*   **Goodwill:** $24,177 million (Source: Consolidated Balance Sheets)
+*   **Acquisition-related intangibles:** $24,118 million (Source: Consolidated Balance Sheets)
+*   **Total Assets:** $67,580 million (Source: Consolidated Balance Sheets)
+
+**Math:**
+($24,177 million + $24,118 million) / $67,580 million = $48,295 million / $67,580 million ≈ **0.7146** (or **71.46%**)
+
+--- GROUND TRUTH (From GPT.xlsx) ---
+71.46% ((24,177 + 24,118) / 67,580)
+
+================================================================================
+USER QUERY [5]: For AMD, what percentage of total revenue in FY2022 came from the Data Center segment?
+--------------------------------------------------------------------------------
+--- BOT INTERNAL LOG ---
+====================================================================================================
+Final Context Selection (Top 5 Unique Nodes):
+  -> Node 0063   | AMD > Results of Operations > Data Center
+  -> Node 0114   | AMD > NOTE 3 – Supplemental Financial Statement Information > NOTE 4 – Segment Reporting
+  -> Node 0062   | AMD > Results of Operations
+  -> Node 0015   | AMD > Additional Information > Data Center Segment > Data Center Market
+  -> Node 0003   | AMD > ADVANCED MICRO DEVICES, INC.
+====================================================================================================
+
+--- BOT SYNTHESIZED RESPONSE ---
+In fiscal year 2022, the Data Center segment accounted for approximately 25.6% of AMD’s total net revenue.
+
+**Calculation:**
+*   **Data Center net revenue:** $6,043 million
+*   **Total net revenue:** $23,601 million
+*   **Percentage:** ($6,043 / $23,601) * 100 ≈ 25.6%
+
+**Source:**
+AMD > NOTE 3 – Supplemental Financial Statement Information > NOTE 4 – Segment Reporting (ID: 0114)
+
+--- GROUND TRUTH (From GPT.xlsx) ---
+~25% (Data Center ~$6.0B out of ~$23.6B total)
+
+================================================================================
+USER QUERY [6]: For AMD, what is the year-over-year growth rate of Client segment revenue from FY2021 to FY2022, and how does it compare to overall company growth?
+--------------------------------------------------------------------------------
+--- BOT INTERNAL LOG ---
+====================================================================================================
+Final Context Selection (Top 5 Unique Nodes):
+  -> Node 0064   | AMD > Results of Operations > Client
+  -> Node 0062   | AMD > Results of Operations
+  -> Node 0114   | AMD > NOTE 3 – Supplemental Financial Statement Information > NOTE 4 – Segment Reporting
+  -> Node 0085   | AMD > ITEM 8. FINANCIAL STATEMENTS AND SUPPLEMENTARY DATA > Advanced Micro Devices, Inc. > Consolidated Statements of Operations
+  -> Node 0060   | AMD > ITEM 7. MANAGEMENT’S DISCUSSION AND ANALYSIS OF FINANCIAL CONDITION AND RESULTS OF OPERATIONS > Overview
+====================================================================================================
+
+--- BOT SYNTHESIZED RESPONSE ---
+From FY2021 to FY2022, the AMD Client segment experienced a year-over-year revenue decrease of 10% (from $6.887 billion to $6.201 billion).
+
+In contrast, AMD’s overall company net revenue grew by 44% during the same period (from $16.434 billion to $23.601 billion).
+
+**Sources:**
+*   **AMD > Results of Operations > Client (ID: 0064):** Confirms the 10% decrease in Client segment revenue.
+*   **AMD > NOTE 4 – Segment Reporting (ID: 0114):** Provides the specific revenue figures for the Client segment ($6,887 million in 2021; $6,201 million in 2022) and total net revenue ($16,434 million in 2021; $23,601 million in 2022).
+*   **AMD > Overview (ID: 0060):** Confirms the 44% overall company revenue growth.
+
+--- GROUND TRUTH (From GPT.xlsx) ---
+Client segment declined ~10% YoY (6,887 → 6,201), while total company revenue grew ~44% (16,434 → 23,601)
+
+================================================================================
+USER QUERY [7]: For AMD, compute the free cash flow for FY2022 and compare it with FY2021.
+--------------------------------------------------------------------------------
+--- BOT INTERNAL LOG ---
+====================================================================================================
+Final Context Selection (Top 5 Unique Nodes):
+  -> Node 0093   | AMD > Advanced Micro Devices, Inc. > Consolidated Statements of Cash Flows
+  -> Node 0095   | AMD > Advanced Micro Devices, Inc. > Consolidated Statements of Cash Flows
+  -> Node 0080   | AMD > FINANCIAL CONDITION > Liquidity and Capital Resources
+  -> Node 0081   | AMD > FINANCIAL CONDITION > Liquidity and Capital Resources > Operating Activities
+  -> Node 0059   | AMD > ITEM 7. MANAGEMENT’S DISCUSSION AND ANALYSIS OF FINANCIAL CONDITION AND RESULTS OF OPERATIONS > Introduction
+====================================================================================================
+
+--- BOT SYNTHESIZED RESPONSE ---
+To compute free cash flow (FCF), the formula used is **Net cash provided by operating activities** minus **Purchases of property and equipment**. Based on the Consolidated Statements of Cash Flows (ID: 0093), the calculation for AMD is as follows:
+
+### **FY 2022**
+*   **Net cash provided by operating activities:** $3,565 million
+*   **Purchases of property and equipment:** ($450) million
+*   **Free Cash Flow:** $3,565 million - $450 million = **$3,115 million**
+
+### **FY 2021**
+*   **Net cash provided by operating activities:** $3,521 million
+*   **Purchases of property and equipment:** ($301) million
+*   **Free Cash Flow:** $3,521 million - $301 million = **$3,220 million**
+
+### **Comparison**
+AMD's free cash flow decreased by **$105 million** in 2022 compared to 2021, primarily due to higher capital expenditures (purchases of property and equipment) despite a slight increase in cash provided by operating activities.
+
+**Sources:**
+*   *Consolidated Statements of Cash Flows (ID: 0093)*
+
+--- GROUND TRUTH (From GPT.xlsx) ---
+~$3.1B in 2022 vs ~$3.2B in 2021 (slight decline)
+
+================================================================================
+USER QUERY [8]: For AMD, calculate the current ratio for FY2022 and assess liquidity strength.
+--------------------------------------------------------------------------------
+--- BOT INTERNAL LOG ---
+====================================================================================================
+Final Context Selection (Top 5 Unique Nodes):
+  -> Node 0080   | AMD > FINANCIAL CONDITION > Liquidity and Capital Resources
+  -> Node 0089   | AMD > Advanced Micro Devices, Inc. > Consolidated Balance Sheets
+  -> Node 0178   | AMD > As of December 31, 2022
+  -> Node 0060   | AMD > ITEM 7. MANAGEMENT’S DISCUSSION AND ANALYSIS OF FINANCIAL CONDITION AND RESULTS OF OPERATIONS > Overview
+  -> Node 0081   | AMD > FINANCIAL CONDITION > Liquidity and Capital Resources > Operating Activities
+====================================================================================================
+
+--- BOT SYNTHESIZED RESPONSE ---
+Based on the Consolidated Balance Sheets as of December 31, 2022 (ID: 0089), the current ratio for AMD for fiscal year 2022 is calculated as follows:
+
+*   **Total Current Assets:** $15,019 million
+*   **Total Current Liabilities:** $6,369 million
+*   **Current Ratio:** $15,019 / $6,369 ≈ **2.36**
+
+### Assessment of Liquidity Strength
+AMD’s liquidity position is strong, as evidenced by a current ratio of 2.36, indicating the company holds more than double the current assets required to cover its short-term obligations. 
+
+Key factors supporting this assessment include:
+*   **Cash Reserves:** AMD increased its cash, cash equivalents, and short-term investments to $5.9 billion as of December 31, 2022, up from $3.6 billion in 2021 (ID: 0080).
+*   **Operating Cash Flow:** The company generated $3.6 billion in net cash from operating activities in 2022, demonstrating a robust ability to fund operations internally (ID: 0081).
+*   **Financial Flexibility:** Management has access to a $3.0 billion unsecured revolving credit facility (none of which was drawn in 2022) and a $3.0 billion commercial paper program, providing additional buffers to meet capital requirements or unexpected liquidity needs (ID: 0060, 0080). 
+
+Management expects these resources, combined with cash flows from operations, to be sufficient to fund its business operations, including capital expenditures and purchase commitments, for the next 12 months and beyond (ID: 0080).
+
+--- GROUND TRUTH (From GPT.xlsx) ---
+~2.4x (indicating strong liquidity)
+
+================================================================================
+USER QUERY [9]: For AMD, estimate whether inventory buildup contributed significantly to cash flow decline in FY2022.
+--------------------------------------------------------------------------------
+--- BOT INTERNAL LOG ---
+====================================================================================================
+Final Context Selection (Top 5 Unique Nodes):
+  -> Node 0081   | AMD > FINANCIAL CONDITION > Liquidity and Capital Resources > Operating Activities
+  -> Node 0080   | AMD > FINANCIAL CONDITION > Liquidity and Capital Resources
+  -> Node 0093   | AMD > Advanced Micro Devices, Inc. > Consolidated Statements of Cash Flows
+  -> Node 0095   | AMD > Advanced Micro Devices, Inc. > Consolidated Statements of Cash Flows
+  -> Node 0155   | AMD > Critical Audit Matters > Inventory Valuation
+====================================================================================================
+
+--- BOT SYNTHESIZED RESPONSE ---
+Yes, inventory buildup was a significant contributor to the cash flow impact from changes in operating assets and liabilities in FY2022.
+
+According to the **Consolidated Statements of Cash Flows (ID: 0093)** and the **Operating Activities** section (**ID: 0081**), AMD experienced a **$1.4 billion increase in inventories** during 2022. This outflow was driven primarily by the build of advanced process nodes to support the ramp of new products. This inventory increase represented one of the three primary drivers of the $1.8 billion in net cash outflows from changes in operating assets and liabilities, alongside a $1.1 billion increase in accounts receivable and a $1.2 billion increase in prepaid expenses and other assets.
+
+--- GROUND TRUTH (From GPT.xlsx) ---
+Yes, inventory increase (~$1B+) negatively impacted operating cash flow
+
+================================================================================
+USER QUERY [10]: For AMD, what proportion of total revenue in FY2022 is attributable to the top two segments combined (Data Center + Client)?
+--------------------------------------------------------------------------------
+--- BOT INTERNAL LOG ---
+====================================================================================================
+Final Context Selection (Top 5 Unique Nodes):
+  -> Node 0063   | AMD > Results of Operations > Data Center
+  -> Node 0064   | AMD > Results of Operations > Client
+  -> Node 0114   | AMD > NOTE 3 – Supplemental Financial Statement Information > NOTE 4 – Segment Reporting
+  -> Node 0062   | AMD > Results of Operations
+  -> Node 0060   | AMD > ITEM 7. MANAGEMENT’S DISCUSSION AND ANALYSIS OF FINANCIAL CONDITION AND RESULTS OF OPERATIONS > Overview
+====================================================================================================
+
+--- BOT SYNTHESIZED RESPONSE ---
+For fiscal year 2022, the combined net revenue for the Data Center and Client segments was $12.244 billion ($6.043 billion + $6.201 billion). Given the total net revenue for AMD in 2022 was $23.601 billion, the proportion attributable to these two segments is approximately **51.88%**.
+
+**Source:**
+*   AMD > NOTE 3 – Supplemental Financial Statement Information > NOTE 4 – Segment Reporting (ID: 0114)
+
+--- GROUND TRUTH (From GPT.xlsx) ---
+~52% (Data Center ~$6B + Client ~$6.2B out of ~$23.6B total)
+

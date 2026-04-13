@@ -24,7 +24,7 @@ logging.basicConfig(level=logging.INFO, format="%(message)s")
 def extract_pdf(pdf_path, output_dir):
     """Convert a single PDF to Markdown using LlamaParse."""
     try:
-        from llama_cloud.client import LlamaCloud
+        from llama_cloud import LlamaCloud
     except ImportError:
         logging.error("llama-cloud not installed. Run: pip install llama-cloud")
         sys.exit(1)
@@ -44,29 +44,32 @@ def extract_pdf(pdf_path, output_dir):
     logging.info(f"  Extracting: {os.path.basename(pdf_path)}...")
 
     try:
-        client = LlamaCloud(token=api_key)
+        client = LlamaCloud(api_key=api_key)
 
-        # Upload and parse the PDF
+        # Upload, parse, and wait for result in one call
+        # cost_effective tier supports markdown output; fast tier does not
         with open(pdf_path, "rb") as f:
-            job = client.parsing.upload_file(
-                file=f,
-                file_name=os.path.basename(pdf_path),
-                result_type="markdown"
+            result = client.parsing.parse(
+                upload_file=f,
+                tier="cost_effective",
+                version="latest",
+                expand=["markdown"],
             )
 
-        # Get the result
-        result = client.parsing.get_result(job_id=job.id, result_type="markdown")
+        # Result.markdown.pages is a list of page objects with .markdown text
+        pages = result.markdown.pages
+        full_md = "\n\n".join(page.markdown for page in pages if page.markdown)
 
         # Write markdown output
         os.makedirs(output_dir, exist_ok=True)
         with open(output_path, "w", encoding="utf-8") as out:
-            out.write(result.markdown)
+            out.write(full_md)
 
-        logging.info(f"  -> Saved: {output_path}")
+        logging.info(f"  -> Saved: {output_path} ({len(pages)} pages, {len(full_md)} chars)")
 
     except Exception as e:
         logging.error(f"  -> Failed: {e}")
-        logging.info("  Note: LlamaParse API may have changed. Check https://docs.cloud.llamaindex.ai/")
+        logging.info("  Check https://docs.cloud.llamaindex.ai/ for API updates.")
 
 
 def batch_extract(pdf_dir, output_dir):

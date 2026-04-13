@@ -4,7 +4,6 @@ Proxy-Pointer: Centralized Configuration
 All paths are relative to the project root. Override via .env or environment variables.
 """
 import os
-import sys
 import logging
 from pathlib import Path
 from dotenv import load_dotenv
@@ -22,8 +21,8 @@ logging.basicConfig(level=logging.INFO, format="%(message)s")
 PDF_DIR       = Path(os.getenv("PP_PDF_DIR",       PROJECT_ROOT / "data" / "pdf"))
 DATA_DIR      = Path(os.getenv("PP_DATA_DIR",      PROJECT_ROOT / "data" / "documents"))
 TREES_DIR     = Path(os.getenv("PP_TREES_DIR",     PROJECT_ROOT / "data" / "trees"))
-INDEX_DIR     = Path(os.getenv("PP_INDEX_DIR",     PROJECT_ROOT / "data" / "index"))
-PAGEINDEX_DIR = Path(os.getenv("PP_PAGEINDEX_DIR", PROJECT_ROOT / "vendor" / "PageIndex"))
+INDEX_DIR     = Path(os.getenv("PP_INDEX_DIR",      PROJECT_ROOT / "data" / "index"))
+RESULTS_DIR   = Path(os.getenv("PP_RESULTS_DIR",    PROJECT_ROOT / "data" / "results"))
 
 # ── Models ──────────────────────────────────────────────────────────────
 EMBEDDING_MODEL    = "models/gemini-embedding-001"
@@ -31,6 +30,3 @@ EMBEDDING_DIMS     = 1536
 NOISE_FILTER_MODEL = "gemini-3.1-flash-lite-preview"
 SYNTH_MODEL        = "gemini-3.1-flash-lite-preview"
 
-# ── Ensure PageIndex is available ───────────────────────────────────────
-if PAGEINDEX_DIR.exists():
-    sys.path.append(str(PAGEINDEX_DIR))

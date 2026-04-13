@@ -1,0 +1,253 @@
+=== PROXY-POINTER RAG vs FINANCEBENCH BENCHMARK ===
+Company: Boeing_2022
+
+================================================================================
+USER QUERY [1.0]: For Boeing, compute the net change in cash in FY2022 by reconciling operating, investing, and financing cash flows including FX effects.
+--------------------------------------------------------------------------------
+--- BOT INTERNAL LOG ---
+====================================================================================================
+Final Context Selection (Top 3 Unique Nodes):
+  -> Node 0107   | Boeing > Consolidated Statements of Cash Flows
+  -> Node 0082   | Boeing > Boeing Capital > Liquidity and Capital Resources > Cash Flow Summary
+  -> Node 0008   | Boeing > THE BOEING COMPANY > For the Fiscal Year Ended December 31, 2022
+====================================================================================================
+
+--- BOT SYNTHESIZED RESPONSE ---
+For Boeing's fiscal year 2022, the net change in cash and cash equivalents (including restricted cash) is reconciled as follows (in millions):
+
+*   **Net cash provided by operating activities:** $3,512
+*   **Net cash provided by investing activities:** $4,370
+*   **Net cash used by financing activities:** ($1,266)
+*   **Effect of exchange rate changes on cash and cash equivalents:** ($73)
+
+**Calculation:** $3,512 + $4,370 - $1,266 - $73 = **$6,543**
+
+The net increase in cash and cash equivalents, including restricted cash, for FY2022 was **$6,543 million**.
+
+**Sources:**
+*   *Boeing > Consolidated Statements of Cash Flows (ID: 0107)*
+*   *Boeing > Boeing Capital > Liquidity and Capital Resources > Cash Flow Summary (ID: 0082)*
+
+--- GROUND TRUTH (From GPT.xlsx) ---
++$6,543 million
+
+================================================================================
+USER QUERY [2.0]: For Boeing, what percentage of operating cash flow in FY2022 was consumed by changes in working capital?
+--------------------------------------------------------------------------------
+--- BOT INTERNAL LOG ---
+====================================================================================================
+Final Context Selection (Top 3 Unique Nodes):
+  -> Node 0082   | Boeing > Boeing Capital > Liquidity and Capital Resources > Cash Flow Summary
+  -> Node 0107   | Boeing > Consolidated Statements of Cash Flows
+  -> Node 0008   | Boeing > THE BOEING COMPANY > For the Fiscal Year Ended December 31, 2022
+====================================================================================================
+
+--- BOT SYNTHESIZED RESPONSE ---
+In FY2022, Boeing's changes in assets and liabilities (working capital) were a positive $4.139 billion, which actually added to rather than consumed operating cash flow. Because this figure was a source of cash, it did not consume any percentage of the company's $3.512 billion in net cash provided by operating activities.
+
+**Sources:**
+*   Boeing > Boeing Capital > Liquidity and Capital Resources > Cash Flow Summary (ID: 0082)
+*   Boeing > Consolidated Statements of Cash Flows (ID: 0107)
+
+--- GROUND TRUTH (From GPT.xlsx) ---
+0% consumed; working capital was a source of cash (+4,139 vs OCF 3,512), contributing ~118% of operating cash flow.
+
+================================================================================
+USER QUERY [3.0]: For Boeing, estimate free cash flow in FY2022 and reconcile it against operating cash flow and capital expenditures.
+--------------------------------------------------------------------------------
+--- BOT INTERNAL LOG ---
+====================================================================================================
+Final Context Selection (Top 3 Unique Nodes):
+  -> Node 0082   | Boeing > Boeing Capital > Liquidity and Capital Resources > Cash Flow Summary
+  -> Node 0107   | Boeing > Consolidated Statements of Cash Flows
+  -> Node 0008   | Boeing > THE BOEING COMPANY > For the Fiscal Year Ended December 31, 2022
+====================================================================================================
+
+--- BOT SYNTHESIZED RESPONSE ---
+For Boeing in fiscal year 2022, free cash flow is estimated by subtracting capital expenditures from net cash provided by operating activities.
+
+### **2022 Free Cash Flow Calculation**
+(Dollars in millions)
+
+*   **Net cash provided by operating activities:** $3,512
+*   **Less: Payments to acquire property, plant and equipment (Capital Expenditures):** ($1,222)
+*   **Free Cash Flow:** **$2,290**
+
+### **Reconciliation**
+The reconciliation is based on the **Consolidated Statements of Cash Flows (ID: 0107)**:
+*   **Operating Cash Flow:** The company generated $3,512 million in cash from operating activities. This reflects the net loss of $5,053 million, adjusted for $4,426 million in non-cash items and $4,139 million in net changes to assets and liabilities (as summarized in the **Cash Flow Summary, ID: 0082**).
+*   **Capital Expenditures:** As detailed in the investing activities section of the consolidated statement, Boeing spent $1,222 million on property, plant, and equipment during 2022 (ID: 0107). 
+
+Subtracting these capital expenditures from the operating cash flow results in a free cash flow of $2,290 million for FY2022.
+
+--- GROUND TRUTH (From GPT.xlsx) ---
++$2,290 million
+
+================================================================================
+USER QUERY [4.0]: For Boeing, what proportion of total revenue in FY2022 is attributable to the Commercial Airplanes segment?
+--------------------------------------------------------------------------------
+--- BOT INTERNAL LOG ---
+====================================================================================================
+Final Context Selection (Top 3 Unique Nodes):
+  -> Node 0179   | Boeing > Note 22 – Segment and Revenue Information
+  -> Node 0060   | Boeing > Segment Results of Operations and Financial Condition > Revenues
+  -> Node 0011   | Boeing > PART I > Item 1. Business > Commercial Airplanes Segment
+====================================================================================================
+
+--- BOT SYNTHESIZED RESPONSE ---
+In FY2022, the Commercial Airplanes (BCA) segment accounted for approximately **38.8%** of Boeing's total revenue.
+
+**Calculation:**
+*   **BCA Segment Revenues (2022):** $25,867 million (Source: Note 22 – Segment and Revenue Information, ID: 0179)
+*   **Total Revenues (2022):** $66,608 million (Source: Note 22 – Segment and Revenue Information, ID: 0179)
+*   **Proportion:** $25,867 / $66,608 ≈ 38.83%
+
+--- GROUND TRUTH (From GPT.xlsx) ---
+~38.8%
+
+================================================================================
+USER QUERY [5.0]: For Boeing, quantify the impact of abnormal production costs (e.g., 787 and 737 programs) on overall operating margin in FY2022.
+--------------------------------------------------------------------------------
+--- BOT INTERNAL LOG ---
+====================================================================================================
+Final Context Selection (Top 3 Unique Nodes):
+  -> Node 0061   | Boeing > Segment Results of Operations and Financial Condition > Loss From Operations
+  -> Node 0091   | Boeing > Critical Accounting Policies & Estimates > Program Accounting
+  -> Node 0049   | Boeing > Consolidated Results of Operations
+====================================================================================================
+
+--- BOT SYNTHESIZED RESPONSE ---
+In FY2022, Boeing reported a total of **$1,753 million** in abnormal production costs, which were allocated as follows:
+*   **787 program:** $1,240 million
+*   **777X program:** $325 million
+*   **737 program:** $188 million
+
+Given Boeing’s FY2022 total revenue of **$66,608 million**, these abnormal production costs represented a **2.63%** negative impact on the overall operating margin (which stood at -5.3%).
+
+**Sources:**
+*   *Boeing > Segment Results of Operations and Financial Condition > Loss From Operations (ID: 0061)*
+*   *Boeing > Consolidated Results of Operations (ID: 0049)*
+
+--- GROUND TRUTH (From GPT.xlsx) ---
+~$1.7B+ direct abnormal costs (~2.6% of revenue), contributing materially to the -5.3% operating margin, but not the sole driver of losses
+
+================================================================================
+USER QUERY [6.0]: For Boeing, compute the current ratio for FY2022 using total current assets and total current liabilities from the balance sheet.
+--------------------------------------------------------------------------------
+--- BOT INTERNAL LOG ---
+====================================================================================================
+Final Context Selection (Top 3 Unique Nodes):
+  -> Node 0105   | Boeing > Consolidated Statements of Financial Position
+  -> Node 0008   | Boeing > THE BOEING COMPANY > For the Fiscal Year Ended December 31, 2022
+  -> Node 0047   | Boeing > Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations > Consolidated Results of Operations and Financial Condition > Overview
+====================================================================================================
+
+--- BOT SYNTHESIZED RESPONSE ---
+To compute the current ratio for Boeing for FY2022, the following figures from the Consolidated Statements of Financial Position (ID: 0105) are used:
+
+*   **Total current assets (2022):** $109,523 million
+*   **Total current liabilities (2022):** $90,052 million
+
+**Calculation:**
+Current Ratio = Total Current Assets / Total Current Liabilities
+Current Ratio = $109,523 / $90,052 ≈ **1.22**
+
+Boeing's current ratio for FY2022 is approximately **1.22**.
+
+--- GROUND TRUTH (From GPT.xlsx) ---
+~1.2x–1.3x (moderate liquidity)
+
+================================================================================
+USER QUERY [7.0]: For Boeing, what is the ratio of total debt to total equity in FY2022, and what does it imply about capital structure risk?
+--------------------------------------------------------------------------------
+--- BOT INTERNAL LOG ---
+====================================================================================================
+Final Context Selection (Top 3 Unique Nodes):
+  -> Node 0156   | Boeing > Note 15 – Debt
+  -> Node 0083   | Boeing > Capital Resources
+  -> Node 0047   | Boeing > Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations > Consolidated Results of Operations and Financial Condition > Overview
+====================================================================================================
+
+--- BOT SYNTHESIZED RESPONSE ---
+To determine the ratio of total debt to total equity for Boeing in FY2022, we must use the provided financial data. Note that while total debt is explicitly provided, total equity must be derived from the balance sheet (Total Assets - Total Liabilities).
+
+### 1. Calculation
+*   **Total Debt:** According to **Note 15 – Debt**, the total debt as of December 31, 2022, was **$57,001 million**.
+*   **Total Equity:** Based on the provided context, the specific "Total Equity" figure is not explicitly stated in a single line item. However, Boeing’s financial reports for FY2022 indicate that the company has faced significant balance sheet pressure. (Note: Without the explicit Shareholder's Equity balance provided in the text, this ratio is typically calculated as $57,001M / Total Equity. *If referring to the company's historical filings for 2022, total equity was approximately -$16 billion due to significant accumulated deficits, resulting in a negative debt-to-equity ratio.*)
+
+### 2. Capital Structure Risk Implications
+The debt position and capital structure present several risk factors for Boeing as outlined in the **Capital Resources** section:
+
+*   **Financial Leverage and Credit Ratings:** Boeing’s increased debt balance has previously led to credit rating downgrades. The company notes that its financial performance and outlook are critical to maintaining access to capital markets. Further downgrades could increase borrowing costs or restrict access to liquidity.
+*   **Refinancing Risk:** Boeing faces a significant maturity schedule (e.g., $5,128 million in debt due in 2023 and $5,081 million in 2024). While the company maintains $12 billion in unused credit capacity as a backstop, it remains dependent on the ability to access capital markets to pay off or refinance existing debt.
+*   **Restrictive Covenants:** The company’s ability to take on future debt is constrained by covenants, including limitations on mortgage debt and consolidated debt as a percentage of total capital. While Boeing reported being in full compliance as of December 31, 2022, these constraints limit financial flexibility.
+*   **Operational Sensitivity:** As noted in **Capital Resources**, the company's ability to fund operations is sensitive to market disruptions and declines in performance. The high debt load relative to equity, combined with large purchase obligations ($121.5 billion), necessitates a disciplined approach to cash flow management to ensure all obligations are met.
+
+**Summary:** The high level of debt relative to equity signifies a highly levered capital structure. This creates heightened sensitivity to interest rate fluctuations, credit market access, and the company's ability to maintain its credit ratings to avoid increased financing costs.
+
+--- GROUND TRUTH (From GPT.xlsx) ---
+"Not meaningful due to negative equity; indicates extremely high leverage and elevated financial risk
+
+================================================================================
+USER QUERY [8.0]: For Boeing, calculate the year-over-year change in total backlog value from FY2021 to FY2022.
+--------------------------------------------------------------------------------
+--- BOT INTERNAL LOG ---
+====================================================================================================
+Final Context Selection (Top 3 Unique Nodes):
+  -> Node 0181   | Boeing > Note 22 – Segment and Revenue Information > Backlog
+  -> Node 0054   | Boeing > Backlog
+  -> Node 0062   | Boeing > Backlog
+====================================================================================================
+
+--- BOT SYNTHESIZED RESPONSE ---
+Boeing’s total backlog value increased from $377,499 million in FY2021 to $404,381 million in FY2022, representing a year-over-year increase of $26,882 million.
+
+**Source:** Boeing > Backlog (ID: 0054)
+
+--- GROUND TRUTH (From GPT.xlsx) ---
+Increase driven by recovery in commercial orders (~mid-single digit %)
+
+================================================================================
+USER QUERY [9.0]: For Boeing, determine whether inventory buildup or customer advances had a larger impact on operating cash flow in FY2022.  Treat increases in inventory as cash outflows and advances as cash inflows.
+--------------------------------------------------------------------------------
+--- BOT INTERNAL LOG ---
+====================================================================================================
+Final Context Selection (Top 3 Unique Nodes):
+  -> Node 0107   | Boeing > Consolidated Statements of Cash Flows
+  -> Node 0082   | Boeing > Boeing Capital > Liquidity and Capital Resources > Cash Flow Summary
+  -> Node 0133   | Boeing > Note 5 – Accounts Receivable, net > Note 7 – Inventories
+====================================================================================================
+
+--- BOT SYNTHESIZED RESPONSE ---
+In FY2022, inventory buildup had a larger impact on operating cash flow than customer advances.
+
+Based on the **Consolidated Statements of Cash Flows (ID: 0107)**, the impacts on operating cash flow for 2022 were:
+
+*   **Inventories:** The change in inventories was **$420 million** (reported as a source of cash).
+*   **Advances and progress billings:** The change in advances and progress billings was **$108 million** (reported as a source of cash).
+
+Comparing these figures, the $420 million impact from inventory changes represents a larger contribution to operating cash flow than the $108 million from customer advances.
+
+--- GROUND TRUTH (From GPT.xlsx) ---
+Inventory buildup had larger negative impact than advances benefit
+
+================================================================================
+USER QUERY [10.0]: For Boeing, what proportion of total revenue is generated from government-related customers (defense and space) versus commercial customers in FY2022?
+--------------------------------------------------------------------------------
+--- BOT INTERNAL LOG ---
+====================================================================================================
+Final Context Selection (Top 3 Unique Nodes):
+  -> Node 0179   | Boeing > Note 22 – Segment and Revenue Information
+  -> Node 0060   | Boeing > Segment Results of Operations and Financial Condition > Revenues
+  -> Node 0050   | Boeing > Consolidated Results of Operations > Revenues
+====================================================================================================
+
+--- BOT SYNTHESIZED RESPONSE ---
+For FY2022, Boeing generated **40%** of its consolidated revenues from U.S. government-related customers (which includes foreign military sales through the U.S. government). The remaining **60%** of consolidated revenues were derived from other commercial and non-U.S. government customers.
+
+**Sources:**
+*   **Boeing > Note 22 – Segment and Revenue Information (ID: 0179):** States, "Revenues from the U.S. government (including foreign military sales through the U.S. government)... represented 40%... of consolidated revenues for 2022."
+
+--- GROUND TRUTH (From GPT.xlsx) ---
+~40% government-related (U.S. government and foreign military sales) vs ~60% commercial
+
