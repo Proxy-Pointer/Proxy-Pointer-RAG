@@ -45,7 +45,7 @@ Refer to [Proxy-Pointer RAG: Achieving Vectorless Accuracy at Vector RAG Scale a
 
 ## Benchmark Results
 
-Proxy-Pointer has been evaluated against the **FinanceBench** dataset using four FY2022 10-K filings (AMD, American Express, Boeing, PepsiCo).
+Proxy-Pointer has been evaluated against the **[FinanceBench](https://huggingface.co/datasets/PatronusAI/financebench)** dataset using four FY2022 10-K filings (AMD, American Express, Boeing, PepsiCo). In addition, I created a list of 40 significantly more complex and advanced questions requiring multi-step reasoning and calculations, causal and atribution analysis, adversarial reasoning, which I named **Comprehensive** benchmark. The results are as follows:
 
 | Benchmark | Questions | k_final | Accuracy |
 |---|---|---|---|
@@ -67,7 +67,7 @@ A pre-extracted Markdown file (`AMD.md`) for AMD's FY2022 10-K is included so yo
 ### 1. Clone
 
 ```bash
-git clone https://github.com/youruser/Proxy-Pointer.git
+git clone https://github.com/Proxy-Pointer/Proxy-Pointer-RAG.git
 cd Proxy-Pointer
 ```
 
@@ -129,6 +129,8 @@ The Excel file should have `Question` and `Answer` (or `Ground Truth`) columns. 
 1. Run each question through the RAG bot
 2. Use an LLM-as-a-judge to score each response
 3. Generate a timestamped log file and scorecard in `data/results/`
+
+For instance, you can run with the Comprehensive benchmark questions in 'data/Benchmark/Comprehensive k=5'
 
 ---
 
@@ -289,6 +291,7 @@ The indexed chunk is max 2000 chars — often just a fragment of a table or sect
 ---
 
 ## Dependencies
+You can replace each of the following with your preferred tools:
 
 - [Gemini](https://ai.google.dev/) — Embeddings, noise filter, re-ranker, synthesis
 - [LangChain](https://github.com/langchain-ai/langchain) + [FAISS](https://github.com/facebookresearch/faiss) — Vector indexing

@@ -3,7 +3,7 @@ Proxy-Pointer: Structural RAG Bot
 
 Interactive RAG bot that:
   1. Vector search (k=200) for broad recall
-  2. Deduplicates by node_id
+  2. Deduplicates by (doc_id, node_id) — unique per section per document
   3. LLM re-ranker selects top 5 by hierarchical path relevance
   4. Loads full document sections from source .md files
   5. LLM synthesizer generates grounded answers
@@ -77,11 +77,13 @@ class ProxyPointerRAG:
         docs = self.vector_db.similarity_search(query, k=k_search)
 
         candidates = []
-        unique_map = {}
+        seen_nodes = set()   # (doc_id, node_id) — dedup within AND across docs
         for doc in docs:
             node_id = doc.metadata.get("node_id")
-            if node_id not in unique_map:
-                doc_id = doc.metadata.get("doc_id", "UNK")
+            doc_id = doc.metadata.get("doc_id", "UNK")
+            dedup_key = (doc_id, node_id)
+            if dedup_key not in seen_nodes:
+                seen_nodes.add(dedup_key)
                 internal_crumb = doc.metadata.get("breadcrumb", "Unknown Path")
                 global_crumb = f"{doc_id} > {internal_crumb}"
 
@@ -94,21 +96,23 @@ class ProxyPointerRAG:
                     "content": doc.page_content,
                 }
                 candidates.append(info)
-                unique_map[node_id] = info
 
         # Stage 2: LLM Re-Ranker
+        # Build an index-keyed map so re-ranker IDs are always unique,
+        # regardless of node_id collisions across documents.
+        index_map = {str(i): h for i, h in enumerate(candidates[:50])}
         candidates_text = ""
         for i, h in enumerate(candidates[:50]):
             candidates_text += (
-                f"{i}. [{h['global_breadcrumb']}] (ID: {h['node_id']})\n"
+                f"{i}. [{h['global_breadcrumb']}] (node: {h['node_id']})\n"
             )
 
         prompt = f"""You are a structural re-ranker. 
-Your goal is to find the Top 10 most relevant Document IDs based on their HIERARCHICAL PATH relative to the user's query.
+Your goal is to find the Top {k_final} most relevant candidates based on their HIERARCHICAL PATH relative to the user's query.
 
 User Query: "{query}"
 
-CANDIDATE HIERARCHIES (ID | Full Path):
+CANDIDATE HIERARCHIES (INDEX | Full Path):
 {candidates_text}
 
 RANKING RULES:
@@ -116,10 +120,10 @@ RANKING RULES:
 2. If specific matches are not found, include similar, partial matches.
 3. If the query is not pointing to any specific chapter or section, look for the most relevant Contextual Matches (e.g. if query is about 'India growth', a path like 'Chapter 1 > Outlook > Country outlooks' is very strong).
 4. Structural Priority: Prioritize exact structural anchors (Box 1.1, Figure B1.1) if the query mentions them.
-5. Each ID must appear ONLY ONCE. Do not repeat any ID.
-6. Output ONLY a comma-separated list of the Top 10 unique IDs. No text, no explanation.
+5. Each INDEX must appear ONLY ONCE. Do not repeat any index.
+6. Output ONLY a comma-separated list of the Top {k_final} unique numeric indices. No text, no explanation.
 
-Output Example: 0098, 0096, 0101, 0012, 0033
+Output Example: 3, 7, 12, 0, 25
 """
         try:
             response = self.model.generate_content(prompt).text.strip()
@@ -131,8 +135,8 @@ Output Example: 0098, 0096, 0101, 0012, 0033
             final_pointers = []
             seen = set()
             for rid in ranked_ids:
-                if rid in unique_map and rid not in seen:
-                    final_pointers.append(unique_map[rid])
+                if rid in index_map and rid not in seen:
+                    final_pointers.append(index_map[rid])
                     seen.add(rid)
                 if len(final_pointers) >= k_final:
                     break
@@ -163,20 +167,25 @@ Output Example: 0098, 0096, 0101, 0012, 0033
                     lines = f.readlines()
                     text = "".join(lines[p["start_line"] : p["end_line"]])
                     context.append(
-                        f"### REFERENCE: {p['global_breadcrumb']} "
-                        f"(ID: {p['node_id']})\n{text}"
+                        f"### REFERENCE: {p['global_breadcrumb']}\n{text}"
                     )
             else:
                 # Fallback to vector DB chunk content if .md file is missing
                 context.append(
-                    f"### REFERENCE: {p['global_breadcrumb']} "
-                    f"(ID: {p['node_id']})\n{p['content']}"
+                    f"### REFERENCE: {p['global_breadcrumb']}\n{p['content']}"
                 )
 
         synth_prompt = (
             f"Query: {query}\n\nContext:\n"
             + "\n\n".join(context)
-            + "\n\nAnswer the query concisely citing sources."
+            + "\n\n"
+            "INSTRUCTIONS:\n"
+            "1. Answer the query concisely using ONLY the context above.\n"
+            "2. Do NOT reference any IDs (e.g. 'ID: 0114' or 'node: 0085') anywhere in your answer.\n"
+            "3. At the END of your answer, add a 'Sources:' section listing the breadcrumb paths you used, e.g.:\n"
+            "   Sources:\n"
+            "   - AMD > Results of Operations > Data Center\n"
+            "   - AMD > Consolidated Statements of Operations\n"
         )
         response = self.model.generate_content(synth_prompt)
         return response.text
