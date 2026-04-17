@@ -47,14 +47,14 @@ Refer to [Proxy-Pointer RAG: Achieving Vectorless Accuracy at Vector RAG Scale a
 
 Proxy-Pointer has been evaluated against the **[FinanceBench](https://huggingface.co/datasets/PatronusAI/financebench)** dataset using four FY2022 10-K filings (AMD, American Express, Boeing, PepsiCo). In addition, I created a list of 40 significantly more complex and advanced questions requiring multi-step reasoning and calculations, causal and atribution analysis, adversarial reasoning, which I named **Comprehensive** benchmark. The results are as follows:
 
-| Benchmark | Questions | k_final | Accuracy |
-|---|---|---|---|
-| FinanceBench (26 questions) | Qualitative + quantitative | k=5 | **100%** (26/26) |
-| FinanceBench (26 questions) | Qualitative + quantitative | k=3 | **96.2%** (25/26) |
-| Comprehensive (40 questions) | Complex financial calculations | k=5 | **100%** (40/40) |
-| Comprehensive (40 questions) | Complex financial calculations | k=3 | **92.5%** (37/40) |
+| Benchmark                    | Questions                      | k_final | Accuracy                |
+| ---------------------------- | ------------------------------ | ------- | ----------------------- |
+| FinanceBench (26 questions)  | Qualitative + quantitative     | k=5     | **100%** (26/26)  |
+| FinanceBench (26 questions)  | Qualitative + quantitative     | k=3     | **96.2%** (25/26) |
+| Comprehensive (40 questions) | Complex financial calculations | k=5     | **100%** (40/40)  |
+| Comprehensive (40 questions) | Complex financial calculations | k=3     | **92.5%** (37/40) |
 
-Full scorecards and comparison logs are available in `data/Benchmark/`.
+Full scorecards and comparison logs are available in `data/Benchmark/`. Refer the `Comprehensive k=5` and `Comprehensive k=3` folders for the detailed logs and scorecards.
 
 ---
 
@@ -111,8 +111,11 @@ python -m src.agent.pp_rag_bot
 ```
 
 Try a query like:
+
 ```
 User >> What is AMD's quick ratio for FY2022?
+or a more advanced, cross-company 
+User >> Compare the quick ratios of companies in the dataset in FY22? What do the results imply?
 ```
 
 ---
@@ -126,6 +129,7 @@ python -m src.agent.benchmark <path_to_excel_file>
 ```
 
 The Excel file should have `Question` and `Answer` (or `Ground Truth`) columns. The benchmark script will:
+
 1. Run each question through the RAG bot
 2. Use an LLM-as-a-judge to score each response
 3. Generate a timestamped log file and scorecard in `data/results/`
@@ -194,14 +198,14 @@ Proxy-Pointer/
 
 All configuration is centralized in `src/config.py`. Override via environment variables:
 
-| Variable | Default | Description |
-|---|---|---|
-| `GOOGLE_API_KEY` | (required) | Gemini API key |
-| `LLAMA_CLOUD_API_KEY` | (optional) | LlamaParse API key for PDF extraction |
-| `PP_DATA_DIR` | `data/documents/` | Markdown source directory |
-| `PP_TREES_DIR` | `data/trees/` | Structure tree directory |
-| `PP_INDEX_DIR` | `data/index/` | FAISS index directory |
-| `PP_RESULTS_DIR` | `data/results/` | Benchmark results directory |
+| Variable                | Default             | Description                           |
+| ----------------------- | ------------------- | ------------------------------------- |
+| `GOOGLE_API_KEY`      | (required)          | Gemini API key                        |
+| `LLAMA_CLOUD_API_KEY` | (optional)          | LlamaParse API key for PDF extraction |
+| `PP_DATA_DIR`         | `data/documents/` | Markdown source directory             |
+| `PP_TREES_DIR`        | `data/trees/`     | Structure tree directory              |
+| `PP_INDEX_DIR`        | `data/index/`     | FAISS index directory                 |
+| `PP_RESULTS_DIR`      | `data/results/`   | Benchmark results directory           |
 
 ---
 
@@ -220,11 +224,13 @@ All configuration is centralized in `src/config.py`. Override via environment va
 Three-stage pipeline:
 
 #### Stage 0: Skeleton Tree Building (`build_skeleton_trees.py`)
+
 - Self-contained, pure-Python module (~150 lines) that parses Markdown headings into a hierarchical tree
 - Tree nodes represent document sections with `node_id`, `title`, and `line_num`
 - Zero external dependencies — no LLM calls, no subprocess invocations
 
 #### Stage 1: LLM Noise Filter
+
 - Sends the skeleton tree JSON to Gemini Flash Lite
 - Identifies noise nodes across 6 categories:
   - Table of Contents
@@ -237,6 +243,7 @@ Three-stage pipeline:
 - Temperature 0.0 for deterministic results
 
 #### Stage 2: Chunk, Embed, Index
+
 - For each non-noise node:
   - Extracts text between `line_num` boundaries
   - Parent nodes: text stops at first child's `line_num` (no overlap with children)
@@ -251,17 +258,20 @@ Three-stage pipeline:
 Two-stage retrieval:
 
 #### Stage 1: Broad Vector Recall
+
 - Embeds query with same 1536-dim model
 - FAISS similarity search returns top 200 chunks
 - Deduplicates by `node_id` and shortlists to the **Top 50** unique candidate nodes
 
 #### Stage 2: LLM Structural Re-Ranker
+
 - Sends candidate hierarchical paths (breadcrumbs) to Gemini
 - LLM ranks by **structural relevance**, not embedding similarity
 - Returns top 5 unique node IDs
 - Fallback: if re-ranker fails, uses top 5 by similarity
 
 #### Synthesis
+
 - For each selected node: loads the **full section text** from the source `.md` file using `start_line` / `end_line` pointers
 - Injects breadcrumb as `### REFERENCE` header for grounding
 - Gemini synthesizes a grounded answer citing sources
@@ -271,26 +281,33 @@ Two-stage retrieval:
 ## Design Decisions
 
 ### Why 1536 dimensions?
+
 Gemini's `gemini-embedding-001` defaults to 3072 dimensions. We use `output_dimensionality=1536`:
+
 - **50% smaller** FAISS index files
 - **Faster** similarity search
 - **Minimal accuracy loss** — for structural retrieval (breadcrumb matching), the re-ranker does the heavy lifting; embeddings just need to get the right candidates into the top 200
 
 ### Why LLM noise filter instead of regex?
+
 Hardcoded title matching (`NOISE_TITLES = {"contents", "foreword", ...}`) breaks on:
+
 - Variations: "Note of Thanks" vs "Acknowledgments"
 - Formatting: "**Table of Contents**" vs "TABLE OF CONTENTS"
 - Language: concept-based matching catches semantic equivalents
 
 ### Why structural re-ranker?
+
 Standard vector RAG returns chunks by embedding similarity. A query about "AMD's cash flow" might surface a paragraph that **mentions** cash flow, but the actual Cash Flow Statement table is structurally elsewhere. The re-ranker sees `AMD > Financial Statements > Cash Flows` as a breadcrumb and knows it's the right section.
 
 ### Why full-section loading?
+
 The indexed chunk is max 2000 chars — often just a fragment of a table or section. The synthesizer needs the **complete** section (including headers, full tables, footnotes) for accurate answers. The chunk acts as a **pointer**; the full section is the **payload**.
 
 ---
 
 ## Dependencies
+
 You can replace each of the following with your preferred tools:
 
 - [Gemini](https://ai.google.dev/) — Embeddings, noise filter, re-ranker, synthesis

@@ -29,7 +29,7 @@ Approximately **60.08%** of AMD’s total revenue growth from FY2021 to FY2022 i
 *   *AMD > NOTE 3 – Supplemental Financial Statement Information > NOTE 4 – Segment Reporting (ID: 0114)*
 *   *AMD > Results of Operations (ID: 0062)*
 
---- GROUND TRUTH (From GPT.xlsx) ---
+--- GROUND TRUTH (From Test_Questions.xlsx) ---
 ~60.1% (4,306 / 7,167)
 
 ================================================================================
@@ -63,7 +63,7 @@ The operating margin decreased by approximately **16.84 percentage points** (22.
 
 *Source: Consolidated Statements of Operations (ID: 0085)*
 
---- GROUND TRUTH (From GPT.xlsx) ---
+--- GROUND TRUTH (From Test_Questions.xlsx) ---
 Operating margin declined from 22.2% (2021) to 5.36% (2022), a decrease of 16.84 percentage points
 
 ================================================================================
@@ -89,7 +89,7 @@ This decline is largely explained by the **$3,548 million** in total acquisition
 
 Because these specific amortization expenses were not present in 2021 (Source: ID 0068), they represent a significant non-cash drag on operating results that exceeds the absolute dollar value of the year-over-year decline in operating income.
 
---- GROUND TRUTH (From GPT.xlsx) ---
+--- GROUND TRUTH (From Test_Questions.xlsx) ---
 Majority (~$3B+ impact), as operating income fell despite revenue growth, largely due to Xilinx amortization and acquisition-related expenses
 
 ================================================================================
@@ -116,7 +116,7 @@ As of December 31, 2022, the proportion of AMD's total assets contributed by goo
 **Math:**
 ($24,177 million + $24,118 million) / $67,580 million = $48,295 million / $67,580 million ≈ **0.7146** (or **71.46%**)
 
---- GROUND TRUTH (From GPT.xlsx) ---
+--- GROUND TRUTH (From Test_Questions.xlsx) ---
 71.46% ((24,177 + 24,118) / 67,580)
 
 ================================================================================
@@ -143,7 +143,7 @@ In fiscal year 2022, the Data Center segment accounted for approximately 25.6% o
 **Source:**
 AMD > NOTE 3 – Supplemental Financial Statement Information > NOTE 4 – Segment Reporting (ID: 0114)
 
---- GROUND TRUTH (From GPT.xlsx) ---
+--- GROUND TRUTH (From Test_Questions.xlsx) ---
 ~25% (Data Center ~$6.0B out of ~$23.6B total)
 
 ================================================================================
@@ -169,7 +169,7 @@ In contrast, AMD’s overall company net revenue grew by 44% during the same per
 *   **AMD > NOTE 4 – Segment Reporting (ID: 0114):** Provides the specific revenue figures for the Client segment ($6,887 million in 2021; $6,201 million in 2022) and total net revenue ($16,434 million in 2021; $23,601 million in 2022).
 *   **AMD > Overview (ID: 0060):** Confirms the 44% overall company revenue growth.
 
---- GROUND TRUTH (From GPT.xlsx) ---
+--- GROUND TRUTH (From Test_Questions.xlsx) ---
 Client segment declined ~10% YoY (6,887 → 6,201), while total company revenue grew ~44% (16,434 → 23,601)
 
 ================================================================================
@@ -204,7 +204,7 @@ AMD's free cash flow decreased by **$105 million** in 2022 compared to 2021, pri
 **Sources:**
 *   *Consolidated Statements of Cash Flows (ID: 0093)*
 
---- GROUND TRUTH (From GPT.xlsx) ---
+--- GROUND TRUTH (From Test_Questions.xlsx) ---
 ~$3.1B in 2022 vs ~$3.2B in 2021 (slight decline)
 
 ================================================================================
@@ -237,7 +237,7 @@ Key factors supporting this assessment include:
 
 Management expects these resources, combined with cash flows from operations, to be sufficient to fund its business operations, including capital expenditures and purchase commitments, for the next 12 months and beyond (ID: 0080).
 
---- GROUND TRUTH (From GPT.xlsx) ---
+--- GROUND TRUTH (From Test_Questions.xlsx) ---
 ~2.4x (indicating strong liquidity)
 
 ================================================================================
@@ -258,7 +258,7 @@ Yes, inventory buildup was a significant contributor to the cash flow impact fro
 
 According to the **Consolidated Statements of Cash Flows (ID: 0093)** and the **Operating Activities** section (**ID: 0081**), AMD experienced a **$1.4 billion increase in inventories** during 2022. This outflow was driven primarily by the build of advanced process nodes to support the ramp of new products. This inventory increase represented one of the three primary drivers of the $1.8 billion in net cash outflows from changes in operating assets and liabilities, alongside a $1.1 billion increase in accounts receivable and a $1.2 billion increase in prepaid expenses and other assets.
 
---- GROUND TRUTH (From GPT.xlsx) ---
+--- GROUND TRUTH (From Test_Questions.xlsx) ---
 Yes, inventory increase (~$1B+) negatively impacted operating cash flow
 
 ================================================================================
@@ -280,6 +280,6 @@ For fiscal year 2022, the combined net revenue for the Data Center and Client se
 **Source:**
 *   AMD > NOTE 3 – Supplemental Financial Statement Information > NOTE 4 – Segment Reporting (ID: 0114)
 
---- GROUND TRUTH (From GPT.xlsx) ---
+--- GROUND TRUTH (From Test_Questions.xlsx) ---
 ~52% (Data Center ~$6B + Client ~$6.2B out of ~$23.6B total)
 

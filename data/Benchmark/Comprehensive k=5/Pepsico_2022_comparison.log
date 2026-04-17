@@ -23,7 +23,7 @@ This is calculated using the following figures from the "Free Cash Flow" table (
 
 **Calculation:** ($5,855 / $10,811) * 100 = 54.16%
 
---- GROUND TRUTH (From GPT.xlsx) ---
+--- GROUND TRUTH (From Test_Questions.xlsx) ---
 0.542
 
 ================================================================================
@@ -52,7 +52,7 @@ $10,811 + (-2,430) + (-8,523) + (-465) = **($607) million**
 
 The net decrease in cash and cash equivalents and restricted cash for FY2022 is **$607 million** (Source: ID 0081).
 
---- GROUND TRUTH (From GPT.xlsx) ---
+--- GROUND TRUTH (From Test_Questions.xlsx) ---
 -$607 million
 
 ================================================================================
@@ -73,7 +73,7 @@ For FY2022, PepsiCo’s capital expenditures (listed as "Capital spending") were
 
 Dividing the capital expenditures by the operating cash flow results in approximately **48.16%** of operating cash flow being used for capital expenditures.
 
---- GROUND TRUTH (From GPT.xlsx) ---
+--- GROUND TRUTH (From Test_Questions.xlsx) ---
 0.482
 
 ================================================================================
@@ -94,7 +94,7 @@ For FY2022, PepsiCo’s operating cash flow was $10,811 million (ID: 0080), and 
 
 Therefore, the proportion of operating cash flow returned to shareholders through dividends was approximately **57.1%**.
 
---- GROUND TRUTH (From GPT.xlsx) ---
+--- GROUND TRUTH (From Test_Questions.xlsx) ---
 0.574
 
 ================================================================================
@@ -119,7 +119,7 @@ Based on the **Consolidated Statement of Cash Flows** (ID: 0081) for FY2022:
 The ratio of share repurchases to dividends is:
 $1,500 / $6,172 ≈ **0.243**
 
---- GROUND TRUTH (From GPT.xlsx) ---
+--- GROUND TRUTH (From Test_Questions.xlsx) ---
 0.24x
 
 ================================================================================
@@ -165,7 +165,7 @@ To calculate the reinvestment rate for PepsiCo (defined as Capital spending divi
 *   *Consolidated Statement of Cash Flows (ID: 0080)* for Capital spending and Operating Cash Flow.
 *   *Consolidated Statement of Cash Flows (continued) (ID: 0081)* for Cash dividends paid.
 
---- GROUND TRUTH (From GPT.xlsx) ---
+--- GROUND TRUTH (From Test_Questions.xlsx) ---
 1.123
 
 ================================================================================
@@ -189,7 +189,7 @@ In fiscal year 2022, PepsiCo experienced a greater year-over-year percentage dec
 
 Source: **Reference ID: 0068 (Free Cash Flow table)**
 
---- GROUND TRUTH (From GPT.xlsx) ---
+--- GROUND TRUTH (From Test_Questions.xlsx) ---
 FCF declined ~18% vs OCF decline of ~7%
 
 ================================================================================
@@ -215,7 +215,7 @@ This is detailed in the table "Russia-Ukraine conflict charges" under the **Impa
 
 Source: pepsico > Impairment and Other Charges (ID: 0095)
 
---- GROUND TRUTH (From GPT.xlsx) ---
+--- GROUND TRUTH (From Test_Questions.xlsx) ---
 $1,415 million
 
 ================================================================================
@@ -236,11 +236,11 @@ Based on the provided documents, the total Russia-Ukraine conflict charges in 20
 
 Therefore, approximately **84.7%** of the Russia-Ukraine related charges were due to intangible asset impairments ($1,198 million / $1,415 million).
 
---- GROUND TRUTH (From GPT.xlsx) ---
+--- GROUND TRUTH (From Test_Questions.xlsx) ---
 0.847
 
 ================================================================================
-USER QUERY [10]: For PepsiCo, what percentage of operating cash flow remained after capital expenditures (i.e., FCF margin on OCF)?
+USER QUERY [10]: For PepsiCo, what percentage of operating cash flow remained after capital expenditures ?
 --------------------------------------------------------------------------------
 --- BOT INTERNAL LOG ---
 ====================================================================================================
@@ -272,6 +272,6 @@ Based on the **Consolidated Statement of Cash Flows** (ID: 0080):
     *   Capital spending: $4,240 million
     *   Calculation: ($10,613 - $4,240) / $10,613 = **60.0%**
 
---- GROUND TRUTH (From GPT.xlsx) ---
+--- GROUND TRUTH (From Test_Questions.xlsx) ---
 51.8%
 

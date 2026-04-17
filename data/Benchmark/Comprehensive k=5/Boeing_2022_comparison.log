@@ -32,7 +32,7 @@ This net increase represents the total change in cash and cash equivalents (incl
 
 *Sources: Boeing Consolidated Statements of Cash Flows (ID: 0107); Cash Flow Summary (ID: 0082)*
 
---- GROUND TRUTH (From GPT.xlsx) ---
+--- GROUND TRUTH (From Test_Questions.xlsx) ---
 +$6,543 million
 
 ================================================================================
@@ -57,7 +57,7 @@ Because the change in working capital was a source of cash rather than a consump
 *   *Boeing > Boeing Capital > Liquidity and Capital Resources > Cash Flow Summary (ID: 0082)*
 *   *Boeing > Consolidated Statements of Cash Flows (ID: 0107)*
 
---- GROUND TRUTH (From GPT.xlsx) ---
+--- GROUND TRUTH (From Test_Questions.xlsx) ---
 0% consumed; working capital was a source of cash (+4,139 vs OCF 3,512), contributing ~118% of operating cash flow.
 
 ================================================================================
@@ -88,7 +88,7 @@ Based on the provided financial documents for FY2022, Boeing's free cash flow is
 *   **Net cash provided by operating activities:** $3,512 million (Source: *Cash Flow Summary* ID: 0082; *Consolidated Statements of Cash Flows* ID: 0107).
 *   **Capital expenditures:** $1,222 million, representing payments to acquire property, plant and equipment (Source: *Capital Expenditures* ID: 0185; *Consolidated Statements of Cash Flows* ID: 0107).
 
---- GROUND TRUTH (From GPT.xlsx) ---
+--- GROUND TRUTH (From Test_Questions.xlsx) ---
 +$2,290 million
 
 ================================================================================
@@ -111,7 +111,7 @@ For FY2022, the Commercial Airplanes (BCA) segment generated $25,867 million in 
 *   Boeing > Consolidated Results of Operations > Revenues (ID: 0050)
 *   Boeing > Summary of Business Segment Data (ID: 0112)
 
---- GROUND TRUTH (From GPT.xlsx) ---
+--- GROUND TRUTH (From Test_Questions.xlsx) ---
 ~38.8%
 
 ================================================================================
@@ -136,7 +136,7 @@ In FY2022, Boeing’s Commercial Airplanes (BCA) segment reported a loss from op
 
 These costs represent a portion of the factors contributing to the BCA segment’s overall operating loss for the year (Source: ID 0061).
 
---- GROUND TRUTH (From GPT.xlsx) ---
+--- GROUND TRUTH (From Test_Questions.xlsx) ---
 ~$1.7B+ direct abnormal costs (~2.6% of revenue), contributing materially to the -5.3% operating margin, but not the sole driver of losses
 
 ================================================================================
@@ -164,7 +164,7 @@ Current Ratio = $109,523 / $90,052 ≈ **1.22**
 
 The current ratio for Boeing for FY2022 is approximately **1.22**.
 
---- GROUND TRUTH (From GPT.xlsx) ---
+--- GROUND TRUTH (From Test_Questions.xlsx) ---
 ~1.2x–1.3x (moderate liquidity)
 
 ================================================================================
@@ -195,7 +195,7 @@ The negative equity and high debt levels imply significant capital structure ris
 *   **Solvency and Flexibility:** As noted in "Capital Resources" (ID: 0083), the company’s increased debt balance has already led to credit rating downgrades. The company acknowledges that its ability to fund operations and meet commitments is sensitive to credit market conditions and further rating downgrades. 
 *   **Debt Covenants:** Boeing manages risk by adhering to debt covenants, which include limitations on mortgage debt and consolidated debt as a percentage of total capital. While the company stated it was in compliance as of December 31, 2022, the lack of a positive equity buffer limits their financial flexibility and heightens the importance of maintaining access to capital markets and cash from operations to service the $57 billion debt load.
 
---- GROUND TRUTH (From GPT.xlsx) ---
+--- GROUND TRUTH (From Test_Questions.xlsx) ---
 "Not meaningful due to negative equity; indicates extremely high leverage and elevated financial risk
 
 ================================================================================
@@ -220,7 +220,7 @@ Boeing's total backlog value increased by $26,882 million from FY2021 to FY2022.
 
 **Source:** Boeing > Backlog (ID: 0054)
 
---- GROUND TRUTH (From GPT.xlsx) ---
+--- GROUND TRUTH (From Test_Questions.xlsx) ---
 Increase driven by recovery in commercial orders (~mid-single digit %)
 
 ================================================================================
@@ -244,7 +244,7 @@ Based on the Consolidated Statements of Cash Flows for FY2022 (Source: ID 0107),
 
 Comparing the magnitudes, the **inventory buildup (as a cash outflow of $420 million) had a larger impact on operating cash flow** than the customer advances (as a cash inflow of $108 million) in FY2022.
 
---- GROUND TRUTH (From GPT.xlsx) ---
+--- GROUND TRUTH (From Test_Questions.xlsx) ---
 Inventory buildup had larger negative impact than advances benefit
 
 ================================================================================
@@ -272,6 +272,6 @@ For FY2022, Boeing generated **40%** of its consolidated revenues from U.S. gove
 *   **BGS (Global Services):** This segment serves both commercial and government customers. In 2022, government revenue accounted for 33% of its segment revenue (Source: ID 0179).
 *   **BCA (Commercial Airplanes):** This segment serves the commercial airline industry (Source: ID 0011).
 
---- GROUND TRUTH (From GPT.xlsx) ---
+--- GROUND TRUTH (From Test_Questions.xlsx) ---
 ~40% government-related (U.S. government and foreign military sales) vs ~60% commercial
 

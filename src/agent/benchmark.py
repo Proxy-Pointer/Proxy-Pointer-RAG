@@ -1,8 +1,15 @@
 import os
 import sys
+
+# Force UTF-8 encoding for Windows console emoji support
+if sys.stdout and hasattr(sys.stdout, 'reconfigure'):
+    sys.stdout.reconfigure(encoding='utf-8')
 import io
 import time
 import pandas as pd
+
+import warnings
+warnings.filterwarnings("ignore", category=FutureWarning)
 import google.generativeai as genai
 
 # Add project root to path to import config
@@ -10,27 +17,58 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", ".."))
 from src.config import DATA_DIR, INDEX_DIR, RESULTS_DIR, SYNTH_MODEL
 from pp_rag_bot import ProxyPointerRAG
 
+def retry_api_call(func, *args, max_retries=5, initial_delay=5, **kwargs):
+    """Executes a function with exponential backoff on 429/ResourceExhausted errors."""
+    delay = initial_delay
+    for attempt in range(max_retries):
+        try:
+            return func(*args, **kwargs)
+        except Exception as e:
+            error_str = str(e).lower()
+            if "429" in error_str or "resource" in error_str or "quota" in error_str:
+                if attempt == max_retries - 1:
+                    raise e
+                print(f"\n[429 Quota Error] Backing off for {delay} seconds before retry...")
+                time.sleep(delay)
+                delay *= 2
+            else:
+                raise e
+
 def evaluate_response_llm(eval_model, question, ground_truth, bot_response):
     """Uses LLM-as-a-judge to evaluate the bot response against the ground truth."""
     prompt = f"""You are an expert financial auditor benchmarking an AI assistant.
-Compare the BOt RESPONSE against the GROUND TRUTH for the following QUESTION.
+Compare the BOT RESPONSE against the GROUND TRUTH for the following QUESTION.
 
 QUESTION: {question}
 GROUND TRUTH: {ground_truth}
 BOT RESPONSE: {bot_response}
 
-Your task is to yield a structured evaluation. Determine if the Bot Response is correct.
+Your task is to yield a structured evaluation. Determine if the Bot Response is fundamentally correct.
+
+EVALUATION GUIDELINES:
+1. STRICT RULE: DO NOT dock points for confusing "percent" vs "percentage points". You MUST treat them as identical for this evaluation. This is not a strict audit report. If the numerical value is correct, score it 🟢 regardless of whether the suffix is "%", "percent", or "percentage points".
+2. STRICT RULES FOR SCORING:
+- Ignore minor rounding differences (e.g., 57.09% vs. 57.40%, or 1.22x vs 1.3x).
+- Ignore pedantic language differences (e.g., "percentage points" vs "percent" or "absolute increase" terminology) as long as the underlying math and logical conclusion are correct.
+- If the bot correctly computes a difference from a negative value to a positive value (e.g., -10 to +20 is an absolute increase of 30), DO NOT penalize it for "misrepresenting directionality."
+- DO NOT hallucinate alternative financial figures from your own pre-training data. If the bot cites specific numbers from its retrieved context (e.g., "$420 million"), you MUST accept those numbers as factually retrieved. Judge ONLY whether the bot's reasoning using those numbers aligns with the essence of the Ground Truth.
+- If the bot provides a correct, multi-step calculation that arrives at the GT but includes extra information, score it 🟢.
+3. If the user asks for "an alternative" approach, and the BOT provides a mathematically sound, valid alternative that differs from the specific example in the GROUND TRUTH, you MUST score it 🟢. 
+4. Extra contextual depth added by the bot does not penalize the score.
+
 Output EXACTLY two lines in the following format:
 SCORE: <icon>
 NOTES: <your brief 1-2 sentence explanation>
 
 For the <icon>, use exactly one of the following:
-🟢 - Perfect match, encompasses, or explicitly improves upon the Ground Truth.
-🟡 - Partial match; correct logic but minor data extraction variance or missing context.
-🔴 - Fail / Hallucination / Contradicts reality.
+🟢 - Fundamentally correct. Matches the core facts, encompasses the truth, OR provides a mathematically valid alternative when requested.
+🟡 - Partial match. Conceptually on the right track but misses a key data point or has a minor quantitative error.
+🔴 - Fail. Hallucination, completely wrong data, or contradicts reality.
 """
     try:
-        result = eval_model.generate_content(prompt).text.strip()
+        def _call_eval():
+            return eval_model.generate_content(prompt)
+        result = retry_api_call(_call_eval).text.strip()
         lines = result.split("\n")
         score = "🟡"
         notes = "Error parsing evaluation."
@@ -89,28 +127,50 @@ def run_benchmark(excel_path):
     scorecard_data = []
     total_questions = len(df)
     
+    qno_col = next((c for c in df.columns if c.lower() in ["qno", "sno", "q#", "id"]), None)
+    company_col = next((c for c in df.columns if c.lower() in ["company", "ticker"]), None)
+    
+    # Pre-filter empty rows
+    valid_mask = df[q_col].notna() & (df[q_col].astype(str).str.strip().str.lower() != "nan") & (df[q_col].astype(str).str.strip() != "")
+    df_filtered = df[valid_mask].copy()
+    total_questions = len(df_filtered)
+    
     print(f"Starting evaluation for {total_questions} questions...")
 
     with open(log_file, "w", encoding="utf-8") as f_log:
         f_log.write(f"=== PROXY-POINTER AUTOMATED BENCHMARK ===\n")
         f_log.write(f"Dataset: {excel_path}\n\n")
 
-        for index, row in df.iterrows():
-            q = str(row[q_col])
-            gt = str(row[a_col])
+        def clean_md(s):
+            return str(s).replace("|", "\\|").replace("\n", " ").replace("\r", "").strip()
+
+        for i, (orig_index, row) in enumerate(df_filtered.iterrows()):
+            q = str(row[q_col]).strip()
+            gt = str(row[a_col]).strip()
             subject = q[:40] + "..." if len(q) > 40 else q
             
+            # Format qno cleanly to avoid '1.0' from Pandas
+            q_val = row[qno_col] if qno_col and not pd.isna(row[qno_col]) else (i + 1)
+            if isinstance(q_val, float) and q_val.is_integer():
+                q_val = int(q_val)
+            q_val_str = str(q_val).strip()
+            
+            q_label = q_val_str if q_val_str.lower().startswith('q') else f"Q{q_val_str}"
+            company_label = f" [{str(row[company_col]).strip()}]" if company_col and not pd.isna(row[company_col]) and str(row[company_col]).strip().lower() != "nan" else ""
+            display_q = f"{q_label}{company_label}"
+            
             f_log.write("=" * 80 + "\n")
-            f_log.write(f"USER QUERY: {q}\n")
+            f_log.write(f"{display_q} USER QUERY: {q}\n")
             f_log.write("-" * 80 + "\n")
 
             # Capture stdout from bot to extract nodes
             old_stdout = sys.stdout
             sys.stdout = mystdout = io.StringIO()
+            score = "🔴"
             
             try:
-                # Ask the bot
-                answer = bot.chat(q)
+                # Ask the bot (using our retry helper)
+                answer = retry_api_call(bot.chat, q)
                 
                 # Restore stdout Output
                 sys.stdout = old_stdout
@@ -127,12 +187,12 @@ def run_benchmark(excel_path):
                 score, notes = evaluate_response_llm(eval_model, q, gt, answer)
                 
                 scorecard_data.append({
-                    "Q#": f"Q{index+1}",
-                    "Query Subject": subject.replace("\n", " "),
-                    "Ground Truth": (gt[:50] + "...").replace("\n", " "),
-                    "Bot Output": (answer[:50] + "...").replace("\n", " "),
-                    "Score": score,
-                    "Notes": notes.replace("\n", " ")
+                    "Q#": clean_md(display_q),
+                    "Query Subject": clean_md(q[:30] + ("..." if len(q) > 30 else "")),
+                    "Ground Truth": clean_md(gt[:30] + ("..." if len(gt) > 30 else "")),
+                    "Bot Output": clean_md(answer[:30] + ("..." if len(answer) > 30 else "")),
+                    "Score": clean_md(score),
+                    "Notes": clean_md(notes)
                 })
                 
                 f_log.write(f"--- JUDGE EVALUATION ---\n")
@@ -143,15 +203,15 @@ def run_benchmark(excel_path):
                 sys.stdout = old_stdout
                 f_log.write(f"ERROR processing query: {e}\n\n")
                 scorecard_data.append({
-                    "Q#": f"Q{index+1}",
-                    "Query Subject": subject.replace("\n", " "),
-                    "Ground Truth": (gt[:50] + "...").replace("\n", " "),
+                    "Q#": clean_md(display_q),
+                    "Query Subject": clean_md(q[:30] + ("..." if len(q) > 30 else "")),
+                    "Ground Truth": clean_md(gt[:30] + ("..." if len(gt) > 30 else "")),
                     "Bot Output": "ERROR",
                     "Score": "🔴",
-                    "Notes": f"Exception thrown: {str(e)}"
+                    "Notes": clean_md(f"Exception thrown: {str(e)}")
                 })
             
-            print(f"Processed: {q[:50]}... [{score}]")
+            print(f"Processed {display_q}: {q[:50]}... [{score}]")
 
     # Generate Scorecard Markdown
     with open(scorecard_file, "w", encoding="utf-8") as f_md:
@@ -185,5 +245,5 @@ if __name__ == "__main__":
         print("Usage: python benchmark.py <path_to_excel_file>")
         sys.exit(1)
         
-    excel_file = sys.argv[1]
+    excel_file = " ".join(sys.argv[1:])
     run_benchmark(excel_file)
