@@ -146,6 +146,22 @@ def build_proxy_index(incremental=True):
         f"Embedding model: {embeddings.model} @ {embeddings.dimensionality} dims"
     )
 
+    existing_docs = set()
+    vector_db = None
+    if incremental and os.path.exists(save_path):
+        try:
+            vector_db = FAISS.load_local(
+                save_path, embeddings, allow_dangerous_deserialization=True
+            )
+            # Find which documents are already in the database
+            for doc in vector_db.docstore._dict.values():
+                if "doc_id" in doc.metadata:
+                    existing_docs.add(doc.metadata["doc_id"])
+            logging.info(f"Loaded existing index with {len(existing_docs)} completely indexed document(s).")
+        except Exception as e:
+            logging.warning(f"Could not load existing index: {e}. Building fresh.")
+            vector_db = None
+
     all_chunks = []
 
     # Process all tree files in the trees folder
@@ -169,6 +185,10 @@ def build_proxy_index(incremental=True):
 
         if not os.path.exists(md_file):
             logging.error(f"Markdown file {md_file} not found.")
+            continue
+
+        if doc_id in existing_docs:
+            logging.info(f"  [SKIP] {doc_id}: Already completely indexed in FAISS.")
             continue
 
         with open(md_file, "r", encoding="utf-8") as f:
@@ -243,10 +263,7 @@ def build_proxy_index(incremental=True):
 
     logging.info(f"\nAdding {len(all_chunks)} chunks to index...")
 
-    if incremental and os.path.exists(save_path):
-        vector_db = FAISS.load_local(
-            save_path, embeddings, allow_dangerous_deserialization=True
-        )
+    if vector_db is not None:
         vector_db.add_documents(all_chunks)
     else:
         vector_db = FAISS.from_documents(all_chunks, embeddings)

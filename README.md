@@ -98,11 +98,12 @@ cp .env.example .env
 
 ### 5. Build the index
 
+To build the FAISS index from scratch for the first time:
 ```bash
 python -m src.indexing.build_pp_index --fresh
 ```
 
-This builds a FAISS index from the pre-shipped `AMD.md` file.
+*(Note: If you add more documents later, simply run `python -m src.indexing.build_pp_index` without the `--fresh` flag to incrementally append only the new files!)*
 
 ### 6. Start querying
 
@@ -134,19 +135,20 @@ The Excel file should have `Question` and `Answer` (or `Ground Truth`) columns. 
 2. Use an LLM-as-a-judge to score each response
 3. Generate a timestamped log file and scorecard in `data/results/`
 
-For instance, you can run with the Comprehensive benchmark questions in 'data/Benchmark/Comprehensive k=5'
+For instance, you can run with the Comprehensive benchmark questions in `data/Benchmark/Comprehensive k=5/Test_Questions.xlsx`:
 
----
+> **⚠️ Important Note Before Benchmarking:** The Comprehensive benchmark contains questions about all four companies (AMD, AMEX, Boeing, and PepsiCo). To run it successfully, you MUST first copy all the `.md` files from `data/documents/md_files/` into the `data/documents/` directory, and then rebuild the index using `python -m src.indexing.build_pp_index --fresh`, otherwise the bot won't have the data to answer questions for companies other than AMD!
 
 ## Adding Your Own Documents
 
 ### Option A: You already have Markdown files
 
 1. Place `.md` files in `data/documents/`
-2. Run the indexer (it will auto-build skeleton trees):
+2. Run the indexer (uses incremental indexing to only process new files):
    ```bash
-   python -m src.indexing.build_pp_index --fresh
+   python -m src.indexing.build_pp_index
    ```
+   *(Add `--fresh` if you want to completely erase the existing index and rebuild from scratch).*
 
 ### Option B: Start from PDFs
 
@@ -156,9 +158,9 @@ For instance, you can run with the Comprehensive benchmark questions in 'data/Be
    ```bash
    python -m src.extraction.extract_pdf_to_md
    ```
-4. Build the index:
+4. Build the index (incrementally adds the newly extracted PDFs):
    ```bash
-   python -m src.indexing.build_pp_index --fresh
+   python -m src.indexing.build_pp_index
    ```
 
 ---
