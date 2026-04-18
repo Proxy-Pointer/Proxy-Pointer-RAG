@@ -325,7 +325,7 @@ You can replace each of the following with your preferred tools:
 For questions, feedback, or to report a bug, please use the following channels:
 
 - **GitHub Issues**: For bug reports and feature requests.
-- **GitHub Discussions**: For general questions, ideas, and community chat. You can reach out to me on [LinkedIn](www.linkedin.com/in/partha-sarkar-lets-talk-ai) or [Email](partha.sarkarx@gmail.com).
+- **GitHub Discussions**: For general questions, ideas, and community chat. You can reach out to me on [LinkedIn](https://www.linkedin.com/in/partha-sarkar-lets-talk-ai) or [Email](mailto:partha.sarkarx@gmail.com).
 
 ---
 
