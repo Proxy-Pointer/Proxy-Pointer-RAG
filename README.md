@@ -218,6 +218,7 @@ All configuration is centralized in `src/config.py`. Override via environment va
 - Preserves document hierarchy (headings, tables, lists)
 - Outputs one `.md` file per PDF
 - Idempotent: skips already-extracted files
+- **Note:** Accurate markdown with headings identified is crucial for the pipeline to work correctly. If the default `cost_effective` tier is not sufficient, run with a higher tier by selecting a different value for the `LLAMA_PARSE_TIER` environment variable in config.py.
 
 ### 2. Indexing Layer (`src/indexing/`)
 

@@ -48,10 +48,10 @@ Your task is to yield a structured evaluation. Determine if the Bot Response is 
 EVALUATION GUIDELINES:
 1. STRICT RULE: DO NOT dock points for confusing "percent" vs "percentage points". You MUST treat them as identical for this evaluation. This is not a strict audit report. If the numerical value is correct, score it 🟢 regardless of whether the suffix is "%", "percent", or "percentage points".
 2. STRICT RULES FOR SCORING:
-- Ignore minor rounding differences (e.g., 57.09% vs. 57.40%, or 1.22x vs 1.3x).
+- Ignore minor rounding differences (e.g., 7.09% vs. 7.40%, or 1.22x vs 1.3x).
 - Ignore pedantic language differences (e.g., "percentage points" vs "percent" or "absolute increase" terminology) as long as the underlying math and logical conclusion are correct.
 - If the bot correctly computes a difference from a negative value to a positive value (e.g., -10 to +20 is an absolute increase of 30), DO NOT penalize it for "misrepresenting directionality."
-- DO NOT hallucinate alternative financial figures from your own pre-training data. If the bot cites specific numbers from its retrieved context (e.g., "$420 million"), you MUST accept those numbers as factually retrieved. Judge ONLY whether the bot's reasoning using those numbers aligns with the essence of the Ground Truth.
+- DO NOT hallucinate alternative financial figures from your own pre-training data. If the bot cites specific numbers from its retrieved context (e.g., "$200 million"), you MUST accept those numbers as factually retrieved. Judge ONLY whether the bot's reasoning using those numbers aligns with the essence of the Ground Truth.
 - If the bot provides a correct, multi-step calculation that arrives at the GT but includes extra information, score it 🟢.
 3. If the user asks for "an alternative" approach, and the BOT provides a mathematically sound, valid alternative that differs from the specific example in the GROUND TRUTH, you MUST score it 🟢. 
 4. Extra contextual depth added by the bot does not penalize the score.
@@ -67,7 +67,7 @@ For the <icon>, use exactly one of the following:
 """
     try:
         def _call_eval():
-            return eval_model.generate_content(prompt)
+            return eval_model.generate_content(prompt, generation_config={"temperature": 0.0})
         result = retry_api_call(_call_eval).text.strip()
         lines = result.split("\n")
         score = "🟡"
@@ -142,7 +142,11 @@ def run_benchmark(excel_path):
         f_log.write(f"Dataset: {excel_path}\n\n")
 
         def clean_md(s):
-            return str(s).replace("|", "\\|").replace("\n", " ").replace("\r", "").strip()
+            return str(s).replace("|", "-").replace("\n", " ").replace("\r", "").strip()
+
+        def trunc(s, max_len):
+            s = clean_md(s)
+            return s if len(s) <= max_len else s[:max_len-3] + "..."
 
         for i, (orig_index, row) in enumerate(df_filtered.iterrows()):
             q = str(row[q_col]).strip()
@@ -187,10 +191,10 @@ def run_benchmark(excel_path):
                 score, notes = evaluate_response_llm(eval_model, q, gt, answer)
                 
                 scorecard_data.append({
-                    "Q#": clean_md(display_q),
-                    "Query Subject": clean_md(q[:30] + ("..." if len(q) > 30 else "")),
-                    "Ground Truth": clean_md(gt[:30] + ("..." if len(gt) > 30 else "")),
-                    "Bot Output": clean_md(answer[:30] + ("..." if len(answer) > 30 else "")),
+                    "Q#": f"**{trunc(display_q, 25)}**",
+                    "Query Subject": trunc(q, 35),
+                    "Ground Truth": trunc(gt, 40),
+                    "Bot Output": trunc(answer, 40),
                     "Score": clean_md(score),
                     "Notes": clean_md(notes)
                 })
@@ -203,9 +207,9 @@ def run_benchmark(excel_path):
                 sys.stdout = old_stdout
                 f_log.write(f"ERROR processing query: {e}\n\n")
                 scorecard_data.append({
-                    "Q#": clean_md(display_q),
-                    "Query Subject": clean_md(q[:30] + ("..." if len(q) > 30 else "")),
-                    "Ground Truth": clean_md(gt[:30] + ("..." if len(gt) > 30 else "")),
+                    "Q#": f"**{trunc(display_q, 25)}**",
+                    "Query Subject": trunc(q, 35),
+                    "Ground Truth": trunc(gt, 40),
                     "Bot Output": "ERROR",
                     "Score": "🔴",
                     "Notes": clean_md(f"Exception thrown: {str(e)}")
@@ -221,8 +225,21 @@ def run_benchmark(excel_path):
         f_md.write("🟡 **Yellow:** Partial match; correct logic but minor data extraction variance.\n")
         f_md.write("🔴 **Red:** Fail / Hallucination / Contradicts reality.\n\n")
         
-        f_md.write("| Q# | Query Subject | Ground Truth Summary | Bot Output Summary | Score | Notes |\n")
-        f_md.write("| :--- | :--- | :--- | :--- | :---: | :--- |\n")
+        # Calculate col widths based on max lengths
+        c1 = max(len("Q#"), max([len(d["Q#"]) for d in scorecard_data] + [0]))
+        c2 = max(len("Query Subject"), max([len(d["Query Subject"]) for d in scorecard_data] + [0]))
+        c3 = max(len("Ground Truth Summary"), max([len(d["Ground Truth"]) for d in scorecard_data] + [0]))
+        c4 = max(len("Bot Output Summary"), max([len(d["Bot Output"]) for d in scorecard_data] + [0]))
+        c5 = max(len("Score"), max([len(d["Score"]) for d in scorecard_data] + [0]))
+
+        h1 = "Q#".ljust(c1)
+        h2 = "Query Subject".ljust(c2)
+        h3 = "Ground Truth Summary".ljust(c3)
+        h4 = "Bot Output Summary".ljust(c4)
+        h5 = "Score".ljust(c5)
+
+        f_md.write(f"| {h1} | {h2} | {h3} | {h4} | {h5} | Notes |\n")
+        f_md.write(f"| {'-'*c1} | {'-'*c2} | {'-'*c3} | {'-'*c4} | {'-'*c5} | :--- |\n")
         
         green_count = 0
         yellow_count = 0
@@ -231,7 +248,14 @@ def run_benchmark(excel_path):
             if "🟢" in data["Score"]: green_count += 1
             elif "🟡" in data["Score"]: yellow_count += 1
             elif "🔴" in data["Score"]: red_count += 1
-            row_str = f"| **{data['Q#']}** | {data['Query Subject']} | {data['Ground Truth']} | {data['Bot Output']} | {data['Score']} | {data['Notes']} |\n"
+            
+            r1 = data["Q#"].ljust(c1)
+            r2 = data["Query Subject"].ljust(c2)
+            r3 = data["Ground Truth"].ljust(c3)
+            r4 = data["Bot Output"].ljust(c4)
+            r5 = data["Score"].ljust(c5)
+            
+            row_str = f"| {r1} | {r2} | {r3} | {r4} | {r5} | {data['Notes']} |\n"
             f_md.write(row_str)
             
         f_md.write(f"\n**Final Score:** {green_count} 🟢 | {yellow_count} 🟡 | {red_count} 🔴\n")

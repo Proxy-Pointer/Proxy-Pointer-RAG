@@ -16,7 +16,7 @@ import argparse
 
 # Add project root to path for config import
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", ".."))
-from src.config import PDF_DIR, DATA_DIR
+from src.config import PDF_DIR, DATA_DIR, LLAMA_PARSE_TIER
 
 logging.basicConfig(level=logging.INFO, format="%(message)s")
 
@@ -47,11 +47,10 @@ def extract_pdf(pdf_path, output_dir):
         client = LlamaCloud(api_key=api_key)
 
         # Upload, parse, and wait for result in one call
-        # cost_effective tier supports markdown output; fast tier does not
         with open(pdf_path, "rb") as f:
             result = client.parsing.parse(
                 upload_file=f,
-                tier="cost_effective",
+                tier=LLAMA_PARSE_TIER,
                 version="latest",
                 expand=["markdown"],
             )

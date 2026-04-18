@@ -27,6 +27,10 @@ TREES_DIR     = Path(os.getenv("PP_TREES_DIR",     PROJECT_ROOT / "data" / "tree
 INDEX_DIR     = Path(os.getenv("PP_INDEX_DIR",      PROJECT_ROOT / "data" / "index"))
 RESULTS_DIR   = Path(os.getenv("PP_RESULTS_DIR",    PROJECT_ROOT / "data" / "results"))
 
+# ── LlamaParse ──────────────────────────────────────────────────────────
+# Options: "cost_effective" (v2 default), "agentic", or "agentic_plus" (best for complex docs)
+LLAMA_PARSE_TIER = os.getenv("LLAMA_PARSE_TIER", "cost_effective")
+
 # ── Models ──────────────────────────────────────────────────────────────
 EMBEDDING_MODEL    = "models/gemini-embedding-001"
 EMBEDDING_DIMS     = 1536
