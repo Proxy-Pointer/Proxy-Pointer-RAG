@@ -114,30 +114,28 @@ python -m src.agent.pp_rag_bot
 Try a query like:
 
 ```
-User >> What is AMD's quick ratio for FY2022?
-or a more advanced, cross-company 
-User >> Compare the quick ratios of companies in the dataset in FY22? What do the results imply?
+User >> What is AMD's quick ratio for FY2022? Quick ratio is Quick Assets (Cash and cash equivalents + Short-term investments + Accounts receivable, net) by current liabilities
+or a more advanced comparative one:
+User >> For AMD, what percentage of total revenue growth from FY2021 to FY2022 is attributable to the Embedded segment (including Xilinx)?
 ```
 
 ---
 
 ## Running Benchmarks
 
-To evaluate the pipeline against a set of ground truth questions:
+The benchmark script evaluates the pipeline against an Excel dataset containing `Question` and `Answer` (or `Ground Truth`) columns. It runs each question through the bot, uses an LLM-as-a-judge to grade the response, and generates a timestamped log and scorecard in `data/results/`.
 
-```bash
-python -m src.agent.benchmark <path_to_excel_file>
-```
+We provide a robust Comprehensive benchmark that evaluates the bot across all four dataset companies (AMD, AMEX, Boeing, and PepsiCo). Because only AMD is indexed by default in the quickstart, process the following steps to run the benchmark successfully:
 
-The Excel file should have `Question` and `Answer` (or `Ground Truth`) columns. The benchmark script will:
-
-1. Run each question through the RAG bot
-2. Use an LLM-as-a-judge to score each response
-3. Generate a timestamped log file and scorecard in `data/results/`
-
-For instance, you can run with the Comprehensive benchmark questions in `data/Benchmark/Comprehensive k=5/Test_Questions.xlsx`:
-
-> **⚠️ Important Note Before Benchmarking:** The Comprehensive benchmark contains questions about all four companies (AMD, AMEX, Boeing, and PepsiCo). To run it successfully, you MUST first copy all the `.md` files from `data/documents/md_files/` into the `data/documents/` directory, and then rebuild the index using `python -m src.indexing.build_pp_index --fresh`, otherwise the bot won't have the data to answer questions for companies other than AMD!
+1. **Copy the remaining documents:** Move all `.md` files from `data/documents/md_files/` into the main `data/documents/` directory.
+2. **Rebuild the index:** Run the indexer from scratch to ensure the bot has the data required to answer questions for the other companies:
+   ```bash
+   python -m src.indexing.build_pp_index --fresh
+   ```
+3. **Execute the benchmark:** Run the evaluation script against the provided Comprehensive dataset (or replace the path with your own Excel file):
+   ```bash
+   python -m src.agent.benchmark "data/Benchmark/Comprehensive k=5/Test_Questions.xlsx"
+   ```
 
 ## Adding Your Own Documents
 
