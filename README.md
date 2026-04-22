@@ -39,7 +39,7 @@ Instead of retrieving small, context-less chunks, Proxy-Pointer:
 
 ## Architecture Deep Dive
 
-Refer to [Proxy-Pointer RAG: Achieving Vectorless Accuracy at Vector RAG Scale and Cost](https://towardsdatascience.com/proxy-pointer-rag-achieving-vectorless-accuracy-at-vector-rag-scale-and-cost/) for a detailed explanation of the architecture.
+Refer to [Proxy-Pointer RAG: Achieving Vectorless Accuracy at Vector RAG Scale and Cost](https://towardsdatascience.com/proxy-pointer-rag-achieving-vectorless-accuracy-at-vector-rag-scale-and-cost/) and [Proxy-Pointer RAG: Structure Meets Scale: 100% Accuracy with Smarter Retrieval](https://towardsdatascience.com/proxy-pointer-rag-structure-meets-scale-100-accuracy-with-smarter-retrieval/) for a detailed explanation of the architecture.
 
 ---
 
@@ -322,8 +322,8 @@ You can replace each of the following with your preferred tools:
 
 For questions, feedback, or to report a bug, please use the following channels:
 
-- **GitHub Issues**: For bug reports and feature requests.
-- **GitHub Discussions**: For general questions, ideas, and community chat. You can reach out to me on [LinkedIn](https://www.linkedin.com/in/partha-sarkar-lets-talk-ai) or [Email](mailto:partha.sarkarx@gmail.com).
+- **GitHub Issues**: For bug reports.
+- **General Questions**: For general questions, ideas, and enhancement requests, reach out to me on [LinkedIn](https://www.linkedin.com/in/partha-sarkar-lets-talk-ai) or [Email](mailto:partha.sarkarx@gmail.com).
 
 ---
 
