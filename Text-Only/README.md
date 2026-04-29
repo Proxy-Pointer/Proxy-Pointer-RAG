@@ -68,7 +68,8 @@ A pre-extracted Markdown file (`AMD.md`) for AMD's FY2022 10-K is included so yo
 
 ```bash
 git clone https://github.com/Proxy-Pointer/Proxy-Pointer-RAG.git
-cd Proxy-Pointer
+cd Proxy-Pointer-RAG
+cd Text-Only
 ```
 
 ### 2. Create virtual environment (recommended)
@@ -329,4 +330,4 @@ For questions, feedback, or to report a bug, please use the following channels:
 
 ## License
 
-MIT — see [LICENSE](LICENSE).
+© 2026 Proxy-Pointer. Licensed under [MIT](../LICENSE).

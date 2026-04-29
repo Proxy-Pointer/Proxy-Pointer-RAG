@@ -51,7 +51,8 @@ A sample dataset containing five complex research papers (**CLIP, GaLore, NemoBo
 ### 1. Clone
 ```bash
 git clone https://github.com/Proxy-Pointer/Proxy-Pointer-RAG.git
-cd Proxy-Pointer/MultiModal
+cd Proxy-Pointer-RAG
+cd MultiModal
 ```
 
 ### 2. Create virtual environment
@@ -223,4 +224,5 @@ The indexed chunk is just a fragment. The synthesizer needs the **complete** sec
 ---
 
 ## License
-MIT — see [LICENSE](../LICENSE).
+
+© 2026 Proxy-Pointer. Licensed under [MIT](../LICENSE).

@@ -80,4 +80,6 @@ Both include sample data so you can clone, build the index, and start querying i
 
 ---
 
+## License
+
 © 2026 Proxy-Pointer. Licensed under [MIT](LICENSE).
