@@ -1,0 +1,516 @@
+{
+  "run_summary": {
+    "total": 20,
+    "completed": 20
+  },
+  "results": [
+    {
+      "id": 1,
+      "category": "Precise Data Extraction",
+      "query": "What are the specific hyperparameters used for fine-tuning RoBERTa-Base for GaLore across different GLUE tasks?",
+      "response": "To fine-tune RoBERTa-Base for GaLore across GLUE tasks, the model is trained for 30 epochs with a batch size of 16 (except for CoLA, which uses a batch size of 32). The maximum sequence length is 512. The learning rates and scale factors ($\\alpha$) are tuned per task based on the rank configuration ($r=4$ or $r=8$).\n\nSpecific hyperparameters are detailed in the tables provided in the context:\n\n*   **For Rank $r=4$:** The learning rates are $1 \\times 10^{-5}$ for MNLI, SST-2, QNLI, QQP, RTE, and STS-B, and $3 \\times 10^{-5}$ for MRPC and CoLA. The GaLore $\\alpha$ is 4.\n*   **For Rank $r=8$:** The learning rates are $1 \\times 10^{-5}$ for MNLI, CoLA, and QNLI; $2 \\times 10^{-5}$ for SST-2, MRPC, QQP, and RTE; and $3 \\times 10^{-5}$ for STS-B. The GaLore $\\alpha$ is 2.\n\n[SHOW: fileoutpart157.png | Table 7: Hyperparameters for fine-tuning RoBERTa-Base with GaLore (Rank 4)]\n\n[SHOW: fileoutpart44.png | Table 4: Performance comparison of GaLore and LoRA on GLUE tasks]",
+      "sources": [
+        "Galore > D. Fine-Tuning Experiments > D.1. Details of Fine-Tuning on GLUE",
+        "Galore > Epochs",
+        "Galore > 5. Experiments",
+        "Galore > 4. GaLore for Memory-Efficient Training > 4.4. Hyperparameters of GaLore"
+      ],
+      "images_found": [
+        {
+          "label": "Galore - Table 7: Hyperparameters for fine-tuning RoBERTa-Base with GaLore (Rank 4)",
+          "path": "C:/antigravity/Proxy-Pointer/MultiModal/data/extracted_papers/Galore/tables/fileoutpart157.png",
+          "exists": true
+        }
+      ],
+      "time_seconds": 3.55
+    },
+    {
+      "id": 2,
+      "category": "Precise Data Extraction",
+      "query": "How does VectorPainter extract stroke styles from a reference image, and how does it compare visually against baseline methods like SVGDreamer and DiffSketcher?",
+      "response": "VectorPainter extracts stroke styles from a reference image through a two-step process:\n\n1.  **Stroke Extraction:** The method uses the SLIC superpixel algorithm to partition the reference image into distinct regions based on similar color and texture attributes. Each region is treated as a style stroke.\n2.  **Stroke Vectorization:** For each region, the system identifies the two points with the maximum mutual distance to serve as the initial and terminal control points of a quadratic Bezier curve. The stroke color is determined by averaging the colors within the region, and the width is calculated as the average distance between the region's border points and the central line connecting the control points. This is followed by an optimization process using mean-square-error loss to refine the vectorized strokes (Figure 4).\n\n**Comparison against baseline methods:**\n*   **SVGDreamer:** While SVGDreamer uses text and primitive types for style control, it lacks native support for reference images. Even when modified with style transfer supervision, it performs poorly compared to VectorPainter, failing to achieve precise style control (Figure 6).\n*   **DiffSketcher:** When combined with STROTSS, this method performs relatively well but fails to adequately preserve the reference style compared to VectorPainter.\n*   **General Performance:** Quantitative and qualitative evaluations (Table I, Table S1, and Figure 5) demonstrate that VectorPainter outperforms these baselines, producing high-quality SVGs that maintain superior text alignment and style preservation. Unlike raster-based methods that suffer from quality loss during vectorization, VectorPainter maintains consistency by operating directly in the vector domain.\n\n[SHOW: fileoutpart14.png | Figure 4: Pipeline of Stroke Style Extraction]\n[SHOW: fileoutpart18.png | Figure 6: Comparison of Various Stylized Control Methods]\n[SHOW: fileoutpart19.png | Table I: Quantitative Evaluation]\n[SHOW: fileoutpart25.png | Table S1: Human Evaluation]",
+      "sources": [
+        "VectorPainter > III. METHODOLOGY > A. Stroke Style Extraction",
+        "VectorPainter > VIII. STROKE STYLE EXTRACTION ALGORITHM",
+        "VectorPainter > IV. EXPERIMENTS > C. Qualitative Evaluation",
+        "VectorPainter > IV. EXPERIMENTS > B. Comparison Baselines",
+        "VectorPainter > X. USER STUDY"
+      ],
+      "images_found": [
+        {
+          "label": "VectorPainter - Figure 4: Pipeline of Stroke Style Extraction",
+          "path": "C:/antigravity/Proxy-Pointer/MultiModal/data/extracted_papers/VectorPainter/figures/fileoutpart14.png",
+          "exists": true
+        },
+        {
+          "label": "VectorPainter - Figure 6: Comparison of Various Stylized Control Methods",
+          "path": "C:/antigravity/Proxy-Pointer/MultiModal/data/extracted_papers/VectorPainter/figures/fileoutpart18.png",
+          "exists": true
+        },
+        {
+          "label": "VectorPainter - Table I: Quantitative Evaluation",
+          "path": "C:/antigravity/Proxy-Pointer/MultiModal/data/extracted_papers/VectorPainter/tables/fileoutpart19.png",
+          "exists": true
+        },
+        {
+          "label": "VectorPainter - Table S1: Human Evaluation",
+          "path": "C:/antigravity/Proxy-Pointer/MultiModal/data/extracted_papers/VectorPainter/tables/fileoutpart25.png",
+          "exists": true
+        }
+      ],
+      "time_seconds": 3.68
+    },
+    {
+      "id": 3,
+      "category": "Precise Data Extraction",
+      "query": "What is the validation perplexity for the LLaMA 1B model using GaLore compared to Full-Rank and LoRA during pre-training on the C4 dataset?",
+      "response": "Based on the pre-training results for the LLaMA 1B model on the C4 dataset, the validation perplexity for the different methods is as follows:\n\n*   **Full-Rank:** 15.56\n*   **GaLore:** 15.64\n*   **LoRA:** 19.21\n\nThese results are reported in Table 2.\n\n[SHOW: fileoutpart40.png | Table 2: Comparison with low-rank algorithms on pre-training various sizes of LLaMA models on C4 dataset.]",
+      "sources": [
+        "Galore > 5. Experiments > 5.1. Comparison with Existing Low-Rank Methods",
+        "Galore > C. Details of Pre-Training Experiment > C.3. Training Progression",
+        "Galore > 5. Experiments",
+        "Galore > C. Details of Pre-Training Experiment > C.1. Architecture and Hyperparameters",
+        "Galore > C. Details of Pre-Training Experiment > C.2. Memory Estimates"
+      ],
+      "images_found": [
+        {
+          "label": "Galore - Table 2: Comparison with low-rank algorithms on pre-training various sizes of LLaMA models on C4 dataset.",
+          "path": "C:/antigravity/Proxy-Pointer/MultiModal/data/extracted_papers/Galore/tables/fileoutpart40.png",
+          "exists": true
+        }
+      ],
+      "time_seconds": 3.44
+    },
+    {
+      "id": 4,
+      "category": "Precise Data Extraction",
+      "query": "What is the average Harmonic Mean (HM) score across 11 datasets for CLIP-CITE compared to MaPLe and CoOp on the Base-to-New Generalization task?",
+      "response": "Based on the provided context, the average Harmonic Mean (HM) score across 11 datasets for the Base-to-New Generalization (BNG) task is 81.06% for CLIP-CITE, 78.55% for MaPLe, and 71.66% for CoOp.\n\n[SHOW: fileoutpart12.png | Table 1: Comparison performances (%) on BNG task in terms of B, N, and HM metrics.]",
+      "sources": [
+        "CLIP > 1 Introduction",
+        "CLIP > 4 Experiments > 4.3 Further Analysis",
+        "CLIP > 4 Experiments > 4.1 Experiment Settings",
+        "CLIP > 4 Experiments > 4.2 Performance Comparison",
+        "CLIP > 3 Method > 3.1 Discriminative Visual-Text Alignment task"
+      ],
+      "images_found": [
+        {
+          "label": "CLIP - Table 1: Comparison performances (%) on BNG task in terms of B, N, and HM metrics.",
+          "path": "C:/antigravity/Proxy-Pointer/MultiModal/data/extracted_papers/CLIP/tables/fileoutpart12.png",
+          "exists": true
+        }
+      ],
+      "time_seconds": 2.72
+    },
+    {
+      "id": 5,
+      "category": "Visual / Multimodal",
+      "query": "Describe the VectorFusion pipeline stages: how is the raster image first sampled, then converted to SVG, and finally fine-tuned using latent score distillation?",
+      "response": "The VectorFusion pipeline generates SVGs through three primary stages:\n\n1.  **Sampling a Raster Image:** A text-to-image diffusion model (Stable Diffusion) generates a raster image using a Runge-Kutta solver. To ensure iconographic aesthetics, the prompt is appended with descriptive suffixes (e.g., \"minimal flat 2d vector icon\"). To ensure consistency with the caption, $K$ images are sampled and the best one is selected using CLIP reranking (Figure 3a).\n2.  **Conversion to SVG:** The raster image is automatically traced into an SVG using the Layer-wise Image Vectorization (LIVE) program. This process initializes paths in stages, focusing on high-loss regions, and optimizes path coordinates and colors using an L2 reconstruction loss weighted by distance to the nearest path boundary, alongside a self-intersection regularizer (Figure 3b).\n3.  **Fine-tuning via Latent Score Distillation:** To improve quality and coherence, the SVG is fine-tuned using a Latent Score Distillation Sampling (SDS) loss. The SVG is rendered into an image, augmented, and encoded into a latent space. The SDS loss is computed by comparing the denoised latents against the teacher model (Stable Diffusion) and backpropagating the gradients through the encoder, augmentations, and the differentiable renderer (DiffVG) to update the path parameters (Figure 3c and Figure 5).\n\n[SHOW: fileoutpart29.png | Figure 3: The three-stage VectorFusion pipeline.]\n[SHOW: fileoutpart33.png | Figure 5: Overview of the latent score distillation optimization procedure.]",
+      "sources": [
+        "VectorFusion > 4. Method: VectorFusion > 4.1. A baseline: text-to-image-to-vector",
+        "VectorFusion > 4. Method: VectorFusion > 4.2. Sampling vector graphics by optimization",
+        "VectorFusion > 4. Method: VectorFusion > 4.3. Reinitializing paths",
+        "VectorFusion > 3. Background > 3.3. Score distillation sampling",
+        "VectorFusion > 4. Method: VectorFusion"
+      ],
+      "images_found": [
+        {
+          "label": "VectorFusion - Figure 3: The three-stage VectorFusion pipeline.",
+          "path": "C:/antigravity/Proxy-Pointer/MultiModal/data/extracted_papers/VectorFusion/figures/fileoutpart29.png",
+          "exists": true
+        },
+        {
+          "label": "VectorFusion - Figure 5: Overview of the latent score distillation optimization procedure.",
+          "path": "C:/antigravity/Proxy-Pointer/MultiModal/data/extracted_papers/VectorFusion/figures/fileoutpart33.png",
+          "exists": true
+        }
+      ],
+      "time_seconds": 3.06
+    },
+    {
+      "id": 6,
+      "category": "Visual / Multimodal",
+      "query": "Describe the CLIP-CITE framework architecture, including the roles of the Discriminative Visual-Text Alignment Task, Supervised Contrastive Learning, and Vision-Language Similarity Distillation.",
+      "response": "The CLIP-CITE framework is designed to improve CLIP fine-tuning in limited data regimes by focusing on task design, multi-modal alignment, and knowledge preservation. As illustrated in Figure 2, the architecture consists of three primary components:\n\n*   **Discriminative Visual-Text Alignment Task:** This component combines visual-semantic alignment with image classification. It calculates the probability of an image belonging to a class by measuring the cosine similarity between the visual embedding and the text embedding of the class label. By freezing the text encoder and training the visual encoder and classifier, the model learns to associate visual and textual representations effectively for discriminative tasks.\n*   **Supervised Contrastive Learning:** This strategy fine-tunes both the visual and text encoders to preserve and enhance the representation capability of the pre-trained CLIP. It uses a supervised contrastive loss to bring matching image-text pairs closer together in the embedding space while pushing apart non-matching pairs, ensuring the model captures semantic relationships even with limited data.\n*   **Vision-Language Similarity Distillation:** To prevent catastrophic forgetting and maintain generalization, this component uses a Kullback-Leibler (KL) divergence loss. It minimizes the difference between the image-text similarity distributions produced by the fine-tuned model and the original pre-trained CLIP model, ensuring the fine-tuned model retains the modal consistency and knowledge of the original.\n\nThe final objective function combines these three losses, and the framework employs a weighted ensemble of the fine-tuned and pre-trained models during inference to optimize performance.\n\n[SHOW: figures/fileoutpart3.png | Figure 2: The framework of the CLIP-CITE method.]",
+      "sources": [
+        "CLIP > 3 Method",
+        "CLIP > 3 Method > 3.1 Discriminative Visual-Text Alignment task",
+        "CLIP > 3 Method > 3.2 Supervised Contrastive Learning",
+        "CLIP > 3 Method > 3.3 Vision-Language Similarity Distillation",
+        "CLIP > 3 Method > 3.4 Final Objective Function"
+      ],
+      "images_found": [
+        {
+          "label": "CLIP - Figure 2: The framework of the CLIP-CITE method.",
+          "path": "C:/antigravity/Proxy-Pointer/MultiModal/data/extracted_papers/CLIP/figures/fileoutpart3.png",
+          "exists": true
+        }
+      ],
+      "time_seconds": 3.72
+    },
+    {
+      "id": 7,
+      "category": "Visual / Multimodal",
+      "query": "How does the Nemobot system flow work, and how do the Coding Pad, Chat Playground, and Analysis Portal interact with LLM functions?",
+      "response": "The Nemobot system operates as a modular, low-latency platform for designing and training AI agents. Its architecture separates game logic and state management\u2014which are handled locally in-memory for responsiveness\u2014from LLM-based reasoning, which is triggered only when necessary to avoid inference bottlenecks.\n\nThe interaction between the core components is as follows:\n\n*   **Coding Pad:** Users program the game logic (initial states, transitions, and termination conditions) and define the AI\u2019s initial heuristics. It allows for the synchronous execution and deployment of these programs.\n*   **Chat Playground:** This interface serves as the environment where users interact with the AI to test game logic, generate data, and conduct real-time experimentation. Programs written on the coding pad are instantly rendered here.\n*   **Analysis Portal:** This component evaluates AI performance and visualizes game data, allowing users to identify areas for heuristic refinement.\n*   **LLM Functions:** These are integrated into the main game flow to handle high-level logic, strategy construction, and reasoning. By using \"programmable prompts,\" the system allows developers to define logical behaviors that the LLM executes dynamically. This process, often referred to as \"neuralized memoization,\" allows the system to generate strategic decisions or explain moves without requiring exhaustive pre-programmed code.\n\nThis iterative cycle of programming, testing, and analyzing creates a foundation for data-driven AI training, where performance metrics are asynchronously synchronized to a cloud database to facilitate collaborative learning.\n\n[SHOW: fileoutpart3.png | Figure 3: System Flow of Nemobot illustrating the interaction between the Coding Pad, Chat Playground, and LLM functions.]\n[SHOW: fileoutpart6.png | Figure 4: UI of Nemobot showing the integration of the Coding Pad, Chat Playground, and LLM functions.]",
+      "sources": [
+        "NemoBot > III. NEMOBOT GAME PROGRAMMING > B. System Architecture and Implementation",
+        "NemoBot > III. NEMOBOT GAME PROGRAMMING > A. Overview of Nemobot",
+        "NemoBot > II. GAME PLAYING WITH LARGE LANGUAGE MODELS > B. Programmable Prompts via LLM Functions",
+        "NemoBot > II. GAME PLAYING WITH LARGE LANGUAGE MODELS > D. AI Game Programming Agent",
+        "NemoBot > IV. EVALUATION OF NEMOBOT GAMES > A. Dictionary-Based Game: Tic Tac Toe"
+      ],
+      "images_found": [
+        {
+          "label": "NemoBot - Figure 3: System Flow of Nemobot illustrating the interaction between the Coding Pad, Chat Playground, and LLM functions.",
+          "path": "C:/antigravity/Proxy-Pointer/MultiModal/data/extracted_papers/NemoBot/figures/fileoutpart3.png",
+          "exists": true
+        },
+        {
+          "label": "NemoBot - Figure 4: UI of Nemobot showing the integration of the Coding Pad, Chat Playground, and LLM functions.",
+          "path": "C:/antigravity/Proxy-Pointer/MultiModal/data/extracted_papers/NemoBot/figures/fileoutpart6.png",
+          "exists": true
+        }
+      ],
+      "time_seconds": 3.74
+    },
+    {
+      "id": 8,
+      "category": "Visual / Multimodal",
+      "query": "What are the CLIP R-Precision and Similarity scores for VectorFusion with SD initialization and rejection sampling compared to CLIPDraw?",
+      "response": "Based on Table 1, the CLIP R-Precision and Similarity scores for **VectorFusion (+ SD init + rejection sampling)** using 64 primitives are as follows:\n\n*   **CLIP L/14:** 78.9 R-Precision and 29.4 Similarity.\n*   **OpenCLIP H/14:** 81.3 R-Precision and 24.5 Similarity.\n\nFor comparison, **CLIPDraw (scratch)** achieved:\n*   **CLIP L/14:** 85.2 R-Precision and 27.2 Similarity.\n*   **OpenCLIP H/14:** 77.3 R-Precision and 31.7 Similarity.\n\n[SHOW: fileoutpart35.png | Table 1: Evaluating the consistency of text-to-SVG generations using 64 primitives]",
+      "sources": [
+        "VectorFusion > 5. Experiments > 5.1. Experimental setup",
+        "VectorFusion > Paths",
+        "VectorFusion > 5. Experiments",
+        "VectorFusion > 4. Method: VectorFusion",
+        "VectorFusion > 4. Method: VectorFusion > 4.3. Reinitializing paths"
+      ],
+      "images_found": [
+        {
+          "label": "VectorFusion - Table 1: Evaluating the consistency of text-to-SVG generations using 64 primitives",
+          "path": "C:/antigravity/Proxy-Pointer/MultiModal/data/extracted_papers/VectorFusion/tables/fileoutpart35.png",
+          "exists": true
+        }
+      ],
+      "time_seconds": 3.06
+    },
+    {
+      "id": 9,
+      "category": "Visual / Multimodal",
+      "query": "How does the training convergence of the Nim game agent work using Michie's algorithm in Nemobot, and how is this data used for LLM function programming?",
+      "response": "In Nemobot, the Nim game agent achieves training convergence through a trial-and-error reinforcement learning process inspired by Donald Michie\u2019s Boxes algorithm. During self-play simulations, the agent chooses moves probabilistically based on the current game state (the \"box\"). Winning moves increase the probability of being selected in future iterations, while losing moves decrease that probability. Over successive rounds, this iterative process allows the agent to uncover optimal strategies across diverse game configurations without needing pre-existing expert examples.\n\nThis training data is utilized for LLM function programming in the following ways:\n*   **Predicting Learning Rates:** The simulation results, which track the number of rounds ($L$) required for convergence based on initial pile sizes ($N$) and move constraints ($K$), are used by the LLM to predict the learning rate of the agent (Table II).\n*   **Fine-tuning and Strategy Recommendation:** The gameplay data gathered from simulations is used to fine-tune LLM functions via prompt engineering. This enables the LLM to recommend moves that maximize winning chances and dynamically adapt to different game scenarios based on its learned understanding of optimal strategies.\n*   **Neuralized Memoization:** The system treats these successful strategies as a form of \"neuralized memoization,\" where the LLM stores and reuses effective plans and strategic sequences, reducing the need for exhaustive rule-based evaluations.\n\n[SHOW: fileoutpart9.png | Figure 6: Training process illustrating the number of game trials required for the Nim game agent to master a skillful strategy.]\n\n[SHOW: fileoutpart10.png | Table II: Performance of the Nim Game simulation under various configurations, used to predict learning rates.]",
+      "sources": [
+        "NemoBot > III. NEMOBOT GAME PROGRAMMING > C. Interactive AI Training",
+        "NemoBot > III. NEMOBOT GAME PROGRAMMING > B. System Architecture and Implementation",
+        "NemoBot > II. GAME PLAYING WITH LARGE LANGUAGE MODELS > B. Programmable Prompts via LLM Functions",
+        "NemoBot > II. GAME PLAYING WITH LARGE LANGUAGE MODELS > D. AI Game Programming Agent",
+        "NemoBot > IV. EVALUATION OF NEMOBOT GAMES"
+      ],
+      "images_found": [],
+      "time_seconds": 3.73
+    },
+    {
+      "id": 10,
+      "category": "Structural Reasoning",
+      "query": "Can GaLore be used for both pre-training and fine-tuning? Reference the experimental results for LLaMA 7B and describe how the memory savings compare to LoRA.",
+      "response": "Yes, GaLore can be used for both pre-training and fine-tuning of large language models.\n\n**Experimental Results for LLaMA 7B:**\nGaLore was evaluated on an LLaMA 7B architecture (embedding size 4096, 32 layers) trained for 150K steps on the C4 dataset. Using 8-bit GaLore (rank $r=1024$), the model achieved a perplexity of 14.65, which is comparable to the 14.61 perplexity achieved by 8-bit Adam. Detailed memory and performance metrics for this scaling experiment are provided in Table 3.\n\n**Memory Savings Compared to LoRA:**\nGaLore is more memory-efficient than LoRA because it does not require storing a separate low-rank factorization ($BA$). While LoRA requires storing $mn + 2mr + 2nr$ memory for weights and optimizer states, GaLore requires only $mn + mr + 2nr$. Consequently, GaLore consistently demonstrates a lower memory footprint than LoRA across various tasks, as shown in the GLUE benchmark results in Table 4.\n\n[SHOW: tables/fileoutpart42.png | Table 3: Pre-training LLaMA 7B on C4 dataset]\n[SHOW: tables/fileoutpart44.png | Table 4: Evaluating GaLore for memory-efficient fine-tuning on GLUE benchmark]\n[SHOW: tables/fileoutpart39.png | Table 1: Comparison between GaLore and LoRA memory requirements]",
+      "sources": [
+        "Galore > 5. Experiments > 5.3. Scaling up to LLaMA 7B Architecture",
+        "Galore > 5. Experiments",
+        "Galore > 4. GaLore for Memory-Efficient Training > 4.2. Memory-Efficient Optimization",
+        "Galore > 5. Experiments > 5.4. Memory-Efficient Fine-Tuning",
+        "Galore > 7. Conclusion"
+      ],
+      "images_found": [
+        {
+          "label": "Galore - Table 3: Pre-training LLaMA 7B on C4 dataset",
+          "path": "C:/antigravity/Proxy-Pointer/MultiModal/data/extracted_papers/Galore/tables/fileoutpart42.png",
+          "exists": true
+        },
+        {
+          "label": "Galore - Table 1: Comparison between GaLore and LoRA memory requirements",
+          "path": "C:/antigravity/Proxy-Pointer/MultiModal/data/extracted_papers/Galore/tables/fileoutpart39.png",
+          "exists": true
+        }
+      ],
+      "time_seconds": 2.73
+    },
+    {
+      "id": 11,
+      "category": "Structural Reasoning",
+      "query": "Explain the VectorPainter pipeline, specifically the roles of the SVG Encoder, the Latent Diffusion Model, and the Vector Dropout mechanism.",
+      "response": "The VectorPainter pipeline synthesizes stylized vector graphics by combining stroke style extraction with an optimization-based synthesis process. Based on the provided text, here is the explanation of the requested components:\n\n*   **SVG Encoder:** The provided context does not explicitly define a component named \"SVG Encoder.\" Instead, the pipeline uses a **differentiable rasterizer (DiffVG)** to render vector graphics into pixel space, allowing gradients to be backpropagated to optimize SVG stroke parameters. Additionally, it utilizes **DDIM inversion** to encode the reference image into a latent space to maintain global style consistency.\n*   **Latent Diffusion Model (LDM):** The LDM (specifically Stable Diffusion XL) is used during the Stylized SVG Synthesis stage. After the reference image is encoded into a latent space and noise is introduced via the DDIM scheduler, the LDM generates images that mirror the target style, which are then used to compute losses for optimizing the SVG strokes.\n*   **Vector Dropout Mechanism:** The provided context does not mention a \"Vector Dropout\" mechanism.\n\nThe overall pipeline is illustrated in Figure 3, while the stroke extraction process is detailed in Figure 4.\n\n[SHOW: figures/fileoutpart10.png | Figure 3: Pipeline of VectorPainter]\n[SHOW: figures/fileoutpart14.png | Figure 4: Pipeline of Stroke Style Extraction]",
+      "sources": [
+        "VectorPainter > III. METHODOLOGY",
+        "VectorPainter > III. METHODOLOGY > A. Stroke Style Extraction",
+        "VectorPainter > III. METHODOLOGY > B. Stylized SVG Synthesis",
+        "VectorPainter > IV. EXPERIMENTS > E. Ablation Studies",
+        "VectorPainter > VII. IMPLEMENTATION DETAILS"
+      ],
+      "images_found": [
+        {
+          "label": "VectorPainter - Figure 3: Pipeline of VectorPainter",
+          "path": "C:/antigravity/Proxy-Pointer/MultiModal/data/extracted_papers/VectorPainter/figures/fileoutpart10.png",
+          "exists": true
+        },
+        {
+          "label": "VectorPainter - Figure 4: Pipeline of Stroke Style Extraction",
+          "path": "C:/antigravity/Proxy-Pointer/MultiModal/data/extracted_papers/VectorPainter/figures/fileoutpart14.png",
+          "exists": true
+        }
+      ],
+      "time_seconds": 3.37
+    },
+    {
+      "id": 12,
+      "category": "Structural Reasoning",
+      "query": "In CLIP-CITE, why does including the Vision-Language Similarity Distillation loss help prevent catastrophic forgetting during fine-tuning? What is the mathematical formulation?",
+      "response": "The vision-language similarity distillation loss ($L_{VLD}$) helps prevent catastrophic forgetting and maintains generalization by distilling modal consistency from the pre-trained CLIP model into the fine-tuned model. By minimizing the Kullback-Leibler (KL) divergence between the image-text similarity distributions of the original CLIP encoders and the fine-tuned encoders, the model is encouraged to retain the original modal alignments and relationships learned during pre-training.\n\nThe mathematical formulation is defined as:\n\n$L_{VLD} = \\sum_{x \\in B} D_{KL} (\\hat{p}(\\hat{y}|x), p(\\hat{y}|x))$\n\nIn this equation, $p(\\hat{y}|x)$ represents the batch cosine image-text similarity scores computed using the fine-tuned models ($\\theta_I$ and $\\theta_T$), while $\\hat{p}(\\hat{y}|x)$ represents the scores obtained from the original CLIP models. These scores are normalized via a softmax function to create probability distributions.\n\n[SHOW: fileoutpart7.png | Figure 5: Mathematical formulation of the vision-language similarity distillation loss]",
+      "sources": [
+        "CLIP > 3 Method > 3.3 Vision-Language Similarity Distillation",
+        "CLIP > 3 Method > 3.4 Final Objective Function",
+        "CLIP > 3 Method > 3.2 Supervised Contrastive Learning",
+        "CLIP > 3 Method > 3.1 Discriminative Visual-Text Alignment task",
+        "CLIP > 4 Experiments > 4.3 Further Analysis"
+      ],
+      "images_found": [
+        {
+          "label": "CLIP - Figure 5: Mathematical formulation of the vision-language similarity distillation loss",
+          "path": "C:/antigravity/Proxy-Pointer/MultiModal/data/extracted_papers/CLIP/figures/fileoutpart7.png",
+          "exists": true
+        }
+      ],
+      "time_seconds": 2.94
+    },
+    {
+      "id": 13,
+      "category": "Complex Reasoning",
+      "query": "How does VectorFusion adapt Score Distillation Sampling (SDS) to work with latent diffusion models instead of pixel-space models? Explain the latent SDS loss formulation.",
+      "response": "VectorFusion adapts Score Distillation Sampling (SDS) for latent diffusion models (LDMs) by treating the differentiable vector graphics renderer, data augmentation, and the frozen LDM encoder as a single image generator. Instead of operating in pixel space, the optimization occurs in the latent space of the LDM.\n\nIn each iteration, the SVG is rendered into an image ($x$), augmented ($x_{aug}$), and encoded into the latent space using the LDM encoder ($z = E_\\phi(x_{aug})$). The latents are then diffused with random noise ($z_t = \\alpha_t z + \\sigma_t \\epsilon$) and denoised by the teacher model ($\\hat{\\epsilon}_\\phi(z_t, y)$).\n\nThe latent SDS loss formulation is defined as:\n\n$$\\nabla_\\theta \\mathcal{L}_{SDS} = \\mathbb{E}_{t, \\epsilon} \\left[ w(t) \\left( \\hat{\\epsilon}_\\phi(\\alpha_t z_t + \\sigma_t \\epsilon, y) - \\epsilon \\right) \\frac{\\partial z}{\\partial x_{aug}} \\frac{\\partial x_{aug}}{\\partial \\theta} \\right]$$\n\nAs shown in Figure 5, the process involves backpropagating through the encoding, augmentation, and rendering steps to update the path parameters ($\\theta$). For numerical stability, the Jacobian of the encoder ($\\partial z / \\partial x_{aug}$) is computed in full FP32 precision.\n\n[SHOW: fileoutpart32.png | Figure 5: Overview of VectorFusion\u2019s latent score distillation optimization procedure.]",
+      "sources": [
+        "VectorFusion > 4. Method: VectorFusion",
+        "VectorFusion > 4. Method: VectorFusion > 4.2. Sampling vector graphics by optimization",
+        "VectorFusion > 3. Background > 3.3. Score distillation sampling",
+        "VectorFusion > 1. Introduction",
+        "VectorFusion > 3. Background > 3.2. Diffusion models"
+      ],
+      "images_found": [
+        {
+          "label": "VectorFusion - Figure 5: Overview of VectorFusion\u2019s latent score distillation optimization procedure.",
+          "path": "C:/antigravity/Proxy-Pointer/MultiModal/data/extracted_papers/VectorFusion/figures/fileoutpart32.png",
+          "exists": true
+        }
+      ],
+      "time_seconds": 3.4
+    },
+    {
+      "id": 14,
+      "category": "Complex Reasoning",
+      "query": "How does Nemobot extend Shannon's four categories of game-playing machines using LLMs? Provide specific examples for dictionary-based games, rigorously solvable games, and learning machines.",
+      "response": "Nemobot extends Shannon\u2019s four categories of game-playing machines by integrating Large Language Models (LLMs) to act as dynamic, adaptive agents that replace or augment traditional, resource-heavy implementations.\n\n**1. Dictionary-Based Games**\nTraditional systems require exhaustive storage of all state-action pairs. Nemobot compresses this \"dictionary\" into the LLM\u2019s inference capabilities. By serializing the game state (e.g., a 3x3 Tic-Tac-Toe board) into structured text, the LLM dynamically generates optimal moves based on its pre-trained knowledge, eliminating the need for nested conditional loops or massive memory storage.\n\n**2. Rigorously Solvable Games**\nIn games like Nim, which rely on mathematical formulas (e.g., Nim-sum), Nemobot uses LLMs as interactive copilots. Beyond simply providing the optimal move, the LLM explains the underlying logic in natural language and can generate code for efficient algorithms, such as the Euclidean algorithm for the Game of Euclid. This bridges the gap between algorithmic execution and strategic understanding.\n\n**3. Learning Machines**\nNemobot advances learning machines through a two-pronged approach:\n*   **Self-Play:** It utilizes Donald Michie\u2019s Boxes algorithm, where the LLM agent learns through trial-and-error, probabilistically refining strategies based on winning or losing outcomes.\n*   **Crowdsourcing:** The system collects data from human-versus-AI matches (e.g., the Mancala leaderboard) to fine-tune LLM functions. The LLM acts as an instructor, providing feedback on suboptimal moves and accelerating the learning process.\n\n[SHOW: fileoutpart5.png | Table I: Nemobot games categorized by Shannon\u2019s taxonomy]\n[SHOW: fileoutpart6.png | Example Prompt: Tic Tac Toe Strategy]\n[SHOW: fileoutpart9.png | Fig. 6: Training process for the Nim game agent]\n[SHOW: fileoutpart10.png | Table II: Performance of the Nim Game simulation]\n[SHOW: fileoutpart7.png | Example Prompt: Mancala Game Tree Analysis]\n[SHOW: fileoutpart8.png | Fig. 5: The chatbot interface of the Mancala game]",
+      "sources": [
+        "NemoBot > II. GAME PLAYING WITH LARGE LANGUAGE MODELS > A. Shannon\u2019s Taxonomy of AI Games with LLMs",
+        "NemoBot > IV. EVALUATION OF NEMOBOT GAMES > A. Dictionary-Based Game: Tic Tac Toe",
+        "NemoBot > IV. EVALUATION OF NEMOBOT GAMES",
+        "NemoBot > III. NEMOBOT GAME PROGRAMMING",
+        "NemoBot > II. GAME PLAYING WITH LARGE LANGUAGE MODELS > D. AI Game Programming Agent"
+      ],
+      "images_found": [
+        {
+          "label": "NemoBot - Table I: Nemobot games categorized by Shannon\u2019s taxonomy",
+          "path": "C:/antigravity/Proxy-Pointer/MultiModal/data/extracted_papers/NemoBot/tables/fileoutpart5.png",
+          "exists": true
+        },
+        {
+          "label": "NemoBot - Example Prompt: Tic Tac Toe Strategy",
+          "path": "C:/antigravity/Proxy-Pointer/MultiModal/data/extracted_papers/NemoBot/figures/fileoutpart6.png",
+          "exists": true
+        },
+        {
+          "label": "NemoBot - Fig. 6: Training process for the Nim game agent",
+          "path": "C:/antigravity/Proxy-Pointer/MultiModal/data/extracted_papers/NemoBot/figures/fileoutpart9.png",
+          "exists": true
+        },
+        {
+          "label": "NemoBot - Table II: Performance of the Nim Game simulation",
+          "path": "C:/antigravity/Proxy-Pointer/MultiModal/data/extracted_papers/NemoBot/tables/fileoutpart10.png",
+          "exists": true
+        },
+        {
+          "label": "NemoBot - Example Prompt: Mancala Game Tree Analysis",
+          "path": "C:/antigravity/Proxy-Pointer/MultiModal/data/extracted_papers/NemoBot/figures/fileoutpart7.png",
+          "exists": true
+        },
+        {
+          "label": "NemoBot - Fig. 5: The chatbot interface of the Mancala game",
+          "path": "C:/antigravity/Proxy-Pointer/MultiModal/data/extracted_papers/NemoBot/figures/fileoutpart8.png",
+          "exists": true
+        }
+      ],
+      "time_seconds": 3.73
+    },
+    {
+      "id": 15,
+      "category": "Cross-Document Reasoning",
+      "query": "Both CLIP-CITE and VectorFusion use CLIP scores as evaluation metrics. Compare how each paper uses CLIP-based metrics and what they measure in each context.",
+      "response": "Both VectorFusion and VectorPainter utilize CLIP-based metrics to evaluate the performance of their respective vector graphics generation methods, though they focus on different aspects of alignment and use different specific metrics.\n\n**VectorFusion**\nVectorFusion uses CLIP-based metrics primarily to evaluate **caption consistency** (how well the generated SVG aligns with the input text prompt). It employs two specific metrics:\n*   **R-Prec (Retrieval Precision):** Used to measure the consistency between the generated SVG and the caption.\n*   **Sim (Similarity):** Used alongside R-Prec to assess the alignment.\nThese metrics are used to compare VectorFusion against baselines like CLIPDraw and Stable Diffusion (SD) + LIVE. As shown in the \"Paths\" table, these metrics are calculated using both CLIP L/14 and OpenCLIP H/14 encoders to demonstrate that VectorFusion outperforms baselines in caption consistency.\n\n**VectorPainter**\nVectorPainter uses the **CLIP Score** to evaluate the **text-content alignment** of the synthesized SVGs. Specifically, it measures how well the generated graphics match the provided text descriptions. Unlike VectorFusion, which focuses on retrieval-based consistency, VectorPainter uses the CLIP Score as one of four quantitative metrics (alongside LPIPS, FID, and ArtFID) to demonstrate the effectiveness of its stylization method in maintaining content alignment while applying a reference style.\n\n[SHOW: fileoutpart19.png | Table I: Quantitative Evaluation of VectorPainter using CLIPScore and other metrics.]",
+      "sources": [
+        "VectorFusion > 5. Experiments > 5.2. Evaluating caption consistency",
+        "VectorFusion > Paths",
+        "VectorPainter > IV. EXPERIMENTS > C. Qualitative Evaluation",
+        "VectorPainter > IV. EXPERIMENTS > A. Evaluation Metrics",
+        "VectorFusion > 5. Experiments > 5.3. Comparison with CLIP-based approaches"
+      ],
+      "images_found": [
+        {
+          "label": "VectorPainter - Table I: Quantitative Evaluation of VectorPainter using CLIPScore and other metrics.",
+          "path": "C:/antigravity/Proxy-Pointer/MultiModal/data/extracted_papers/VectorPainter/tables/fileoutpart19.png",
+          "exists": true
+        }
+      ],
+      "time_seconds": 2.92
+    },
+    {
+      "id": 16,
+      "category": "Cross-Document Reasoning",
+      "query": "Both GaLore and CLIP-CITE address the challenge of efficient model training. Compare GaLore's gradient projection approach with CLIP-CITE's fine-tuning strategy in terms of memory efficiency and knowledge preservation.",
+      "response": "GaLore and CLIP-CITE address efficient training through distinct methodologies:\n\n**Memory Efficiency**\n*   **GaLore:** Focuses on reducing the memory footprint of optimizer states (e.g., Adam) by projecting gradients into a low-rank subspace. By tracking only low-rank gradient statistics, it avoids storing full-rank matrices. It is more memory-efficient than LoRA because it does not require storing separate low-rank adaptors (BA), as it merges updates directly into the weights. Total memory usage is $(mn + mr + 2nr)$ compared to LoRA's $(mn + 3mr + 3nr)$ (Table 1).\n*   **CLIP-CITE:** While it achieves superior performance with fewer training iterations and shorter overall time, it is not a parameter-efficient method in the same sense as GaLore. It involves full fine-tuning of the model, which utilizes more GPU resources (approximately 19G) compared to other parameter-efficient competitors like CoOp or MaPLe (Table 5).\n\n**Knowledge Preservation**\n*   **GaLore:** By utilizing low-rank gradient projection, GaLore maintains the original training dynamics. When the rank $r$ equals the dimension of the weight matrix, GaLore follows the exact training trajectory of the original model, ensuring high fidelity to the pre-training process.\n*   **CLIP-CITE:** Focuses on preserving and enhancing the representation capability of pre-trained CLIP models through a supervised contrastive loss ($L_{SCL}$) and vision-language similarity distillation ($L_{VLD}$). This approach aligns images and text to maintain semantic relationships during fine-tuning, which effectively prevents the overfitting often seen in simple full fine-tuning (FT-Probe) and ensures the model retains its pre-trained knowledge while adapting to downstream tasks.\n\n[SHOW: tables/fileoutpart39.png | Table 1: Comparison between GaLore and LoRA]\n[SHOW: tables/fileoutpart18.png | Table 5: Comparison performances and training efficiency]",
+      "sources": [
+        "Galore > 4. GaLore for Memory-Efficient Training > 4.2. Memory-Efficient Optimization",
+        "Galore > 5. Experiments > 5.4. Memory-Efficient Fine-Tuning",
+        "CLIP > 4 Experiments > 4.3 Further Analysis",
+        "CLIP > 3 Method > 3.2 Supervised Contrastive Learning",
+        "Galore > 3. GaLore: Gradient Low-Rank Projection > 3.3. Gradient Low-rank Projection (GaLore)"
+      ],
+      "images_found": [
+        {
+          "label": "Galore - Table 1: Comparison between GaLore and LoRA",
+          "path": "C:/antigravity/Proxy-Pointer/MultiModal/data/extracted_papers/Galore/tables/fileoutpart39.png",
+          "exists": true
+        },
+        {
+          "label": "CLIP - Table 5: Comparison performances and training efficiency",
+          "path": "C:/antigravity/Proxy-Pointer/MultiModal/data/extracted_papers/CLIP/tables/fileoutpart18.png",
+          "exists": true
+        }
+      ],
+      "time_seconds": 4.43
+    },
+    {
+      "id": 17,
+      "category": "Cross-Document Reasoning",
+      "query": "Both VectorPainter and VectorFusion generate vector graphics from text prompts. Compare the two approaches in terms of how they leverage diffusion models and their SVG optimization strategies.",
+      "response": "VectorFusion and VectorPainter both utilize optimization-based pipelines involving differentiable rasterization (DiffVG) to generate vector graphics, but they differ significantly in their objectives and use of diffusion models.\n\n**Diffusion Model Leverage:**\n*   **VectorFusion:** Primarily uses Latent Diffusion Models (LDM) like Stable Diffusion to guide the optimization of SVG paths via Score Distillation Sampling (SDS). It computes the SDS loss in latent space, allowing the model to synthesize vector graphics from scratch or refine existing ones to be consistent with a text prompt.\n*   **VectorPainter:** Focuses on stylized synthesis by combining a text prompt with a reference image. It uses DDIM inversion and LDM to maintain global stylistic consistency between the output SVG and the reference image, rather than relying solely on text-based score distillation.\n\n**SVG Optimization Strategies:**\n*   **VectorFusion:** Employs a multi-stage approach. It can initialize paths randomly or via an automatic \"text-to-image-to-vector\" pipeline (using LIVE). It optimizes path parameters (coordinates, colors) through SDS and includes strategies like periodic path reinitialization (removing unused paths and creating new ones) to improve detail and diversity. It also supports specific constraints for different styles, such as iconography, pixel art, and sketches (Figure 6).\n*   **VectorPainter:** Uses a \"Stroke Style Extraction\" strategy. It partitions a reference image into superpixels (using SLIC) to extract and vectorize style-specific strokes. These extracted strokes are used to initialize the SVG, which significantly reduces optimization difficulty compared to random initialization. It further enforces style consistency through a \"style-preserving loss,\" which includes stroke-level constraints (Sinkhorn distance/optimal transport) and global-level constraints (DDIM inversion) (Figure 3, Figure 4).\n\n[SHOW: fileoutpart29.png | Figure 3: VectorFusion generation stages]\n[SHOW: fileoutpart34.png | Figure 6: Impact of path count on detail]\n[SHOW: fileoutpart10.png | Figure 3: VectorPainter pipeline]\n[SHOW: fileoutpart14.png | Figure 4: VectorPainter stroke extraction and reconstruction]",
+      "sources": [
+        "VectorFusion > 4. Method: VectorFusion",
+        "VectorFusion > 4. Method: VectorFusion > 4.2. Sampling vector graphics by optimization",
+        "VectorPainter > III. METHODOLOGY",
+        "VectorPainter > III. METHODOLOGY > B. Stylized SVG Synthesis",
+        "VectorPainter > IV. EXPERIMENTS > B. Comparison Baselines"
+      ],
+      "images_found": [
+        {
+          "label": "VectorPainter - Figure 3: VectorPainter pipeline",
+          "path": "C:/antigravity/Proxy-Pointer/MultiModal/data/extracted_papers/VectorPainter/figures/fileoutpart10.png",
+          "exists": true
+        }
+      ],
+      "time_seconds": 4.39
+    },
+    {
+      "id": 18,
+      "category": "Anchor-Aware Retrieval",
+      "query": "What games are implemented in Nemobot, and how are they categorized according to Shannon's game taxonomy?",
+      "response": "Nemobot implements a variety of games categorized according to Claude Shannon\u2019s taxonomy of game-playing machines. These games are detailed in Table I and categorized as follows:\n\n*   **Category 1 (Dictionary-based machines):** These systems use precomputed solutions or LLM functions to query moves for specific game states. Examples include **Tic Tac Toe** and the **Physics learning quiz game** (Newton\u2019s Laws).\n*   **Category 2 (Machines using rigorous mathematical formulas):** These systems use mathematical strategies (such as the Nim-sum) to determine optimal moves. The **Nim game** is the primary example, where the LLM generates code to implement efficient algorithms like the Euclidean algorithm.\n*   **Category 3 (Machines employing general principles of play):** These games rely on heuristic strategies and game trees. **Mancala** and the **Single-player RPG** (Math Video Recommender) fall into this category, utilizing LLM functions to dynamically query advice and enhance decision-making.\n*   **Category 4 (Learning machines):** These systems improve through trial-and-error, reinforcement learning, and crowdsourced data. Examples include the **Audio recommendation system game**, **Code Mentor**, and the **Role Playing Game**.\n\n[SHOW: fileoutpart5.png | Table I: Nemobot games categorized according to Shannon\u2019s game taxonomy]\n\n[SHOW: fileoutpart0.png | Figure 1: Crowdsourcing and strategy optimization in game-playing AI]\n\n[SHOW: fileoutpart1.png | Figure 2: Shannon\u2019s four types of game-playing machines]\n\n[SHOW: fileoutpart8.png | Figure 5: The chatbot interface of the Mancala game]\n\n[SHOW: fileoutpart9.png | Figure 6: Training process for the Nim game agent]\n\n[SHOW: fileoutpart10.png | Table II: Performance of the Nim Game simulation under various configurations]",
+      "sources": [
+        "NemoBot > II. GAME PLAYING WITH LARGE LANGUAGE MODELS > A. Shannon\u2019s Taxonomy of AI Games with LLMs",
+        "NemoBot > IV. EVALUATION OF NEMOBOT GAMES > A. Dictionary-Based Game: Tic Tac Toe",
+        "NemoBot > I. INTRODUCTION",
+        "NemoBot > III. NEMOBOT GAME PROGRAMMING",
+        "NemoBot > IV. EVALUATION OF NEMOBOT GAMES"
+      ],
+      "images_found": [
+        {
+          "label": "NemoBot - Table I: Nemobot games categorized according to Shannon\u2019s game taxonomy",
+          "path": "C:/antigravity/Proxy-Pointer/MultiModal/data/extracted_papers/NemoBot/tables/fileoutpart5.png",
+          "exists": true
+        },
+        {
+          "label": "NemoBot - Figure 1: Crowdsourcing and strategy optimization in game-playing AI",
+          "path": "C:/antigravity/Proxy-Pointer/MultiModal/data/extracted_papers/NemoBot/figures/fileoutpart0.png",
+          "exists": true
+        },
+        {
+          "label": "NemoBot - Figure 2: Shannon\u2019s four types of game-playing machines",
+          "path": "C:/antigravity/Proxy-Pointer/MultiModal/data/extracted_papers/NemoBot/figures/fileoutpart1.png",
+          "exists": true
+        },
+        {
+          "label": "NemoBot - Figure 5: The chatbot interface of the Mancala game",
+          "path": "C:/antigravity/Proxy-Pointer/MultiModal/data/extracted_papers/NemoBot/figures/fileoutpart8.png",
+          "exists": true
+        },
+        {
+          "label": "NemoBot - Figure 6: Training process for the Nim game agent",
+          "path": "C:/antigravity/Proxy-Pointer/MultiModal/data/extracted_papers/NemoBot/figures/fileoutpart9.png",
+          "exists": true
+        },
+        {
+          "label": "NemoBot - Table II: Performance of the Nim Game simulation under various configurations",
+          "path": "C:/antigravity/Proxy-Pointer/MultiModal/data/extracted_papers/NemoBot/tables/fileoutpart10.png",
+          "exists": true
+        }
+      ],
+      "time_seconds": 3.41
+    },
+    {
+      "id": 19,
+      "category": "Anchor-Aware Retrieval",
+      "query": "How does the number of Bezier paths affect the level of detail and style in VectorFusion's generated vector graphics?",
+      "response": "In VectorFusion, the number of Bezier paths acts as a hyper-parameter that directly influences the level of detail and abstraction in the generated vector graphics. \n\n*   **Abstraction vs. Detail:** Vector graphics generated with fewer paths are more abstract and flatter in style. Conversely, increasing the number of paths allows for greater detail, enabling the expression of more complex highlights and features (Figure 6).\n*   **Consistency:** Increasing the number of paths generally improves caption consistency metrics, though the research notes that there are diminishing returns beyond a certain point. The authors found 64 paths to be sufficient for optimizing SVGs that are coherent with the provided captions (Figure 9).\n\n[SHOW: figures/fileoutpart34.png | Figure 6: Comparison of 16, 64, and 128 paths showing how path count controls detail.]\n\n[SHOW: figures/fileoutpart40.png | Figure 9: Plot showing that increasing the number of paths improves caption consistency.]",
+      "sources": [
+        "VectorFusion > C. Ablation: Number of paths",
+        "VectorFusion > F. Experimental hyperparameters > F.1. Path initialization",
+        "VectorFusion > B. Ablation: Reinitializing paths",
+        "VectorFusion > 4. Method: VectorFusion",
+        "VectorFusion > 4. Method: VectorFusion > 4.2. Sampling vector graphics by optimization"
+      ],
+      "images_found": [
+        {
+          "label": "VectorFusion - Figure 9: Plot showing that increasing the number of paths improves caption consistency.",
+          "path": "C:/antigravity/Proxy-Pointer/MultiModal/data/extracted_papers/VectorFusion/figures/fileoutpart40.png",
+          "exists": true
+        }
+      ],
+      "time_seconds": 2.72
+    },
+    {
+      "id": 20,
+      "category": "Cross-Document Reasoning",
+      "query": "NemoBot and GaLore both optimize LLM usage but in fundamentally different ways. Compare how NemoBot uses LLMs as interactive game-playing agents with programmable prompts versus how GaLore reduces the memory footprint of LLM training through gradient projection. What are the key architectural trade-offs in each approach?",
+      "response": "NemoBot and GaLore optimize LLM usage through distinct paradigms: NemoBot focuses on **inference-time interaction and agentic strategy**, while GaLore focuses on **training-time memory efficiency**.\n\n### NemoBot: Interactive Agentic Optimization\nNemoBot utilizes LLMs as autonomous agents that generate strategies through \"programmable prompts\" and LLM functions. Instead of rigid algorithms, it employs:\n*   **Neuralized Memoization:** Caching strategies and tool-use sequences to reduce redundancy and enhance efficiency, analogous to Michie\u2019s memo functions.\n*   **Architectural Trade-offs:** It prioritizes modularity and low latency by handling game logic locally in-memory, querying the LLM only for high-level strategy construction. This decouples the core game loop from inference latency.\n\n### GaLore: Memory-Efficient Training\nGaLore optimizes the training process by reducing the memory footprint of optimizer states (e.g., Adam). It achieves this through **Gradient Low-rank Projection**:\n*   **Mechanism:** It projects the gradient $G_t$ into a low-rank space using projection matrices ($P_t, Q_t$), tracking only low-rank gradient statistics. This allows for full-parameter training with significantly reduced memory compared to standard methods or LoRA (Table 1).\n*   **Architectural Trade-offs:** Unlike LoRA, which introduces additional adaptors, GaLore updates the original weights directly. When the rank $r$ equals the matrix dimension, GaLore follows the exact training trajectory of the original model, whereas LoRA\u2019s trajectory diverges.\n\n### Key Architectural Trade-offs\n| Feature | NemoBot | GaLore |\n| :--- | :--- | :--- |\n| **Primary Goal** | Strategic autonomy & game learning | Memory-efficient model training |\n| **Optimization Focus** | Inference-time strategy & caching | Training-time gradient statistics |\n| **Model Impact** | Model-agnostic; uses LLMs as tools | Modifies training dynamics/optimizer |\n| **Efficiency Gain** | Reduced recomputation via memoization | Reduced memory for optimizer states |\n\n[SHOW: fileoutpart2.png | Figure 3: System Flow of Nemobot, illustrating the integration of LLM functions for data-driven learning.]\n[SHOW: fileoutpart39.png | Table 1: Comparison of memory requirements between GaLore and LoRA.]",
+      "sources": [
+        "NemoBot > II. GAME PLAYING WITH LARGE LANGUAGE MODELS > B. Programmable Prompts via LLM Functions",
+        "NemoBot > II. GAME PLAYING WITH LARGE LANGUAGE MODELS > D. AI Game Programming Agent",
+        "NemoBot > III. NEMOBOT GAME PROGRAMMING > B. System Architecture and Implementation",
+        "Galore > 4. GaLore for Memory-Efficient Training > 4.2. Memory-Efficient Optimization",
+        "Galore > 3. GaLore: Gradient Low-Rank Projection > 3.3. Gradient Low-rank Projection (GaLore)"
+      ],
+      "images_found": [
+        {
+          "label": "NemoBot - Figure 3: System Flow of Nemobot, illustrating the integration of LLM functions for data-driven learning.",
+          "path": "C:/antigravity/Proxy-Pointer/MultiModal/data/extracted_papers/NemoBot/figures/fileoutpart2.png",
+          "exists": true
+        },
+        {
+          "label": "Galore - Table 1: Comparison of memory requirements between GaLore and LoRA.",
+          "path": "C:/antigravity/Proxy-Pointer/MultiModal/data/extracted_papers/Galore/tables/fileoutpart39.png",
+          "exists": true
+        }
+      ],
+      "time_seconds": 3.84
+    }
+  ]
+}

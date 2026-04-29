@@ -1,0 +1,124 @@
+{
+  "test_queries": [
+    {
+      "id": 1,
+      "category": "Precise Data Extraction",
+      "paper": "Galore",
+      "query": "What are the specific hyperparameters used for fine-tuning RoBERTa-Base for GaLore across different GLUE tasks?"
+    },
+    {
+      "id": 2,
+      "category": "Precise Data Extraction",
+      "paper": "VectorPainter",
+      "query": "How does VectorPainter extract stroke styles from a reference image, and how does it compare visually against baseline methods like SVGDreamer and DiffSketcher?"
+    },
+    {
+      "id": 3,
+      "category": "Precise Data Extraction",
+      "paper": "Galore",
+      "query": "What is the validation perplexity for the LLaMA 1B model using GaLore compared to Full-Rank and LoRA during pre-training on the C4 dataset?"
+    },
+    {
+      "id": 4,
+      "category": "Precise Data Extraction",
+      "paper": "CLIP",
+      "query": "What is the average Harmonic Mean (HM) score across 11 datasets for CLIP-CITE compared to MaPLe and CoOp on the Base-to-New Generalization task?"
+    },
+    {
+      "id": 5,
+      "category": "Visual / Multimodal",
+      "paper": "VectorFusion",
+      "query": "Describe the VectorFusion pipeline stages: how is the raster image first sampled, then converted to SVG, and finally fine-tuned using latent score distillation?"
+    },
+    {
+      "id": 6,
+      "category": "Visual / Multimodal",
+      "paper": "CLIP",
+      "query": "Describe the CLIP-CITE framework architecture, including the roles of the Discriminative Visual-Text Alignment Task, Supervised Contrastive Learning, and Vision-Language Similarity Distillation."
+    },
+    {
+      "id": 7,
+      "category": "Visual / Multimodal",
+      "paper": "NemoBot",
+      "query": "How does the Nemobot system flow work, and how do the Coding Pad, Chat Playground, and Analysis Portal interact with LLM functions?"
+    },
+    {
+      "id": 8,
+      "category": "Visual / Multimodal",
+      "paper": "VectorFusion",
+      "query": "What are the CLIP R-Precision and Similarity scores for VectorFusion with SD initialization and rejection sampling compared to CLIPDraw?"
+    },
+    {
+      "id": 9,
+      "category": "Visual / Multimodal",
+      "paper": "NemoBot",
+      "query": "How does the training convergence of the Nim game agent work using Michie's algorithm in Nemobot, and how is this data used for LLM function programming?"
+    },
+    {
+      "id": 10,
+      "category": "Structural Reasoning",
+      "paper": "Galore",
+      "query": "Can GaLore be used for both pre-training and fine-tuning? Reference the experimental results for LLaMA 7B and describe how the memory savings compare to LoRA."
+    },
+    {
+      "id": 11,
+      "category": "Structural Reasoning",
+      "paper": "VectorPainter",
+      "query": "Explain the VectorPainter pipeline, specifically the roles of the SVG Encoder, the Latent Diffusion Model, and the Vector Dropout mechanism."
+    },
+    {
+      "id": 12,
+      "category": "Structural Reasoning",
+      "paper": "CLIP",
+      "query": "In CLIP-CITE, why does including the Vision-Language Similarity Distillation loss help prevent catastrophic forgetting during fine-tuning? What is the mathematical formulation?"
+    },
+    {
+      "id": 13,
+      "category": "Complex Reasoning",
+      "paper": "VectorFusion",
+      "query": "How does VectorFusion adapt Score Distillation Sampling (SDS) to work with latent diffusion models instead of pixel-space models? Explain the latent SDS loss formulation."
+    },
+    {
+      "id": 14,
+      "category": "Complex Reasoning",
+      "paper": "NemoBot",
+      "query": "How does Nemobot extend Shannon's four categories of game-playing machines using LLMs? Provide specific examples for dictionary-based games, rigorously solvable games, and learning machines."
+    },
+    {
+      "id": 15,
+      "category": "Cross-Document Reasoning",
+      "papers": ["CLIP", "VectorFusion"],
+      "query": "Both CLIP-CITE and VectorFusion use CLIP scores as evaluation metrics. Compare how each paper uses CLIP-based metrics and what they measure in each context."
+    },
+    {
+      "id": 16,
+      "category": "Cross-Document Reasoning",
+      "papers": ["Galore", "CLIP"],
+      "query": "Both GaLore and CLIP-CITE address the challenge of efficient model training. Compare GaLore's gradient projection approach with CLIP-CITE's fine-tuning strategy in terms of memory efficiency and knowledge preservation."
+    },
+    {
+      "id": 17,
+      "category": "Cross-Document Reasoning",
+      "papers": ["VectorPainter", "VectorFusion"],
+      "query": "Both VectorPainter and VectorFusion generate vector graphics from text prompts. Compare the two approaches in terms of how they leverage diffusion models and their SVG optimization strategies."
+    },
+    {
+      "id": 18,
+      "category": "Anchor-Aware Retrieval",
+      "paper": "NemoBot",
+      "query": "What games are implemented in Nemobot, and how are they categorized according to Shannon's game taxonomy?"
+    },
+    {
+      "id": 19,
+      "category": "Anchor-Aware Retrieval",
+      "paper": "VectorFusion",
+      "query": "How does the number of Bezier paths affect the level of detail and style in VectorFusion's generated vector graphics?"
+    },
+    {
+      "id": 20,
+      "category": "Cross-Document Reasoning",
+      "papers": ["NemoBot", "Galore"],
+      "query": "NemoBot and GaLore both optimize LLM usage but in fundamentally different ways. Compare how NemoBot uses LLMs as interactive game-playing agents with programmable prompts versus how GaLore reduces the memory footprint of LLM training through gradient projection. What are the key architectural trade-offs in each approach?"
+    }
+  ]
+}

@@ -1,0 +1,273 @@
+=== PROXY-POINTER RAG vs GROUND TRUTH BENCHMARK ===
+Company: AMEX_2022
+
+================================================================================
+USER QUERY [1]: Is gross margin a meaningful metric for AMEX? If not, compute an alternative margin using available data and justify.
+--------------------------------------------------------------------------------
+--- BOT INTERNAL LOG ---
+====================================================================================================
+Final Context Selection (Top 5 Unique Nodes):
+  -> Node 0059   | AMEX > TABLE 1: SUMMARY OF FINANCIAL PERFORMANCE
+  -> Node 0078   | AMEX > BUSINESS SEGMENT RESULTS OF OPERATIONS > TOTAL REVENUES NET OF INTEREST EXPENSE
+  -> Node 0288   | AMEX > REPORTABLE OPERATING SEGMENTS AND GEOGRAPHIC OPERATIONS > Total Revenues Net of Interest Expense
+  -> Node 0012   | AMEX > Partners and Relationships > Our Spend-Centric Model and Revenue Mix
+  -> Node 0175   | AMEX > CONSOLIDATED STATEMENTS OF INCOME
+====================================================================================================
+
+--- BOT SYNTHESIZED RESPONSE ---
+### Is Gross Margin Meaningful for AMEX?
+No, gross margin is not a meaningful metric for American Express (AMEX). As a financial services company, AMEX does not have "Cost of Goods Sold" (COGS) in the traditional manufacturing sense. While the income statement lists various expenses (such as rewards, marketing, and salaries), these are operating expenses necessary to run the business model rather than direct production costs associated with a physical product.
+
+### Alternative Margin: "Net Interest and Fee Margin"
+For a financial institution, a more meaningful metric is the **Net Revenue Margin after Rewards**, which accounts for the company’s "spend-centric" business model where high rewards costs are a direct investment to drive revenue.
+
+**Formula:** 
+(Total Revenues Net of Interest Expense – Card Member Rewards) / Total Revenues Net of Interest Expense
+
+**Justification:** 
+AMEX’s business model (ID: 0012) relies on generating revenue through card spending, which necessitates significant investment in rewards. Treating rewards as a reduction of revenue rather than a general operating expense provides a clearer view of the "net" revenue the company retains after accounting for the primary cost of its value proposition to card members.
+
+**Calculation (in millions, based on ID: 0175):**
+
+| Metric | 2022 | 2021 | 2020 |
+| :--- | :--- | :--- | :--- |
+| A. Total Revenues Net of Interest Expense | $52,862 | $42,380 | $36,087 |
+| B. Card Member Rewards | $14,002 | $11,007 | $8,041 |
+| **C. Net Revenue After Rewards (A - B)** | **$38,860** | **$31,373** | **$28,046** |
+| **D. Net Margin after Rewards (C / A)** | **73.5%** | **74.0%** | **77.7%** |
+
+*Sources: ID: 0012 (Spend-Centric Model), ID: 0175 (Consolidated Statements of Income)*
+
+--- GROUND TRUTH (From Test_Questions.xlsx) ---
+Gross margin is not meaningful because AMEX does not report COGS. A better metric is operating margin ≈ Pre-tax income / Total revenues net of interest expense ≈ 9,248 / 52,862 ≈ 17.5%.
+
+================================================================================
+USER QUERY [2]: Calculate the proportion of net interest income to total revenues net of interest expense for 2022 and compare it to 2021. Did dependence increase?
+--------------------------------------------------------------------------------
+--- BOT INTERNAL LOG ---
+====================================================================================================
+Final Context Selection (Top 5 Unique Nodes):
+  -> Node 0063   | AMEX > CONSOLIDATED RESULTS OF OPERATIONS > TABLE 2: TOTAL REVENUES NET OF INTEREST EXPENSE SUMMARY
+  -> Node 0059   | AMEX > TABLE 1: SUMMARY OF FINANCIAL PERFORMANCE
+  -> Node 0175   | AMEX > CONSOLIDATED STATEMENTS OF INCOME
+  -> Node 0288   | AMEX > REPORTABLE OPERATING SEGMENTS AND GEOGRAPHIC OPERATIONS > Total Revenues Net of Interest Expense
+  -> Node 0078   | AMEX > BUSINESS SEGMENT RESULTS OF OPERATIONS > TOTAL REVENUES NET OF INTEREST EXPENSE
+====================================================================================================
+
+--- BOT SYNTHESIZED RESPONSE ---
+To calculate the proportion of net interest income to total revenues net of interest expense, we use the data from **Table 2: Total Revenues Net of Interest Expense Summary (ID: 0063)**:
+
+*   **2022:**
+    *   Net interest income: $9,895 million
+    *   Total revenues net of interest expense: $52,862 million
+    *   **Proportion:** $9,895 / $52,862 ≈ **18.72%**
+
+*   **2021:**
+    *   Net interest income: $7,750 million
+    *   Total revenues net of interest expense: $42,380 million
+    *   **Proportion:** $7,750 / $42,380 ≈ **18.29%**
+
+**Conclusion:**
+Yes, the dependence on net interest income increased slightly, rising from 18.29% in 2021 to 18.72% in 2022.
+
+--- GROUND TRUTH (From Test_Questions.xlsx) ---
+2022: ~18.7% (9,895/52,862); 2021: ~18.3% (7,750/42,380). Dependence increased slightly
+
+================================================================================
+USER QUERY [3]: By how many percentage points did total revenues net of interest expense grow from 2021 to 2022, and what does this imply?
+--------------------------------------------------------------------------------
+--- BOT INTERNAL LOG ---
+====================================================================================================
+Final Context Selection (Top 5 Unique Nodes):
+  -> Node 0063   | AMEX > CONSOLIDATED RESULTS OF OPERATIONS > TABLE 2: TOTAL REVENUES NET OF INTEREST EXPENSE SUMMARY
+  -> Node 0078   | AMEX > BUSINESS SEGMENT RESULTS OF OPERATIONS > TOTAL REVENUES NET OF INTEREST EXPENSE
+  -> Node 0288   | AMEX > REPORTABLE OPERATING SEGMENTS AND GEOGRAPHIC OPERATIONS > Total Revenues Net of Interest Expense
+  -> Node 0059   | AMEX > TABLE 1: SUMMARY OF FINANCIAL PERFORMANCE
+  -> Node 0062   | AMEX > CONSOLIDATED RESULTS OF OPERATIONS
+====================================================================================================
+
+--- BOT SYNTHESIZED RESPONSE ---
+Total revenues net of interest expense grew by **25 percentage points** from 2021 to 2022 (increasing from $42,380 million to $52,862 million).
+
+**Implication:**
+This growth implies a robust recovery and expansion in the company's core earning capacity. The increase was driven by strong performance across multiple revenue streams, most notably a 25% increase in discount revenue (the largest component) and a 28% increase in net interest income, despite a significant rise in interest expense (ID: 0063, 0059).
+
+--- GROUND TRUTH (From Test_Questions.xlsx) ---
+Growth = (52,862 − 42,380) / 42,380 ≈ 24.7%. Indicates strong post-pandemic recovery.
+
+================================================================================
+USER QUERY [4]: Compute the ratio of non-interest revenue to total revenues net of interest expense for 2022 and interpret.
+--------------------------------------------------------------------------------
+--- BOT INTERNAL LOG ---
+====================================================================================================
+Final Context Selection (Top 5 Unique Nodes):
+  -> Node 0063   | AMEX > CONSOLIDATED RESULTS OF OPERATIONS > TABLE 2: TOTAL REVENUES NET OF INTEREST EXPENSE SUMMARY
+  -> Node 0078   | AMEX > BUSINESS SEGMENT RESULTS OF OPERATIONS > TOTAL REVENUES NET OF INTEREST EXPENSE
+  -> Node 0288   | AMEX > REPORTABLE OPERATING SEGMENTS AND GEOGRAPHIC OPERATIONS > Total Revenues Net of Interest Expense
+  -> Node 0062   | AMEX > CONSOLIDATED RESULTS OF OPERATIONS
+  -> Node 0175   | AMEX > CONSOLIDATED STATEMENTS OF INCOME
+====================================================================================================
+
+--- BOT SYNTHESIZED RESPONSE ---
+Based on the **Consolidated Results of Operations (Table 2)**, the ratio for 2022 is calculated as follows:
+
+*   **Total non-interest revenues:** $42,967 million
+*   **Total revenues net of interest expense:** $52,862 million
+
+**Ratio Calculation:**
+$42,967 / $52,862 ≈ **0.8128 (or 81.3%)**
+
+**Interpretation:**
+In 2022, approximately 81.3% of American Express’s total revenues (net of interest expense) were derived from non-interest sources, such as discount revenue, card fees, and service fees. This indicates that the company’s business model is heavily reliant on non-interest-based income (primarily transaction-based and fee-based revenue) rather than purely interest-based lending activities, reinforcing its position as a diversified payments company.
+
+*Source: AMEX > CONSOLIDATED RESULTS OF OPERATIONS > TABLE 2: TOTAL REVENUES NET OF INTEREST EXPENSE SUMMARY (ID: 0063)*
+
+--- GROUND TRUTH (From Test_Questions.xlsx) ---
+Non-interest revenue = 52,862 − 9,895 = 42,967. Ratio = 42,967 / 52,862 ≈ 81.3%. Indicates AMEX is primarily fee-based.
+
+================================================================================
+USER QUERY [5]: Compare growth in net interest income vs total revenues net of interest expense. Which grew faster?
+--------------------------------------------------------------------------------
+--- BOT INTERNAL LOG ---
+====================================================================================================
+Final Context Selection (Top 5 Unique Nodes):
+  -> Node 0063   | AMEX > CONSOLIDATED RESULTS OF OPERATIONS > TABLE 2: TOTAL REVENUES NET OF INTEREST EXPENSE SUMMARY
+  -> Node 0310   | AMEX > Changes in Net Interest Income − Volume and Rate Analysis<sup>(a)</sup>
+  -> Node 0078   | AMEX > BUSINESS SEGMENT RESULTS OF OPERATIONS > TOTAL REVENUES NET OF INTEREST EXPENSE
+  -> Node 0288   | AMEX > REPORTABLE OPERATING SEGMENTS AND GEOGRAPHIC OPERATIONS > Total Revenues Net of Interest Expense
+  -> Node 0309   | AMEX > STATISTICAL DISCLOSURE BY BANK HOLDING COMPANIES > Distribution of Assets, Liabilities, and Shareholders’ Equity; Interest Rates and Interest Differential
+====================================================================================================
+
+--- BOT SYNTHESIZED RESPONSE ---
+Based on "Table 2: Total Revenues Net of Interest Expense Summary" (ID: 0063), the growth comparison for the periods is as follows:
+
+*   **2022 vs. 2021:** **Net interest income grew faster** at 28% ($9,895 million vs. $7,750 million), compared to a 25% increase in total revenues net of interest expense ($52,862 million vs. $42,380 million).
+*   **2021 vs. 2020:** **Total revenues net of interest expense grew faster** at 17% ($42,380 million vs. $36,087 million), while net interest income declined by 3% ($7,750 million vs. $7,985 million).
+
+--- GROUND TRUTH (From Test_Questions.xlsx) ---
+Net interest income grew ~28% (7,750 → 9,895), while total revenues grew ~25% (42,380 → 52,862). Net interest income grew faster.
+
+================================================================================
+USER QUERY [6]: Estimate how much of total revenue growth is attributable to discount revenue increase.
+--------------------------------------------------------------------------------
+--- BOT INTERNAL LOG ---
+====================================================================================================
+Final Context Selection (Top 5 Unique Nodes):
+  -> Node 0188   | AMEX > AMOUNTS BASED ON ESTIMATES AND ASSUMPTIONS > INCOME STATEMENT > Discount Revenue
+  -> Node 0063   | AMEX > CONSOLIDATED RESULTS OF OPERATIONS > TABLE 2: TOTAL REVENUES NET OF INTEREST EXPENSE SUMMARY
+  -> Node 0062   | AMEX > CONSOLIDATED RESULTS OF OPERATIONS
+  -> Node 0059   | AMEX > TABLE 1: SUMMARY OF FINANCIAL PERFORMANCE
+  -> Node 0175   | AMEX > CONSOLIDATED STATEMENTS OF INCOME
+====================================================================================================
+
+--- BOT SYNTHESIZED RESPONSE ---
+To estimate how much of the total revenue growth is attributable to the increase in discount revenue, we compare the 2022 vs. 2021 results:
+
+*   **Total Revenue Growth (Net of Interest Expense):** $10,482 million ($52,862 million in 2022 vs. $42,380 million in 2021).
+*   **Discount Revenue Increase:** $6,176 million ($30,739 million in 2022 vs. $24,563 million in 2021).
+
+**Calculation:**
+($6,176 million / $10,482 million) * 100 ≈ **58.9%**
+
+Approximately **58.9%** of the total revenue growth in 2022 compared to 2021 is attributable to the increase in discount revenue.
+
+*Source: AMEX > CONSOLIDATED RESULTS OF OPERATIONS > TABLE 2: TOTAL REVENUES NET OF INTEREST EXPENSE SUMMARY (ID: 0063)*
+
+--- GROUND TRUTH (From Test_Questions.xlsx) ---
+Discount revenue increase = 30,722 − 24,546 = 6,176. Total revenue increase = 52,862 − 42,380 = 10,482. Contribution ≈ 6,176 / 10,482 ≈ 58.9%.
+
+================================================================================
+USER QUERY [7]: Did provisions for credit losses increase faster than total revenue?
+--------------------------------------------------------------------------------
+--- BOT INTERNAL LOG ---
+====================================================================================================
+Final Context Selection (Top 5 Unique Nodes):
+  -> Node 0066   | AMEX > TABLE 3: PROVISIONS FOR CREDIT LOSSES SUMMARY
+  -> Node 0099   | AMEX > PROVISIONS FOR CREDIT LOSSES
+  -> Node 0079   | AMEX > BUSINESS SEGMENT RESULTS OF OPERATIONS > PROVISIONS FOR CREDIT LOSSES
+  -> Node 0289   | AMEX > REPORTABLE OPERATING SEGMENTS AND GEOGRAPHIC OPERATIONS > Provisions for Credit Losses
+  -> Node 0084   | AMEX > Denotes a variance of 100 percent or more > TOTAL REVENUES NET OF INTEREST EXPENSE
+====================================================================================================
+
+--- BOT SYNTHESIZED RESPONSE ---
+Yes, provisions for credit losses increased faster than total revenues net of interest expense in 2022 compared to 2021.
+
+*   **Provisions for Credit Losses:** According to Table 3 (ID: 0066), total provisions for credit losses increased from $(1,419) million in 2021 to $2,182 million in 2022, resulting in a variance of 100% or more (marked as "#").
+*   **Total Revenue:** While the provided text (ID: 0084) details specific growth percentages for revenue components (e.g., Discount revenue at 25%, Net card fees at 24%, and Net interest income at 26%), it indicates that the total provisions for credit losses experienced a significantly larger swing (moving from a net release in 2021 to a significant build in 2022) compared to the steady percentage growth seen in revenue categories.
+
+--- GROUND TRUTH (From Test_Questions.xlsx) ---
+Provision growth rate exceeds revenue growth (~25%), indicating rising credit risk exposure.
+
+================================================================================
+USER QUERY [8]: Is there any numerical evidence of crypto-related revenue contribution?
+--------------------------------------------------------------------------------
+--- BOT INTERNAL LOG ---
+====================================================================================================
+Final Context Selection (Top 5 Unique Nodes):
+  -> Node 0012   | AMEX > Partners and Relationships > Our Spend-Centric Model and Revenue Mix
+  -> Node 0061   | AMEX > BUSINESS ENVIRONMENT
+  -> Node 0073   | AMEX > TABLE 6: NETWORK VOLUMES-RELATED STATISTICAL INFORMATION
+  -> Node 0044   | AMEX > ITEM 1A. RISK FACTORS > Strategic, Business and Competitive Risks
+  -> Node 0187   | AMEX > AMOUNTS BASED ON ESTIMATES AND ASSUMPTIONS > INCOME STATEMENT
+====================================================================================================
+
+--- BOT SYNTHESIZED RESPONSE ---
+Based on the provided documents, there is no numerical evidence of crypto-related revenue contribution.
+
+The provided reference materials do not mention cryptocurrency as a source of revenue, nor do they detail any revenue streams derived from digital assets or crypto-related services. The documents focus on revenue generated from:
+*   **Card Member spending** (Discount revenue)
+*   **Finance charges and fees** (Net card fees, Service fees, and Interest income)
+*   **Network partnership agreements** (Processed revenue)
+
+While the risk factors (ID: 0044) note that the company faces intense competition from "evolving and growing alternative payment and financing providers" and must invest in new technologies to remain competitive, they do not specifically identify or quantify crypto-related activity as a current or material revenue component.
+
+--- GROUND TRUTH (From Test_Questions.xlsx) ---
+No evidence of crypto-related revenue in financial statements or notes.
+
+================================================================================
+USER QUERY [9]: If billed business grew ~23% and total revenue grew ~24.7%, what does this imply?
+--------------------------------------------------------------------------------
+--- BOT INTERNAL LOG ---
+====================================================================================================
+Final Context Selection (Top 5 Unique Nodes):
+  -> Node 0073   | AMEX > TABLE 6: NETWORK VOLUMES-RELATED STATISTICAL INFORMATION
+  -> Node 0089   | AMEX > COMMERCIAL SERVICES > TABLE 11: CS SELECTED INCOME STATEMENT DATA
+  -> Node 0096   | AMEX > INTERNATIONAL CARD SERVICES > TABLE 13: ICS SELECTED INCOME STATEMENT DATA
+  -> Node 0103   | AMEX > GLOBAL MERCHANT AND NETWORK SERVICES > TABLE 15: GMNS SELECTED INCOME STATEMENT AND OTHER DATA
+  -> Node 0082   | AMEX > U.S. CONSUMER SERVICES > TABLE 9: USCS SELECTED INCOME STATEMENT DATA
+====================================================================================================
+
+--- BOT SYNTHESIZED RESPONSE ---
+When billed business grows at a slower rate (approx. 23%) than total revenue (approx. 24.7%), it implies that revenue is growing faster than the underlying volume of transactions. This suggests that the company is generating more revenue per dollar of billed business, likely driven by factors such as increased interest income, changes in fee structures, or shifts in the business mix.
+
+**Supporting Evidence:**
+*   **Table 6 (ID: 0073):** Confirms that "Total billed business" grew by 23% in 2022.
+*   **Segment Income Statements (Tables 9, 11, 13, and 15):** Across American Express's reporting segments, total revenue growth often outpaced volume growth due to significant increases in interest income and other non-interest revenues. For example, in **Table 9 (USCS)**, interest income grew by 34% in 2022, contributing to a 26% growth in total revenues net of interest expense, which exceeds the 23% total billed business growth rate.
+
+--- GROUND TRUTH (From Test_Questions.xlsx) ---
+Revenue slightly outpaced billed business, suggesting improved pricing, mix, or higher fee yield.
+
+================================================================================
+USER QUERY [10]: For AMEX, Did operating leverage improve in 2022? Compare revenue and expense growth.
+--------------------------------------------------------------------------------
+--- BOT INTERNAL LOG ---
+====================================================================================================
+Final Context Selection (Top 5 Unique Nodes):
+  -> Node 0062   | AMEX > CONSOLIDATED RESULTS OF OPERATIONS
+  -> Node 0063   | AMEX > CONSOLIDATED RESULTS OF OPERATIONS > TABLE 2: TOTAL REVENUES NET OF INTEREST EXPENSE SUMMARY
+  -> Node 0070   | AMEX > TABLE 4: EXPENSES SUMMARY > EXPENSES
+  -> Node 0069   | AMEX > TABLE 4: EXPENSES SUMMARY
+  -> Node 0082   | AMEX > U.S. CONSUMER SERVICES > TABLE 9: USCS SELECTED INCOME STATEMENT DATA
+====================================================================================================
+
+--- BOT SYNTHESIZED RESPONSE ---
+Based on the provided data for 2022 compared to 2021, American Express achieved a slight improvement in operating leverage, as revenue growth slightly outpaced expense growth.
+
+*   **Revenue Growth:** Total revenues net of interest expense grew by **25%** ($52.862 billion in 2022 vs. $42.380 billion in 2021) (Source: Table 2, ID: 0063).
+*   **Expense Growth:** Total expenses grew by **24%** ($41.095 billion in 2022 vs. $33.110 billion in 2021) (Source: Table 4, ID: 0069).
+
+Because the percentage increase in revenue (25%) was higher than the percentage increase in total expenses (24%), the company demonstrated a modest improvement in operating leverage.
+
+--- GROUND TRUTH (From Test_Questions.xlsx) ---
+Revenue grew ~24.7% while expenses grew at a lower rate, indicating positive operating leverage and margin expansion.
+

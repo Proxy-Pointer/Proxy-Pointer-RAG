@@ -1,0 +1,277 @@
+=== PROXY-POINTER RAG vs GROUND TRUTH BENCHMARK ===
+Company: Pepsico_2022
+
+================================================================================
+USER QUERY [1]: For PepsiCo, what percentage of operating cash flow in FY2022 was converted into free cash flow?
+--------------------------------------------------------------------------------
+--- BOT INTERNAL LOG ---
+====================================================================================================
+Final Context Selection (Top 5 Unique Nodes):
+  -> Node 0080   | pepsico > **Consolidated Statement of Cash Flows**
+  -> Node 0081   | pepsico > **Consolidated Statement of Cash Flows (continued)**
+  -> Node 0068   | pepsico > Europe > **Free Cash Flow**
+  -> Node 0064   | pepsico > Europe > Restructuring and Impairment Charges > **Our Liquidity and Capital Resources**
+  -> Node 0032   | pepsico > Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations.
+====================================================================================================
+
+--- BOT SYNTHESIZED RESPONSE ---
+In FY2022, PepsiCo converted 54.16% of its operating cash flow into free cash flow.
+
+This is calculated using the following figures from the "Free Cash Flow" table (Source ID: 0068):
+*   **Net cash provided by operating activities:** $10,811 million
+*   **Free cash flow:** $5,855 million
+
+**Calculation:** ($5,855 / $10,811) * 100 = 54.16%
+
+--- GROUND TRUTH (From Test_Questions.xlsx) ---
+0.542
+
+================================================================================
+USER QUERY [2]: For PepsiCo, compute the net change in cash in FY2022 by aggregating operating, investing, and financing activities.
+--------------------------------------------------------------------------------
+--- BOT INTERNAL LOG ---
+====================================================================================================
+Final Context Selection (Top 5 Unique Nodes):
+  -> Node 0080   | pepsico > **Consolidated Statement of Cash Flows**
+  -> Node 0081   | pepsico > **Consolidated Statement of Cash Flows (continued)**
+  -> Node 0150   | pepsico > Note 14 — Supplemental Financial Information > Balance Sheet > **Statement of Cash Flows**
+  -> Node 0065   | pepsico > Europe > Restructuring and Impairment Charges > ***Operating Activities***
+  -> Node 0066   | pepsico > Europe > Restructuring and Impairment Charges > ***Investing Activities***
+====================================================================================================
+
+--- BOT SYNTHESIZED RESPONSE ---
+To compute the net change in cash for PepsiCo in FY2022, we aggregate the net cash flows from operating, investing, and financing activities, as well as the effect of exchange rate changes:
+
+*   **Net Cash Provided by Operating Activities:** $10,811 million (Source: ID 0080)
+*   **Net Cash Used for Investing Activities:** ($2,430) million (Source: ID 0080)
+*   **Net Cash Used for Financing Activities:** ($8,523) million (Source: ID 0081)
+*   **Effect of exchange rate changes on cash and cash equivalents and restricted cash:** ($465) million (Source: ID 0081)
+
+**Calculation:**
+$10,811 + (-2,430) + (-8,523) + (-465) = **($607) million**
+
+The net decrease in cash and cash equivalents and restricted cash for FY2022 is **$607 million** (Source: ID 0081).
+
+--- GROUND TRUTH (From Test_Questions.xlsx) ---
+-$607 million
+
+================================================================================
+USER QUERY [3]: For PepsiCo, what percentage of operating cash flow was used for capital expenditures in FY2022?
+--------------------------------------------------------------------------------
+--- BOT INTERNAL LOG ---
+====================================================================================================
+Final Context Selection (Top 5 Unique Nodes):
+  -> Node 0080   | pepsico > **Consolidated Statement of Cash Flows**
+  -> Node 0081   | pepsico > **Consolidated Statement of Cash Flows (continued)**
+  -> Node 0066   | pepsico > Europe > Restructuring and Impairment Charges > ***Investing Activities***
+  -> Node 0064   | pepsico > Europe > Restructuring and Impairment Charges > **Our Liquidity and Capital Resources**
+  -> Node 0065   | pepsico > Europe > Restructuring and Impairment Charges > ***Operating Activities***
+====================================================================================================
+
+--- BOT SYNTHESIZED RESPONSE ---
+For FY2022, PepsiCo’s capital expenditures (listed as "Capital spending") were $5,207 million, and its "Net Cash Provided by Operating Activities" was $10,811 million (Source ID: 0080).
+
+Dividing the capital expenditures by the operating cash flow results in approximately **48.16%** of operating cash flow being used for capital expenditures.
+
+--- GROUND TRUTH (From Test_Questions.xlsx) ---
+0.482
+
+================================================================================
+USER QUERY [4]: For PepsiCo, what proportion of operating cash flow was returned to shareholders through dividends in FY2022?
+--------------------------------------------------------------------------------
+--- BOT INTERNAL LOG ---
+====================================================================================================
+Final Context Selection (Top 5 Unique Nodes):
+  -> Node 0080   | pepsico > **Consolidated Statement of Cash Flows**
+  -> Node 0081   | pepsico > **Consolidated Statement of Cash Flows (continued)**
+  -> Node 0084   | pepsico > Consolidated Statement of Equity > PepsiCo, Inc. and Subsidiaries
+  -> Node 0068   | pepsico > Europe > **Free Cash Flow**
+  -> Node 0065   | pepsico > Europe > Restructuring and Impairment Charges > ***Operating Activities***
+====================================================================================================
+
+--- BOT SYNTHESIZED RESPONSE ---
+For FY2022, PepsiCo’s operating cash flow was $10,811 million (ID: 0080), and cash dividends paid totaled $6,172 million (ID: 0081). 
+
+Therefore, the proportion of operating cash flow returned to shareholders through dividends was approximately **57.1%**.
+
+--- GROUND TRUTH (From Test_Questions.xlsx) ---
+0.574
+
+================================================================================
+USER QUERY [5]: For PepsiCo, what is the ratio of share repurchases to dividends in FY2022?
+--------------------------------------------------------------------------------
+--- BOT INTERNAL LOG ---
+====================================================================================================
+Final Context Selection (Top 5 Unique Nodes):
+  -> Node 0080   | pepsico > **Consolidated Statement of Cash Flows**
+  -> Node 0081   | pepsico > **Consolidated Statement of Cash Flows (continued)**
+  -> Node 0084   | pepsico > Consolidated Statement of Equity > PepsiCo, Inc. and Subsidiaries
+  -> Node 0085   | pepsico > Consolidated Statement of Equity > PepsiCo, Inc. and Subsidiaries > Column 1
+  -> Node 0115   | pepsico > **Reserves** > Restricted Stock Units and Performance Stock Units
+====================================================================================================
+
+--- BOT SYNTHESIZED RESPONSE ---
+Based on the **Consolidated Statement of Cash Flows** (ID: 0081) for FY2022:
+
+*   **Share repurchases - common:** $1,500 million
+*   **Cash dividends paid:** $6,172 million
+
+The ratio of share repurchases to dividends is:
+$1,500 / $6,172 ≈ **0.243**
+
+--- GROUND TRUTH (From Test_Questions.xlsx) ---
+0.24x
+
+================================================================================
+USER QUERY [6]: For PepsiCo, calculate the reinvestment rate defined as Capex divided by (Operating Cash Flow minus Dividends).
+--------------------------------------------------------------------------------
+--- BOT INTERNAL LOG ---
+====================================================================================================
+Final Context Selection (Top 5 Unique Nodes):
+  -> Node 0080   | pepsico > **Consolidated Statement of Cash Flows**
+  -> Node 0081   | pepsico > **Consolidated Statement of Cash Flows (continued)**
+  -> Node 0068   | pepsico > Europe > **Free Cash Flow**
+  -> Node 0032   | pepsico > Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations.
+  -> Node 0008   | pepsico > **PepsiCo, Inc.** > **For the Fiscal Year Ended December 31, 2022** > Forward-Looking Statements
+====================================================================================================
+
+--- BOT SYNTHESIZED RESPONSE ---
+To calculate the reinvestment rate for PepsiCo (defined as Capital spending divided by [Net Cash Provided by Operating Activities minus Cash dividends paid]), the figures are derived from the Consolidated Statement of Cash Flows (ID: 0080, 0081). All figures are in millions.
+
+### **2022 Calculation:**
+*   **Capital spending:** $5,207
+*   **Operating Cash Flow:** $10,811
+*   **Dividends:** $6,172
+*   **Formula:** 5,207 / (10,811 - 6,172) = 5,207 / 4,639
+*   **Reinvestment Rate:** **112.24%**
+
+### **2021 Calculation:**
+*   **Capital spending:** $4,625
+*   **Operating Cash Flow:** $11,616
+*   **Dividends:** $5,815
+*   **Formula:** 4,625 / (11,616 - 5,815) = 4,625 / 5,801
+*   **Reinvestment Rate:** **79.73%**
+
+### **2020 Calculation:**
+*   **Capital spending:** $4,240
+*   **Operating Cash Flow:** $10,613
+*   **Dividends:** $5,509
+*   **Formula:** 4,240 / (10,613 - 5,509) = 4,240 / 5,104
+*   **Reinvestment Rate:** **83.07%**
+
+***
+
+**Sources:**
+*   *Consolidated Statement of Cash Flows (ID: 0080)* for Capital spending and Operating Cash Flow.
+*   *Consolidated Statement of Cash Flows (continued) (ID: 0081)* for Cash dividends paid.
+
+--- GROUND TRUTH (From Test_Questions.xlsx) ---
+1.123
+
+================================================================================
+USER QUERY [7]: For PepsiCo, compare the year-over-year decline in free cash flow versus operating cash flow in FY2022.
+--------------------------------------------------------------------------------
+--- BOT INTERNAL LOG ---
+====================================================================================================
+Final Context Selection (Top 5 Unique Nodes):
+  -> Node 0080   | pepsico > **Consolidated Statement of Cash Flows**
+  -> Node 0081   | pepsico > **Consolidated Statement of Cash Flows (continued)**
+  -> Node 0068   | pepsico > Europe > **Free Cash Flow**
+  -> Node 0064   | pepsico > Europe > Restructuring and Impairment Charges > **Our Liquidity and Capital Resources**
+  -> Node 0150   | pepsico > Note 14 — Supplemental Financial Information > Balance Sheet > **Statement of Cash Flows**
+====================================================================================================
+
+--- BOT SYNTHESIZED RESPONSE ---
+In fiscal year 2022, PepsiCo experienced a greater year-over-year percentage decline in free cash flow compared to its operating cash flow:
+
+*   **Operating Cash Flow:** Decreased by **7%** (from $11,616 million in 2021 to $10,811 million in 2022).
+*   **Free Cash Flow:** Decreased by **18%** (from $7,157 million in 2021 to $5,855 million in 2022).
+
+Source: **Reference ID: 0068 (Free Cash Flow table)**
+
+--- GROUND TRUTH (From Test_Questions.xlsx) ---
+FCF declined ~18% vs OCF decline of ~7%
+
+================================================================================
+USER QUERY [8]: For PepsiCo, what is the total pre-tax financial impact of Russia-Ukraine conflict-related charges in FY2022?
+--------------------------------------------------------------------------------
+--- BOT INTERNAL LOG ---
+====================================================================================================
+Final Context Selection (Top 5 Unique Nodes):
+  -> Node 0055   | pepsico > Europe > Items Affecting Comparability
+  -> Node 0053   | pepsico > Europe
+  -> Node 0023   | pepsico > <u>**Business Risks**</u> > ***Risks associated with the deadly conflict in Ukraine***
+  -> Node 0095   | pepsico > Impairment and Other Charges
+  -> Node 0032   | pepsico > Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations.
+====================================================================================================
+
+--- BOT SYNTHESIZED RESPONSE ---
+The total pre-tax financial impact of the Russia-Ukraine conflict-related charges for PepsiCo in FY2022 was **$1,415 million**.
+
+This is detailed in the table "Russia-Ukraine conflict charges" under the **Impairment and Other Charges** section (ID: 0095), which breaks down the $1,415 million as follows:
+*   **Cost of sales:** $140 million
+*   **Selling, general and administrative expenses:** $77 million
+*   **Impairment of intangible assets:** $1,198 million
+
+Source: pepsico > Impairment and Other Charges (ID: 0095)
+
+--- GROUND TRUTH (From Test_Questions.xlsx) ---
+$1,415 million
+
+================================================================================
+USER QUERY [9]: For PepsiCo, what percentage of Russia-Ukraine related charges were due to intangible asset impairments?
+--------------------------------------------------------------------------------
+--- BOT INTERNAL LOG ---
+====================================================================================================
+Final Context Selection (Top 5 Unique Nodes):
+  -> Node 0059   | pepsico > Europe > Restructuring and Impairment Charges > *Other Impairment Charges*
+  -> Node 0055   | pepsico > Europe > Items Affecting Comparability
+  -> Node 0053   | pepsico > Europe
+  -> Node 0023   | pepsico > <u>**Business Risks**</u> > ***Risks associated with the deadly conflict in Ukraine***
+  -> Node 0095   | pepsico > Impairment and Other Charges
+====================================================================================================
+
+--- BOT SYNTHESIZED RESPONSE ---
+Based on the provided documents, the total Russia-Ukraine conflict charges in 2022 were $1,415 million (Source: ID: 0095, "Russia-Ukraine conflict charges" table). Of that total, $1,198 million was attributed to "Impairment charges related to intangible assets."
+
+Therefore, approximately **84.7%** of the Russia-Ukraine related charges were due to intangible asset impairments ($1,198 million / $1,415 million).
+
+--- GROUND TRUTH (From Test_Questions.xlsx) ---
+0.847
+
+================================================================================
+USER QUERY [10]: For PepsiCo, what percentage of operating cash flow remained after capital expenditures ?
+--------------------------------------------------------------------------------
+--- BOT INTERNAL LOG ---
+====================================================================================================
+Final Context Selection (Top 5 Unique Nodes):
+  -> Node 0080   | pepsico > **Consolidated Statement of Cash Flows**
+  -> Node 0081   | pepsico > **Consolidated Statement of Cash Flows (continued)**
+  -> Node 0068   | pepsico > Europe > **Free Cash Flow**
+  -> Node 0066   | pepsico > Europe > Restructuring and Impairment Charges > ***Investing Activities***
+  -> Node 0032   | pepsico > Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations.
+====================================================================================================
+
+--- BOT SYNTHESIZED RESPONSE ---
+To determine the percentage of operating cash flow (OCF) remaining after capital expenditures (CapEx) for PepsiCo, we calculate the ratio as: **(Operating Cash Flow - Capital Spending) / Operating Cash Flow**.
+
+Based on the **Consolidated Statement of Cash Flows** (ID: 0080):
+
+*   **2022:**
+    *   Net Cash Provided by Operating Activities: $10,811 million
+    *   Capital spending: $5,207 million
+    *   Calculation: ($10,811 - $5,207) / $10,811 = **51.8%**
+
+*   **2021:**
+    *   Net Cash Provided by Operating Activities: $11,616 million
+    *   Capital spending: $4,625 million
+    *   Calculation: ($11,616 - $4,625) / $11,616 = **60.2%**
+
+*   **2020:**
+    *   Net Cash Provided by Operating Activities: $10,613 million
+    *   Capital spending: $4,240 million
+    *   Calculation: ($10,613 - $4,240) / $10,613 = **60.0%**
+
+--- GROUND TRUTH (From Test_Questions.xlsx) ---
+51.8%
+

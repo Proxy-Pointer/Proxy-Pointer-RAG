@@ -1,0 +1,11 @@
+streamlit
+google-generativeai
+Pillow
+python-dotenv
+faiss-cpu
+numpy
+markdown
+langchain-community
+langchain-core
+langchain-text-splitters
+pdfservices-sdk

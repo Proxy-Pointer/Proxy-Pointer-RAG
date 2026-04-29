@@ -1,0 +1,18 @@
+# ── Environment ──────────────────────────────────────────────────────────
+.env
+
+# ── Python ───────────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.venv/
+env/
+
+# ── Generated Data (each sub-project gitignores its own specifics) ──────
+# Text-Only: data/index/, data/trees/
+# MultiModal: data/index/, data/trees/
+
+# ── OS ───────────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db

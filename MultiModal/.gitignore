@@ -1,0 +1,22 @@
+# Environment
+.env
+
+# Proxy-Pointer MultiModal Data (Data Lite)
+# (Generated files are ignored to keep repo lightweight)
+data/index/
+data/trees/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.venv/
+env/
+
+# Results 
+# (Keep test_log.json and test_queries.json for benchmarking evidence)
+
+# OS
+.DS_Store
+Thumbs.db
