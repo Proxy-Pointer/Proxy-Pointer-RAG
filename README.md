@@ -14,7 +14,7 @@
 | :--- | :--- | :--- |
 | **Core Goal** | Maximum precision for text-based RAG | Unified reasoning across text & visuals |
 | **Input** | Structured Markdown (LlamaParse) | Markdown + Figures/Tables (Adobe Extract) |
-| **Output** | Text-based answers | Text + $\color{#15803d}{\small\textsf{\textbf{AI-Verified Visual Evidence}}}$ 🖼️ |
+| **Output** | Text-based answers | Text + $\color{#15803d}{\textsf{\textbf{AI-Verified Visual Evidence}}}$ 🖼️ |
 | **LLM** | Gemini 3.1 Flash-Lite | Gemini 3.1 Flash-Lite |
 | **Embeddings** | gemini-embedding-001 (1536d) | gemini-embedding-001 (1536d) |
 | **Vision** | — | ✅ Gemini 3.1 Flash-Lite |
