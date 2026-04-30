@@ -6,6 +6,8 @@
 
 **Structural RAG for Complex Documents** — A high-fidelity retrieval pipeline that uses document hierarchy as the primary retrieval anchor, eliminating "hallucination by chunking." Proxy-Pointer indexes **structural pointers** (breadcrumbs like `Paper > Section > Sub-section`) rather than raw text fragments, ensuring the LLM always understands exactly where it is in a document.
 
+**Get Visual citations with grounded text answers, with a text-only pipeline**
+
 ---
 
 ## Two Implementations, One Architecture
@@ -17,7 +19,7 @@
 | **Output** | Text-based answers | Text + $\color{#15803d}{\textsf{\textbf{AI-Verified Visual Evidence}}}$ 🖼️ |
 | **LLM** | Gemini 3.1 Flash-Lite | Gemini 3.1 Flash-Lite |
 | **Embeddings** | gemini-embedding-001 (1536d) | gemini-embedding-001 (1536d) |
-| **Vision** | — | ✅ Gemini 3.1 Flash-Lite |
+| **Vision (optional)** | — | ✅ Gemini 3.1 Flash-Lite |
 | **Retrieval** | Structural re-ranking (k=5) | Anchor-aware re-ranking + image selection |
 | **Benchmark** | 100% on FinanceBench & 40-question Comprehensive | 96% across 20-query, 5-paper technical suite |
 | **Use Case** | 10-K Financials, Legal, Documentation | Anything with Images, Diagrams, Charts, Tables |
