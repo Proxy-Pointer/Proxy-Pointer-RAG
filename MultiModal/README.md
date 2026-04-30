@@ -34,7 +34,7 @@ Instead of retrieving small, context-less chunks, Proxy-Pointer MultiModal:
 2. **Filters noise** (TOC, abbreviations, etc.) using an LLM to ensure the re-ranker stays focused on technical content.
 3. **Uses Semantic Snippets:** The re-ranker sees a 150-character preview of each section, allowing it to find technical topics (like "QK-Normalization") even if they aren't in the heading.
 4. **Performs Anchor-Aware Retrieval:** If a query mentions "Figure 5" or "Table I", the system prioritizes sections that physically contain those anchors.
-5. **Loads Full Multimodal Payloads:** The synthesizer sees the complete section text and the actual images paths, enabling high-fidelity "Visual Grounding."
+5. **Loads Full Multimodal Payloads:** The synthesizer sees the complete section text and the actual images paths, enabling high-fidelity "Visual Grounding" without using multimodal embeddings or a Vision model.
 
 ---
 
@@ -42,8 +42,9 @@ Instead of retrieving small, context-less chunks, Proxy-Pointer MultiModal:
 
 For the full technical story behind the architecture:
 
-1. [Proxy-Pointer RAG: Achieving Vectorless Accuracy at Vector RAG Scale and Cost](https://towardsdatascience.com/proxy-pointer-rag-achieving-vectorless-accuracy-at-vector-rag-scale-and-cost/) — Core architecture & the pointer-based retrieval idea
+1. [Proxy-Pointer RAG: Multimodal Answers Without Multimodal Embeddings](https://towardsdatascience.com/proxy-pointer-rag-multimodal-answers-without-multimodal-embeddings/) — Structure is all you need
 2. [Proxy-Pointer RAG: Structure Meets Scale — 100% Accuracy with Smarter Retrieval](https://towardsdatascience.com/proxy-pointer-rag-structure-meets-scale-100-accuracy-with-smarter-retrieval/) — Scaling to multi-document, LLM re-ranking, and benchmark results
+3. [Proxy-Pointer RAG: Achieving Vectorless Accuracy at Vector RAG Scale and Cost](https://towardsdatascience.com/proxy-pointer-rag-achieving-vectorless-accuracy-at-vector-rag-scale-and-cost/) — Core architecture & the pointer-based retrieval idea
 
 ---
 

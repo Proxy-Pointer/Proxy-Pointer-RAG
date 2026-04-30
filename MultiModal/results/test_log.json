@@ -18,7 +18,7 @@
       "images_found": [
         {
           "label": "Galore - Table 7: Hyperparameters for fine-tuning RoBERTa-Base with GaLore (Rank 4)",
-          "path": "C:/antigravity/Proxy-Pointer/MultiModal/data/extracted_papers/Galore/tables/fileoutpart157.png",
+          "path": "C:/Proxy-Pointer/MultiModal/data/extracted_papers/Galore/tables/fileoutpart157.png",
           "exists": true
         }
       ],
@@ -39,22 +39,22 @@
       "images_found": [
         {
           "label": "VectorPainter - Figure 4: Pipeline of Stroke Style Extraction",
-          "path": "C:/antigravity/Proxy-Pointer/MultiModal/data/extracted_papers/VectorPainter/figures/fileoutpart14.png",
+          "path": "C:/Proxy-Pointer/MultiModal/data/extracted_papers/VectorPainter/figures/fileoutpart14.png",
           "exists": true
         },
         {
           "label": "VectorPainter - Figure 6: Comparison of Various Stylized Control Methods",
-          "path": "C:/antigravity/Proxy-Pointer/MultiModal/data/extracted_papers/VectorPainter/figures/fileoutpart18.png",
+          "path": "C:/Proxy-Pointer/MultiModal/data/extracted_papers/VectorPainter/figures/fileoutpart18.png",
           "exists": true
         },
         {
           "label": "VectorPainter - Table I: Quantitative Evaluation",
-          "path": "C:/antigravity/Proxy-Pointer/MultiModal/data/extracted_papers/VectorPainter/tables/fileoutpart19.png",
+          "path": "C:/Proxy-Pointer/MultiModal/data/extracted_papers/VectorPainter/tables/fileoutpart19.png",
           "exists": true
         },
         {
           "label": "VectorPainter - Table S1: Human Evaluation",
-          "path": "C:/antigravity/Proxy-Pointer/MultiModal/data/extracted_papers/VectorPainter/tables/fileoutpart25.png",
+          "path": "C:/Proxy-Pointer/MultiModal/data/extracted_papers/VectorPainter/tables/fileoutpart25.png",
           "exists": true
         }
       ],
@@ -75,7 +75,7 @@
       "images_found": [
         {
           "label": "Galore - Table 2: Comparison with low-rank algorithms on pre-training various sizes of LLaMA models on C4 dataset.",
-          "path": "C:/antigravity/Proxy-Pointer/MultiModal/data/extracted_papers/Galore/tables/fileoutpart40.png",
+          "path": "C:/Proxy-Pointer/MultiModal/data/extracted_papers/Galore/tables/fileoutpart40.png",
           "exists": true
         }
       ],
@@ -96,7 +96,7 @@
       "images_found": [
         {
           "label": "CLIP - Table 1: Comparison performances (%) on BNG task in terms of B, N, and HM metrics.",
-          "path": "C:/antigravity/Proxy-Pointer/MultiModal/data/extracted_papers/CLIP/tables/fileoutpart12.png",
+          "path": "C:/Proxy-Pointer/MultiModal/data/extracted_papers/CLIP/tables/fileoutpart12.png",
           "exists": true
         }
       ],
@@ -117,12 +117,12 @@
       "images_found": [
         {
           "label": "VectorFusion - Figure 3: The three-stage VectorFusion pipeline.",
-          "path": "C:/antigravity/Proxy-Pointer/MultiModal/data/extracted_papers/VectorFusion/figures/fileoutpart29.png",
+          "path": "C:/Proxy-Pointer/MultiModal/data/extracted_papers/VectorFusion/figures/fileoutpart29.png",
           "exists": true
         },
         {
           "label": "VectorFusion - Figure 5: Overview of the latent score distillation optimization procedure.",
-          "path": "C:/antigravity/Proxy-Pointer/MultiModal/data/extracted_papers/VectorFusion/figures/fileoutpart33.png",
+          "path": "C:/Proxy-Pointer/MultiModal/data/extracted_papers/VectorFusion/figures/fileoutpart33.png",
           "exists": true
         }
       ],
@@ -143,7 +143,7 @@
       "images_found": [
         {
           "label": "CLIP - Figure 2: The framework of the CLIP-CITE method.",
-          "path": "C:/antigravity/Proxy-Pointer/MultiModal/data/extracted_papers/CLIP/figures/fileoutpart3.png",
+          "path": "C:/Proxy-Pointer/MultiModal/data/extracted_papers/CLIP/figures/fileoutpart3.png",
           "exists": true
         }
       ],
@@ -164,12 +164,12 @@
       "images_found": [
         {
           "label": "NemoBot - Figure 3: System Flow of Nemobot illustrating the interaction between the Coding Pad, Chat Playground, and LLM functions.",
-          "path": "C:/antigravity/Proxy-Pointer/MultiModal/data/extracted_papers/NemoBot/figures/fileoutpart3.png",
+          "path": "C:/Proxy-Pointer/MultiModal/data/extracted_papers/NemoBot/figures/fileoutpart3.png",
           "exists": true
         },
         {
           "label": "NemoBot - Figure 4: UI of Nemobot showing the integration of the Coding Pad, Chat Playground, and LLM functions.",
-          "path": "C:/antigravity/Proxy-Pointer/MultiModal/data/extracted_papers/NemoBot/figures/fileoutpart6.png",
+          "path": "C:/Proxy-Pointer/MultiModal/data/extracted_papers/NemoBot/figures/fileoutpart6.png",
           "exists": true
         }
       ],
@@ -190,7 +190,7 @@
       "images_found": [
         {
           "label": "VectorFusion - Table 1: Evaluating the consistency of text-to-SVG generations using 64 primitives",
-          "path": "C:/antigravity/Proxy-Pointer/MultiModal/data/extracted_papers/VectorFusion/tables/fileoutpart35.png",
+          "path": "C:/Proxy-Pointer/MultiModal/data/extracted_papers/VectorFusion/tables/fileoutpart35.png",
           "exists": true
         }
       ],
@@ -226,12 +226,12 @@
       "images_found": [
         {
           "label": "Galore - Table 3: Pre-training LLaMA 7B on C4 dataset",
-          "path": "C:/antigravity/Proxy-Pointer/MultiModal/data/extracted_papers/Galore/tables/fileoutpart42.png",
+          "path": "C:/Proxy-Pointer/MultiModal/data/extracted_papers/Galore/tables/fileoutpart42.png",
           "exists": true
         },
         {
           "label": "Galore - Table 1: Comparison between GaLore and LoRA memory requirements",
-          "path": "C:/antigravity/Proxy-Pointer/MultiModal/data/extracted_papers/Galore/tables/fileoutpart39.png",
+          "path": "C:/Proxy-Pointer/MultiModal/data/extracted_papers/Galore/tables/fileoutpart39.png",
           "exists": true
         }
       ],
@@ -252,12 +252,12 @@
       "images_found": [
         {
           "label": "VectorPainter - Figure 3: Pipeline of VectorPainter",
-          "path": "C:/antigravity/Proxy-Pointer/MultiModal/data/extracted_papers/VectorPainter/figures/fileoutpart10.png",
+          "path": "C:/Proxy-Pointer/MultiModal/data/extracted_papers/VectorPainter/figures/fileoutpart10.png",
           "exists": true
         },
         {
           "label": "VectorPainter - Figure 4: Pipeline of Stroke Style Extraction",
-          "path": "C:/antigravity/Proxy-Pointer/MultiModal/data/extracted_papers/VectorPainter/figures/fileoutpart14.png",
+          "path": "C:/Proxy-Pointer/MultiModal/data/extracted_papers/VectorPainter/figures/fileoutpart14.png",
           "exists": true
         }
       ],
@@ -278,7 +278,7 @@
       "images_found": [
         {
           "label": "CLIP - Figure 5: Mathematical formulation of the vision-language similarity distillation loss",
-          "path": "C:/antigravity/Proxy-Pointer/MultiModal/data/extracted_papers/CLIP/figures/fileoutpart7.png",
+          "path": "C:/Proxy-Pointer/MultiModal/data/extracted_papers/CLIP/figures/fileoutpart7.png",
           "exists": true
         }
       ],
@@ -299,7 +299,7 @@
       "images_found": [
         {
           "label": "VectorFusion - Figure 5: Overview of VectorFusion\u2019s latent score distillation optimization procedure.",
-          "path": "C:/antigravity/Proxy-Pointer/MultiModal/data/extracted_papers/VectorFusion/figures/fileoutpart32.png",
+          "path": "C:/Proxy-Pointer/MultiModal/data/extracted_papers/VectorFusion/figures/fileoutpart32.png",
           "exists": true
         }
       ],
@@ -320,32 +320,32 @@
       "images_found": [
         {
           "label": "NemoBot - Table I: Nemobot games categorized by Shannon\u2019s taxonomy",
-          "path": "C:/antigravity/Proxy-Pointer/MultiModal/data/extracted_papers/NemoBot/tables/fileoutpart5.png",
+          "path": "C:/Proxy-Pointer/MultiModal/data/extracted_papers/NemoBot/tables/fileoutpart5.png",
           "exists": true
         },
         {
           "label": "NemoBot - Example Prompt: Tic Tac Toe Strategy",
-          "path": "C:/antigravity/Proxy-Pointer/MultiModal/data/extracted_papers/NemoBot/figures/fileoutpart6.png",
+          "path": "C:/Proxy-Pointer/MultiModal/data/extracted_papers/NemoBot/figures/fileoutpart6.png",
           "exists": true
         },
         {
           "label": "NemoBot - Fig. 6: Training process for the Nim game agent",
-          "path": "C:/antigravity/Proxy-Pointer/MultiModal/data/extracted_papers/NemoBot/figures/fileoutpart9.png",
+          "path": "C:/Proxy-Pointer/MultiModal/data/extracted_papers/NemoBot/figures/fileoutpart9.png",
           "exists": true
         },
         {
           "label": "NemoBot - Table II: Performance of the Nim Game simulation",
-          "path": "C:/antigravity/Proxy-Pointer/MultiModal/data/extracted_papers/NemoBot/tables/fileoutpart10.png",
+          "path": "C:/Proxy-Pointer/MultiModal/data/extracted_papers/NemoBot/tables/fileoutpart10.png",
           "exists": true
         },
         {
           "label": "NemoBot - Example Prompt: Mancala Game Tree Analysis",
-          "path": "C:/antigravity/Proxy-Pointer/MultiModal/data/extracted_papers/NemoBot/figures/fileoutpart7.png",
+          "path": "C:/Proxy-Pointer/MultiModal/data/extracted_papers/NemoBot/figures/fileoutpart7.png",
           "exists": true
         },
         {
           "label": "NemoBot - Fig. 5: The chatbot interface of the Mancala game",
-          "path": "C:/antigravity/Proxy-Pointer/MultiModal/data/extracted_papers/NemoBot/figures/fileoutpart8.png",
+          "path": "C:/Proxy-Pointer/MultiModal/data/extracted_papers/NemoBot/figures/fileoutpart8.png",
           "exists": true
         }
       ],
@@ -366,7 +366,7 @@
       "images_found": [
         {
           "label": "VectorPainter - Table I: Quantitative Evaluation of VectorPainter using CLIPScore and other metrics.",
-          "path": "C:/antigravity/Proxy-Pointer/MultiModal/data/extracted_papers/VectorPainter/tables/fileoutpart19.png",
+          "path": "C:/Proxy-Pointer/MultiModal/data/extracted_papers/VectorPainter/tables/fileoutpart19.png",
           "exists": true
         }
       ],
@@ -387,12 +387,12 @@
       "images_found": [
         {
           "label": "Galore - Table 1: Comparison between GaLore and LoRA",
-          "path": "C:/antigravity/Proxy-Pointer/MultiModal/data/extracted_papers/Galore/tables/fileoutpart39.png",
+          "path": "C:/Proxy-Pointer/MultiModal/data/extracted_papers/Galore/tables/fileoutpart39.png",
           "exists": true
         },
         {
           "label": "CLIP - Table 5: Comparison performances and training efficiency",
-          "path": "C:/antigravity/Proxy-Pointer/MultiModal/data/extracted_papers/CLIP/tables/fileoutpart18.png",
+          "path": "C:/Proxy-Pointer/MultiModal/data/extracted_papers/CLIP/tables/fileoutpart18.png",
           "exists": true
         }
       ],
@@ -413,7 +413,7 @@
       "images_found": [
         {
           "label": "VectorPainter - Figure 3: VectorPainter pipeline",
-          "path": "C:/antigravity/Proxy-Pointer/MultiModal/data/extracted_papers/VectorPainter/figures/fileoutpart10.png",
+          "path": "C:/Proxy-Pointer/MultiModal/data/extracted_papers/VectorPainter/figures/fileoutpart10.png",
           "exists": true
         }
       ],
@@ -434,32 +434,32 @@
       "images_found": [
         {
           "label": "NemoBot - Table I: Nemobot games categorized according to Shannon\u2019s game taxonomy",
-          "path": "C:/antigravity/Proxy-Pointer/MultiModal/data/extracted_papers/NemoBot/tables/fileoutpart5.png",
+          "path": "C:/Proxy-Pointer/MultiModal/data/extracted_papers/NemoBot/tables/fileoutpart5.png",
           "exists": true
         },
         {
           "label": "NemoBot - Figure 1: Crowdsourcing and strategy optimization in game-playing AI",
-          "path": "C:/antigravity/Proxy-Pointer/MultiModal/data/extracted_papers/NemoBot/figures/fileoutpart0.png",
+          "path": "C:/Proxy-Pointer/MultiModal/data/extracted_papers/NemoBot/figures/fileoutpart0.png",
           "exists": true
         },
         {
           "label": "NemoBot - Figure 2: Shannon\u2019s four types of game-playing machines",
-          "path": "C:/antigravity/Proxy-Pointer/MultiModal/data/extracted_papers/NemoBot/figures/fileoutpart1.png",
+          "path": "C:/Proxy-Pointer/MultiModal/data/extracted_papers/NemoBot/figures/fileoutpart1.png",
           "exists": true
         },
         {
           "label": "NemoBot - Figure 5: The chatbot interface of the Mancala game",
-          "path": "C:/antigravity/Proxy-Pointer/MultiModal/data/extracted_papers/NemoBot/figures/fileoutpart8.png",
+          "path": "C:/Proxy-Pointer/MultiModal/data/extracted_papers/NemoBot/figures/fileoutpart8.png",
           "exists": true
         },
         {
           "label": "NemoBot - Figure 6: Training process for the Nim game agent",
-          "path": "C:/antigravity/Proxy-Pointer/MultiModal/data/extracted_papers/NemoBot/figures/fileoutpart9.png",
+          "path": "C:/Proxy-Pointer/MultiModal/data/extracted_papers/NemoBot/figures/fileoutpart9.png",
           "exists": true
         },
         {
           "label": "NemoBot - Table II: Performance of the Nim Game simulation under various configurations",
-          "path": "C:/antigravity/Proxy-Pointer/MultiModal/data/extracted_papers/NemoBot/tables/fileoutpart10.png",
+          "path": "C:/Proxy-Pointer/MultiModal/data/extracted_papers/NemoBot/tables/fileoutpart10.png",
           "exists": true
         }
       ],
@@ -480,7 +480,7 @@
       "images_found": [
         {
           "label": "VectorFusion - Figure 9: Plot showing that increasing the number of paths improves caption consistency.",
-          "path": "C:/antigravity/Proxy-Pointer/MultiModal/data/extracted_papers/VectorFusion/figures/fileoutpart40.png",
+          "path": "C:/Proxy-Pointer/MultiModal/data/extracted_papers/VectorFusion/figures/fileoutpart40.png",
           "exists": true
         }
       ],
@@ -501,12 +501,12 @@
       "images_found": [
         {
           "label": "NemoBot - Figure 3: System Flow of Nemobot, illustrating the integration of LLM functions for data-driven learning.",
-          "path": "C:/antigravity/Proxy-Pointer/MultiModal/data/extracted_papers/NemoBot/figures/fileoutpart2.png",
+          "path": "C:/Proxy-Pointer/MultiModal/data/extracted_papers/NemoBot/figures/fileoutpart2.png",
           "exists": true
         },
         {
           "label": "Galore - Table 1: Comparison of memory requirements between GaLore and LoRA.",
-          "path": "C:/antigravity/Proxy-Pointer/MultiModal/data/extracted_papers/Galore/tables/fileoutpart39.png",
+          "path": "C:/Proxy-Pointer/MultiModal/data/extracted_papers/Galore/tables/fileoutpart39.png",
           "exists": true
         }
       ],

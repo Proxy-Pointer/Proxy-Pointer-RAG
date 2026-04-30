@@ -6,24 +6,24 @@
 
 **Structural RAG for Complex Documents** — A high-fidelity retrieval pipeline that uses document hierarchy as the primary retrieval anchor, eliminating "hallucination by chunking." Proxy-Pointer indexes **structural pointers** (breadcrumbs like `Paper > Section > Sub-section`) rather than raw text fragments, ensuring the LLM always understands exactly where it is in a document.
 
-**Get Visual citations with grounded text answers, with a text-only pipeline**
+**Get grounded answers with visual citations, with a text-only pipeline.**
 
 ---
 
 ## Two Implementations, One Architecture
 
-| Feature | [Text-Only](./Text-Only) | [MultiModal](./MultiModal) |
-| :--- | :--- | :--- |
-| **Core Goal** | Maximum precision for text-based RAG | Unified reasoning across text & visuals |
-| **Input** | Structured Markdown (LlamaParse) | Markdown + Figures/Tables (Adobe Extract) |
-| **Output** | Text-based answers | Text + $\color{#15803d}{\textsf{\textbf{AI-Verified Visual Evidence}}}$ 🖼️ |
-| **LLM** | Gemini 3.1 Flash-Lite | Gemini 3.1 Flash-Lite |
-| **Embeddings** | gemini-embedding-001 (1536d) | gemini-embedding-001 (1536d) |
-| **Vision (optional)** | — | ✅ Gemini 3.1 Flash-Lite |
-| **Retrieval** | Structural re-ranking (k=5) | Anchor-aware re-ranking + image selection |
-| **Benchmark** | 100% on FinanceBench & 40-question Comprehensive | 96% across 20-query, 5-paper technical suite |
-| **Use Case** | 10-K Financials, Legal, Documentation | Anything with Images, Diagrams, Charts, Tables |
-| **Interface** | CLI / Python API | Streamlit UI with visual citations |
+| Feature                     | [Text-Only](./Text-Only)                            | [MultiModal](./MultiModal)                                                       |
+| :-------------------------- | :----------------------------------------------- | :---------------------------------------------------------------------------- |
+| **Core Goal**         | Maximum precision for text-based RAG             | Unified reasoning across text & visuals                                       |
+| **Input**             | Structured Markdown (LlamaParse)                 | Markdown + Figures/Tables (Adobe Extract)                                     |
+| **Output**            | Text-based answers                               | Text +$\color{#15803d}{\textsf{\textbf{AI-Verified Visual Evidence}}}$ 🖼️ |
+| **LLM**               | Gemini 3.1 Flash-Lite                            | Gemini 3.1 Flash-Lite                                                         |
+| **Embeddings**        | gemini-embedding-001 (1536d)                     | gemini-embedding-001 (1536d)                                                  |
+| **Vision (optional)** | —                                               | ✅ Gemini 3.1 Flash-Lite                                                      |
+| **Retrieval**         | Structural re-ranking (k=5)                      | Anchor-aware re-ranking + image selection                                     |
+| **Benchmark**         | 100% on FinanceBench & 40-question Comprehensive | 96% across 20-query, 5-paper technical suite                                  |
+| **Use Case**          | 10-K Financials, Legal, Documentation            | Anything with Images, Diagrams, Charts, Tables                                |
+| **Interface**         | CLI / Python API                                 | Streamlit UI with visual citations                                            |
 
 ---
 
@@ -59,8 +59,9 @@ graph TD
 
 For the full technical story behind the architecture:
 
-1. [Proxy-Pointer RAG: Achieving Vectorless Accuracy at Vector RAG Scale and Cost](https://towardsdatascience.com/proxy-pointer-rag-achieving-vectorless-accuracy-at-vector-rag-scale-and-cost/) — Core architecture & the pointer-based retrieval idea
+1. [Proxy-Pointer RAG: Multimodal Answers Without Multimodal Embeddings](https://towardsdatascience.com/proxy-pointer-rag-multimodal-answers-without-multimodal-embeddings/) — Structure is all you need
 2. [Proxy-Pointer RAG: Structure Meets Scale — 100% Accuracy with Smarter Retrieval](https://towardsdatascience.com/proxy-pointer-rag-structure-meets-scale-100-accuracy-with-smarter-retrieval/) — Scaling to multi-document, LLM re-ranking, and benchmark results
+3. [Proxy-Pointer RAG: Achieving Vectorless Accuracy at Vector RAG Scale and Cost](https://towardsdatascience.com/proxy-pointer-rag-achieving-vectorless-accuracy-at-vector-rag-scale-and-cost/) — Core architecture & the pointer-based retrieval idea
 
 ---
 
@@ -68,7 +69,7 @@ For the full technical story behind the architecture:
 
 Each implementation has its own self-contained README with a 5-minute quickstart:
 
-- **[Text-Only → Get Started](./Text-Only/README.md)**  
+- **[Text-Only → Get Started](./Text-Only/README.md)**
 - **[MultiModal → Get Started](./MultiModal/README.md)**
 
 Both include sample data so you can clone, build the index, and start querying immediately.
